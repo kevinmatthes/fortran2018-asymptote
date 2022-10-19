@@ -1,8 +1,12 @@
 Added
 .....
 
+- create repository README
+
 - create this CHANGELOG
 
-- create repository
+- create this repository
 
 - license:  GPL-2.0
+
+- Scriv settings
