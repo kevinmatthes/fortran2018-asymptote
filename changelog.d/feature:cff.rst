@@ -7,6 +7,8 @@ Added
 
 - create citation meta data
 
+- create Doxygen docstring container for referenced literature
+
 - `[CS18]`_ Ian Chivers, and Jane Sleightholme.  *Introduction to Programming
   with Fortran.*  4th Edition.  Cham:  Springer, 2018.  ISBN:
   978-3-030-09248-1.
