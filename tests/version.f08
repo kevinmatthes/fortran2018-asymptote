@@ -33,7 +33,7 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   The unit test for this library's  version number.
-!> \return  Whether this test succeeded.
+!> \return  Whether this test succeeds.
 !>
 !> This unit test will check whether this library's version number
 !>
