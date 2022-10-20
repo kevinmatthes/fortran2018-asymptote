@@ -55,12 +55,8 @@ lib     := '-c -fPIC'
 # Linker flags.
 lflags  := '-L. -lf18asy'
 
-# Source files.
-tst-in  := 'tests/'
-
 # Targets.
 library := 'libf18asy.a'
-tst-out := 'target/'
 
 # Valgrind settings.
 vflags  := '--leak-check=full --redzone-size=512 --show-leak-kinds=all'
