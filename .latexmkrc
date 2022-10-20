@@ -21,19 +21,19 @@
 ################################################################################
 ##
 ##  AUTHOR      Kevin Matthes
-##  BRIEF       Settings for the maintenance tools.
+##  BRIEF       The settings for the LaTeX compilation system.
 ##  COPYRIGHT   GPL-2.0
 ##  DATE        2022
-##  FILE        setup.cfg
+##  FILE        .latexmkrc
 ##  NOTE        See `LICENSE' for full license.
 ##              See `README.md' for project details.
 ##
 ################################################################################
 
-# Changelog management tool.
-[scriv]
-categories = Added, Changed, Deprecated, Fixed, Removed, Security
-rst_header_chars = -.
-version = 0.0.0
+# Set the maximum count of compilation runs to the Doxygen default value.
+$max_repeat = 8;
+
+# Use `pdflatex` as LaTeX compiler.
+$pdf_mode = 1;
 
 ################################################################################

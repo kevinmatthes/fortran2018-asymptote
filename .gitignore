@@ -21,19 +21,35 @@
 ################################################################################
 ##
 ##  AUTHOR      Kevin Matthes
-##  BRIEF       Settings for the maintenance tools.
+##  BRIEF       Settings for the Git repository.
 ##  COPYRIGHT   GPL-2.0
 ##  DATE        2022
-##  FILE        setup.cfg
+##  FILE        .gitignore
 ##  NOTE        See `LICENSE' for full license.
 ##              See `README.md' for project details.
 ##
 ################################################################################
 
-# Changelog management tool.
-[scriv]
-categories = Added, Changed, Deprecated, Fixed, Removed, Security
-rst_header_chars = -.
-version = 0.0.0
+# Build artifacts.
+target/
+
+*.a
+*.dll
+*.exe
+*.lib
+*.mod
+*.o
+*.obj
+*.smod
+*.so
+
+
+
+# Documentation artifacts.
+html/
+latex/
+man/
+
+*.pdf
 
 ################################################################################

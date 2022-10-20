@@ -21,19 +21,70 @@
 ################################################################################
 ##
 ##  AUTHOR      Kevin Matthes
-##  BRIEF       Settings for the maintenance tools.
+##  BRIEF       The recipes in order to compile the provided executable.
 ##  COPYRIGHT   GPL-2.0
 ##  DATE        2022
-##  FILE        setup.cfg
+##  FILE        .justfile
 ##  NOTE        See `LICENSE' for full license.
 ##              See `README.md' for project details.
 ##
 ################################################################################
 
-# Changelog management tool.
-[scriv]
-categories = Added, Changed, Deprecated, Fixed, Removed, Security
-rst_header_chars = -.
-version = 0.0.0
+# Synonyms for the configured recipes.
+alias a     := all
+alias clr   := clear
+alias d     := doxygen
+alias l     := lib
+alias ver   := bump
+
+
+
+# Compiler flags.
+exe     := '-fPIE'
+f18     := '-std=f2018'
+flags   := '-Wall -Werror -Wextra -Wpedantic'
+lib     := '-c -fPIC'
+
+# Linker flags.
+lflags  := '-L. -lf18asy'
+
+# Targets.
+library := 'libf18asy.a'
+
+# Settings for the supported language modes.
+f18-lib := f18 + ' ' + lib + ' ' + flags
+lnk-f18 := '-I. ' + lflags
+
+
+
+# The default recipe to execute.
+@default: lib
+
+# Execute all configured recipes.
+@all: clear doxygen lib
+
+# Increment the version numbers.
+@bump part:
+    bump2version {{part}}
+    scriv collect
+
+# Remove build and documentation artifacts.
+@clear:
+    git clean -dfx
+
+# Create the Doxygen documentation for this project.
+@doxygen:
+    doxygen doxygen.cfg
+    cd latex/ && latexmk -f -r ../.latexmkrc --silent refman
+    cp latex/refman.pdf doxygen.pdf
+
+# Create the Fortran interfaces.
+@interfaces:
+    gfortran {{f18-lib}} src/lib.f08
+    ar rsv {{library}} *.o
+    rm -rf *.o
+
+# Create the project library.
+@lib: interfaces
 
 ################################################################################
