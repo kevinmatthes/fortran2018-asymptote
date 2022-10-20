@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file lib.f08
+!> \file version.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,18 +32,23 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The module containing all symbols to be exported.
+!> \brief   The unit test for this library's  version number.
+!> \return  Whether this test succeeds.
 !>
-!> This library module includes all symbols to be exported by the library this
-!> project provides.  It is, hence, sufficient to include this module in order
-!> to have access to all other symbols.
+!> This unit test will check whether this library's version number
+!>
+!> * can be imported.
+!> * equals 'v0.0.0'.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-module libf18asy
+program version
+    use, non_intrinsic :: libf18asy, only: constant => version
 implicit none
-    !> This library's version.
-    character (*), parameter :: version = 'v0.0.0'
-end module libf18asy
+    character (*), parameter :: expectation = 'v0.0.0'
+
+    if (constant /= expectation) error stop                                    &
+        '[version] The version string has an unexpected value!'
+end program version
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
