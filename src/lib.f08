@@ -42,6 +42,8 @@
 
 module libf18asy
 implicit none
+    !> This library's version.
+    character (*), parameter :: version = 'v0.0.0'
 end module libf18asy
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
