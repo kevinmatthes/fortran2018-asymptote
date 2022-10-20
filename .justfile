@@ -32,9 +32,16 @@
 
 # Synonyms for the configured recipes.
 alias a     := all
+alias b     := library
+alias build := library
+alias c     := check
 alias clr   := clear
 alias d     := doxygen
-alias l     := lib
+alias dirs  := directories
+alias l     := library
+alias r     := valgrind
+alias t     := test
+alias v     := valgrind
 alias ver   := bump
 
 
@@ -48,29 +55,44 @@ lib     := '-c -fPIC'
 # Linker flags.
 lflags  := '-L. -lf18asy'
 
+# Source files.
+tst-in  := 'tests/'
+
 # Targets.
 library := 'libf18asy.a'
+tst-out := 'target/'
+
+# Valgrind settings.
+vflags  := '--leak-check=full --redzone-size=512 --show-leak-kinds=all'
 
 # Settings for the supported language modes.
+f18-exe := f18 + ' ' + exe + ' ' + flags
 f18-lib := f18 + ' ' + lib + ' ' + flags
 lnk-f18 := '-I. ' + lflags
 
 
 
 # The default recipe to execute.
-@default: lib
+@default: check
 
 # Execute all configured recipes.
-@all: clear doxygen lib
+@all: check doxygen
 
 # Increment the version numbers.
 @bump part:
     bump2version {{part}}
     scriv collect
 
+# Ensure the library's logic to work.
+@check: clear valgrind
+
 # Remove build and documentation artifacts.
 @clear:
     git clean -dfx
+
+# Create the required directories.
+@directories:
+    mkdir -p target/
 
 # Create the Doxygen documentation for this project.
 @doxygen:
@@ -85,6 +107,14 @@ lnk-f18 := '-I. ' + lflags
     rm -rf *.o
 
 # Create the project library.
-@lib: interfaces
+@library: interfaces
+
+# Compile all unit tests.
+@test: directories library
+    gfortran {{f18-exe}} tests/version.f08 -o target/version {{lnk-f18}}
+
+# Analyse the memory management of the target application.
+@valgrind: test
+    valgrind {{vflags}} target/version
 
 ################################################################################
