@@ -28,7 +28,7 @@
  *
  * \brief   References and further readings to appear in the bibliography.
  *
- * Doxygen allows both the creation and configuration of a bibliography for the
+ * Doxygen allows for the creation and configuration of a bibliography for the
  * resulting manual.  In order to fill it with entries, the documented source
  * code needs to `\cite` the respective works.  As there is only one citation
  * command, `\cite`, every reference needs to be cited explicitly.
