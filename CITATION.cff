@@ -1,0 +1,111 @@
+######################## GNU General Public License 2.0 ########################
+##                                                                            ##
+## Copyright (C) 2022 Kevin Matthes                                           ##
+##                                                                            ##
+## This program is free software; you can redistribute it and/or modify       ##
+## it under the terms of the GNU General Public License as published by       ##
+## the Free Software Foundation; either version 2 of the License, or          ##
+## (at your option) any later version.                                        ##
+##                                                                            ##
+## This program is distributed in the hope that it will be useful,            ##
+## but WITHOUT ANY WARRANTY; without even the implied warranty of             ##
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              ##
+## GNU General Public License for more details.                               ##
+##                                                                            ##
+## You should have received a copy of the GNU General Public License along    ##
+## with this program; if not, write to the Free Software Foundation, Inc.,    ##
+## 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.                ##
+##                                                                            ##
+################################################################################
+
+################################################################################
+##
+##  AUTHOR      Kevin Matthes
+##  BRIEF       Citation settings for the Git repository.
+##  COPYRIGHT   GPL-2.0
+##  DATE        2022
+##  FILE        CITATION.cff
+##  NOTE        See `LICENSE' for full license.
+##              See `README.md' for project details.
+##
+################################################################################
+
+# Parser settings.
+cff-version: 1.2.0
+message: Please cite this software using these meta data.
+
+# Version information.
+date-released: 2022-10-19
+version: 0.0.0
+
+# Project information.
+abstract: A Fortran 2018 interface for the Asymptote Vector Graphics Language.
+authors:
+  - alias: kevinmatthes
+    family-names: Matthes
+    given-names: Kevin
+license: GPL-2.0
+repository-code: https://github.com/kevinmatthes/fortran2018-asymptote
+title: fortran2018-asymptote
+url: https://github.com/kevinmatthes/fortran2018-asymptote
+
+# References.
+references:
+  - authors:
+      - family-names: Chivers
+        given-names: Ian
+      - family-names: Sleightholme
+        given-names: Jane
+    doi: 10.1007/978-3-319-75502-1
+    edition: '4'
+    isbn: 978-3-030-09248-1
+    languages:
+      - en
+    pages: 956
+    publisher:
+      city: Cham
+      country: CH
+      name: Springer
+    title: Introduction to Programming with Fortran
+    type: book
+    year: 2018
+  - authors:
+      - family-names: Kühme
+        given-names: Thomas
+      - family-names: Witschital
+        given-names: Peter
+    edition: '3'
+    isbn: 978-3-486-22016-2
+    languages:
+      - de
+    pages: 248
+    publisher:
+      city: Munich
+      country: DE
+      name: Oldenbourg
+    title: Die FORTRAN-Fibel
+    type: book
+    year: 1991
+  - abstract: Incorporating Fortran 2018
+    authors:
+      - family-names: Metcalf
+        given-names: Michael
+      - family-names: Reid
+        given-names: John
+      - family-names: Cohen
+        given-names: Malcolm
+    doi: 10.1093/oso/9780198811886.001.0001
+    edition: '2'
+    isbn: 978-0-19-881188-6
+    languages:
+      - en
+    pages: 522
+    publisher:
+      city: Oxford
+      country: GB
+      name: Oxford University Press
+    title: Modern Fortran Explained
+    type: book
+    year: 2018
+
+################################################################################
