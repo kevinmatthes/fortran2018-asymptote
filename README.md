@@ -57,4 +57,17 @@ version is as follows:
 > with this program; if not, write to the Free Software Foundation, Inc.,
 > 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+## Software Requirements
+
+| Requirement       | Type          | Role                                  |
+|:------------------|:-------------:|:--------------------------------------|
+| bump2version      | Python CLI    | automatic version increment           |
+| Doxygen           | application   | source code documentation             |
+| GFortran          | application   | Fortran 2018 compiler                 |
+| Just              | Rust binary   | execution of the build instructions   |
+| Latexmk           | application   | LaTeX compilation of Doxygen manual   |
+| Scriv             | Python CLI    | changelog management                  |
+| TeX Live (full)   | package       | LaTeX environment for Doxygen manual  |
+| Valgrind          | application   | memory leak detection                 |
+
 <!----------------------------------------------------------------------------->
