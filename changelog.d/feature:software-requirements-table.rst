@@ -1,0 +1,4 @@
+Added
+.....
+
+- software requirements table
