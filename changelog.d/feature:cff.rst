@@ -1,6 +1,6 @@
-.. _[CS18]: CITATION.cff
-.. _[KW91]: CITATION.cff
-.. _[MRC18]: CITATION.cff
+.. _[CS18]: CITATION.cff#L54
+.. _[KW91]: CITATION.cff#L104
+.. _[MRC18]: CITATION.cff#L121
 
 Added
 .....
