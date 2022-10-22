@@ -34,14 +34,16 @@
 !>
 !> \brief   The module containing all symbols to be exported.
 !>
-!> This library module includes all symbols to be exported by the library this
-!> project provides.  It is, hence, sufficient to include this module in order
-!> to have access to all other symbols.
+!> This library is intended to provide an interface to the Aymptote Vector
+!> Graphics Language \cite hammerlindl.bowman.prince:asymptote:2021:2.69
+!> \cite hammerlindl.bowman.prince:asymptote:2022:2.83.  It is tested with
+!> Asymptote, version 2.69 \cite hammerlindl.bowman.prince:asymptote:2021:2.69.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 module libf18asy
 implicit none
+public
     !> This library's version.
     character (*), parameter :: version = 'v0.0.0'
 end module libf18asy
