@@ -36,6 +36,12 @@
 .. _Keep a Changelog: https://keepachangelog.com/en/1.0.0/
 .. _Scriv: https://github.com/nedbat/scriv
 ..
+.. _[CS18]: CITATION.cff#L54
+.. _[HBP21]: CITATION.cff#L72
+.. _[HBP22]: CITATION.cff#L88
+.. _[KW91]: CITATION.cff#L104
+.. _[MRC18]: CITATION.cff#L121
+..
 .. -------------------------------------------------------------------------- ..
 
 Changelog
