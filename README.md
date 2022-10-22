@@ -33,7 +33,8 @@
 
 ## Summary
 
-A Fortran 2018 interface for the Asymptote Vector Graphics Language.
+A Fortran 2018 interface for [the Asymptote Vector Graphics
+Language](CITATION.cff#L88).
 
 ## License
 
