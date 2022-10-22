@@ -69,6 +69,38 @@ references:
     title: Introduction to Programming with Fortran
     type: book
     year: 2018
+  - abstract: The Vector Graphics Language
+    authors:
+      - family-names: Hammerlindl
+        given-names: Andy
+      - family-names: Bowman
+        given-names: John
+      - family-names: Prince
+        given-names: Tom
+    languages:
+      - en
+    month: 02
+    title: Asymptote
+    type: manual
+    version: 2.69
+    url: https://asymptote.sourceforge.io/
+    year: 2021
+  - abstract: The Vector Graphics Language
+    authors:
+      - family-names: Hammerlindl
+        given-names: Andy
+      - family-names: Bowman
+        given-names: John
+      - family-names: Prince
+        given-names: Tom
+    languages:
+      - en
+    month: 09
+    title: Asymptote
+    type: manual
+    version: 2.83
+    url: https://asymptote.sourceforge.io/
+    year: 2022
   - authors:
       - family-names: Kühme
         given-names: Thomas
