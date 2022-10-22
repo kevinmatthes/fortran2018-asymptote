@@ -1,7 +1,3 @@
-.. _[CS18]: CITATION.cff
-.. _[KW91]: CITATION.cff
-.. _[MRC18]: CITATION.cff
-
 Added
 .....
 
