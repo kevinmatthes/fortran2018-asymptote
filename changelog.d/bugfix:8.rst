@@ -1,6 +1,3 @@
-.. _[HBP21]: CITATION.cff#L72
-.. _[HBP22]: CITATION.cff#L88
-
 Added
 .....
 
