@@ -33,14 +33,25 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   The writing logic for the Asymptote drawing.
+!> \param   this        The Asymptote drawing to output.
+!> \param   unit        The file to write this Asymptote drawing to.
+!> \param   io_type     How this drawing is going to be written.
+!> \param   value_list  Additional information concerning the style of writing.
+!> \param   io_status   Whether this operation succeeded.
+!> \param   io_message  An additional information about the writing process.
 !>
 !> This subroutine will produce the Asymptote drawing by writing it to the given
 !> unit.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine output_drawing                                                      &
-    (this, unit, io_type, value_list, io_status, io_message)
+subroutine output_drawing   ( this                                             &
+                            , unit                                             &
+                            , io_type                                          &
+                            , value_list                                       &
+                            , io_status                                        &
+                            , io_message                                       &
+                            )
 implicit none
     character (*), intent (in)          :: io_type
     character (*), intent (inout)       :: io_message
