@@ -46,6 +46,38 @@ implicit none
 public
     !> This library's version.
     character (*), parameter :: version = 'v0.0.0'
+
+    !> The Asymptote drawing to produce.
+    type, public :: asymptote
+        !> This drawing's name.
+        character (:), allocatable, private :: name
+    contains
+        generic :: write (formatted) => output_drawing
+
+        procedure, nopass       :: output_drawing
+        procedure, pass (this)  :: set_name
+    end type asymptote
+
+    interface
+        module subroutine output_drawing                                       &
+            (this, unit, io_type, value_list, io_status, io_message)
+        implicit none
+            character (*), intent (in)          :: io_type
+            character (*), intent (inout)       :: io_message
+            class (asymptote), intent (in)      :: this
+            integer, dimension (:), intent (in) :: value_list
+            integer, intent (in)                :: unit
+            integer, intent (out)               :: io_status
+        end subroutine
+    end interface
+
+    interface
+        pure module subroutine set_name (this, name)
+        implicit none
+            character (*), intent (in)          :: name
+            class (asymptote), intent (inout)   :: this
+        end subroutine set_name
+    end interface
 end module libf18asy
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
