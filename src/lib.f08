@@ -53,9 +53,9 @@ public
         character (:), allocatable, private :: name
     contains
         !> \sa output_drawing \return Nothing.
-        generic :: write    ( !> \sa output_drawing
-                              formatted
-                            ) => output_drawing
+        generic :: write ( !> \sa output_drawing
+                           formatted
+                         ) => output_drawing
 
         !> \sa output_drawing \return Nothing.
         procedure, nopass       :: output_drawing
