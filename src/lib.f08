@@ -52,9 +52,15 @@ public
         !> This drawing's name.
         character (:), allocatable, private :: name
     contains
-        generic :: write (formatted) => output_drawing
+        !> \sa output_drawing \return Nothing.
+        generic :: write    ( !> \sa output_drawing
+                              formatted
+                            ) => output_drawing
 
+        !> \sa output_drawing \return Nothing.
         procedure, nopass       :: output_drawing
+
+        !> \sa set_name \return Nothing.
         procedure, pass (this)  :: set_name
     end type asymptote
 
