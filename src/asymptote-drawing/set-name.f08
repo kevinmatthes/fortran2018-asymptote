@@ -33,6 +33,8 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   Modify the name of this Asymptote drawing.
+!> \param   this    The Asymptote drawing whose name shall be altered.
+!> \param   name    The new to assign to this Asymptote drawing.
 !>
 !> This subroutine will assign a new name to this Asymptote drawing.
 !!
