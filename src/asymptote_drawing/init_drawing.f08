@@ -32,13 +32,12 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Write this Asymptote drawing to an Asymptote source file.
-!> \param   this        The Asymptote drawing to export.
+!> \brief   Create a new Asymptote drawing.
+!> \param   init    The new Asymptote drawing's name.
+!> \return  The new Asymptote drawing.
 !>
-!> This subroutine will produce the Asymptote drawing by writing it to an
-!> Asymptote source file.  The output source file is determined by the name of
-!> this drawing, `drawing_name`.  The file will always be newly created,
-!> replacing any recent file of the same name.
+!> This function will construct a new Asymptote drawing entity base on the given
+!> data.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
