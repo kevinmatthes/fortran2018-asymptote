@@ -76,7 +76,7 @@ lnk-f18 := '-I. ' + lflags
 
 # Compile the Asymptote drawing type.
 @asymptote-drawing: interfaces
-    gfortran {{f18-lib}} src/asymptote-drawing.f08
+    gfortran {{f18-lib}} src/asymptote_drawing.f08
     ar rsv {{library}} *.o
     rm -rf *.o
 
