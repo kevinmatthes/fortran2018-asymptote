@@ -47,8 +47,9 @@ subroutine export_drawing (this)
 implicit none
     class (drawing), intent (in)    :: this
 
-    integer :: status
-    integer :: unit
+    character (*), parameter    :: fmt = '(a, a, a)'
+    integer                     :: status
+    integer                     :: unit
 
     if (associated (this % drawing_name)) then
         open    ( file = this % drawing_name // '.asy'                         &
@@ -58,13 +59,16 @@ implicit none
                 )
 
         if (status /= 0) then
-            write (unit = error_unit, fmt = '(a, a, a)')                       &
+            write (unit = error_unit, fmt = fmt)                               &
                 'Asymptote drawing '''                                         &
             ,   this % drawing_name                                            &
             ,   ''' cannot be created.'
         else
-            write (unit = unit, fmt = '(a, a, a)')                             &
-                '// LIBF18ASY, ', library_version, '.'
+            write (unit, fmt = fmt)                                            &
+                '// Created by LIBF18ASY, ', library_version, '.'
+            write (unit, fmt = fmt)                                            &
+                'defaultfilename = "', this % drawing_name, '";'
+            close (unit)
         end if
     end if
 end subroutine export_drawing
