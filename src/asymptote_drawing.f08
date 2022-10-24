@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote-drawing.f08
+!> \file asymptote_drawing.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -42,8 +42,10 @@
 submodule (libf18asy) asymptote_drawing
 implicit none
 contains
-    include 'asymptote-drawing/output-drawing.f08'
-    include 'asymptote-drawing/set-name.f08'
+    include 'asymptote_drawing/export_drawing.f08'
+    include 'asymptote_drawing/get_drawing_name.f08'
+    include 'asymptote_drawing/init_drawing.f08'
+    include 'asymptote_drawing/set_drawing_name.f08'
 end submodule asymptote_drawing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
