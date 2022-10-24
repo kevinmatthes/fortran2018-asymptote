@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file version.f08
+!> \file test_library_version.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -42,13 +42,14 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-program version
-    use, non_intrinsic :: libf18asy, only: constant => version
+program test_library_version
+    use, non_intrinsic :: libf18asy, only: version
 implicit none
     character (*), parameter :: expectation = 'v0.0.0'
 
-    if (constant /= expectation) error stop                                    &
-        '[version] The version string has an unexpected value!'
-end program version
+    if (version /= expectation) then
+        error stop '[version] The version string has an unexpected value!'
+    end if
+end program test_library_version
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
