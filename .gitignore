@@ -34,9 +34,11 @@
 target/
 
 *.a
+*.asy
 *.dll
 *.exe
 *.lib
+*.log
 *.mod
 *.o
 *.obj

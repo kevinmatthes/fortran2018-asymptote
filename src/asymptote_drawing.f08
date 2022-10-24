@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file version.f08
+!> \file asymptote_drawing.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,23 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The unit test for this library's  version number.
-!> \return  Whether this test succeeds.
+!> \brief   The submodule defining the Asymptote drawing.
 !>
-!> This unit test will check whether this library's version number
-!>
-!> * can be imported.
-!> * equals 'v0.0.0'.
+!> This submodule contains the procedures associated with the Asymptote drawing
+!> to produce.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-program version
-    use, non_intrinsic :: libf18asy, only: constant => version
+submodule (libf18asy) asymptote_drawing
 implicit none
-    character (*), parameter :: expectation = 'v0.0.0'
-
-    if (constant /= expectation) error stop                                    &
-        '[version] The version string has an unexpected value!'
-end program version
+contains
+    include 'asymptote_drawing/export_drawing.f08'
+    include 'asymptote_drawing/finalise_drawing.f08'
+    include 'asymptote_drawing/get_drawing_name.f08'
+    include 'asymptote_drawing/init_drawing.f08'
+    include 'asymptote_drawing/set_drawing_name.f08'
+end submodule asymptote_drawing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

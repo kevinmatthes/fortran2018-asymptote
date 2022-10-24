@@ -34,8 +34,11 @@
 !>
 !> \brief   The module containing all symbols to be exported.
 !>
-!> This library is intended to provide an interface to the Aymptote Vector
-!> Graphics Language \cite hammerlindl.bowman.prince:asymptote:2021:2.69
+!> This Fortran 2018 library \cite chivers.sleightholme:fortran:2018
+!> \cite kuhme.witschital:fortran:1991 \cite metcalf.reid.cohen:fortran:2018
+!> is intended to provide the functionality to export drawings using the
+!> Asymptote Vector Graphics Language
+!> \cite hammerlindl.bowman.prince:asymptote:2021:2.69
 !> \cite hammerlindl.bowman.prince:asymptote:2022:2.83.  It is tested with
 !> Asymptote, version 2.69 \cite hammerlindl.bowman.prince:asymptote:2021:2.69.
 !!
@@ -45,7 +48,60 @@ module libf18asy
 implicit none
 public
     !> This library's version.
-    character (*), parameter :: version = 'v0.0.0'
+    character (*), parameter    :: library_version = 'v0.0.0'
+
+    !> The Asymptote drawing to produce.
+    type, public    :: drawing
+        !> This drawing's name.
+        character (:), pointer, private :: drawing_name => null ()
+    contains
+        final                           :: finalise_drawing
+        procedure, pass (this), public  :: export   => export_drawing
+        procedure, pass (this), public  :: get_name => get_drawing_name
+        procedure, pass (this), public  :: set_name => set_drawing_name
+    end type drawing
+
+    interface drawing
+        module procedure init_drawing
+    end interface drawing
+
+    interface
+        module subroutine export_drawing (this)
+        implicit none
+            class (drawing), intent (in)    :: this
+        end subroutine export_drawing
+    end interface
+
+    interface finalise
+        pure module subroutine finalise_drawing (this)
+        implicit none
+            type (drawing), intent (inout)  :: this
+        end subroutine finalise_drawing
+    end interface finalise
+
+    interface
+        pure module subroutine get_drawing_name (this, name)
+        implicit none
+            character (:), pointer, intent (out)    :: name
+            class (drawing), intent (in)            :: this
+        end subroutine get_drawing_name
+    end interface
+
+    interface
+        pure module function init_drawing (name)
+        implicit none
+            character (*), intent (in)  :: name
+            type (drawing)              :: init_drawing
+        end function init_drawing
+    end interface
+
+    interface
+        pure module subroutine set_drawing_name (this, name)
+        implicit none
+            character (*), intent (in)      :: name
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_name
+    end interface
 end module libf18asy
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

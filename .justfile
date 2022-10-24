@@ -40,7 +40,7 @@ alias d     := doxygen
 alias dirs  := directories
 alias l     := library
 alias r     := valgrind
-alias t     := test
+alias t     := valgrind
 alias v     := valgrind
 alias ver   := bump
 
@@ -74,6 +74,12 @@ lnk-f18 := '-I. ' + lflags
 # Execute all configured recipes.
 @all: check doxygen
 
+# Compile the Asymptote drawing type.
+@asymptote_drawing: interfaces
+    gfortran {{f18-lib}} src/asymptote_drawing.f08
+    ar rsv {{library}} *.o
+    rm -rf *.o
+
 # Increment the version numbers.
 @bump part:
     bump2version {{part}}
@@ -103,14 +109,17 @@ lnk-f18 := '-I. ' + lflags
     rm -rf *.o
 
 # Create the project library.
-@library: interfaces
+@library: asymptote_drawing interfaces
 
-# Compile all unit tests.
-@test: directories library
-    gfortran {{f18-exe}} tests/version.f08 -o target/version {{lnk-f18}}
+# Compile and run a single unit test.
+@test name: directories library
+    gfortran {{f18-exe}} tests/test_{{name}}.f08 -o \
+        target/test_{{name}} {{lnk-f18}}
+    valgrind {{vflags}} target/test_{{name}}
 
-# Analyse the memory management of the target application.
-@valgrind: test
-    valgrind {{vflags}} target/version
+# Analyse the memory management of the unit tests.
+@valgrind:
+    just test drawing_lifecycle
+    just test library_version
 
 ################################################################################
