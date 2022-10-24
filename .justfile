@@ -113,10 +113,12 @@ lnk-f18 := '-I. ' + lflags
 
 # Compile all unit tests.
 @test: directories library
-    gfortran {{f18-exe}} tests/version.f08 -o target/version {{lnk-f18}}
+    gfortran {{f18-exe}} tests/test_library_version.f08 \
+        -o target/test_library_version \
+        {{lnk-f18}}
 
 # Analyse the memory management of the target application.
 @valgrind: test
-    valgrind {{vflags}} target/version
+    valgrind {{vflags}} target/test_library_version
 
 ################################################################################
