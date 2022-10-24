@@ -55,9 +55,10 @@ public
         !> This drawing's name.
         character (:), pointer, private :: drawing_name => null ()
     contains
-        procedure, pass (this)  :: export_drawing
-        procedure, pass (this)  :: get_drawing_name
-        procedure, pass (this)  :: set_drawing_name
+        final                           :: finalise_drawing
+        procedure, pass (this), public  :: export_drawing
+        procedure, pass (this), public  :: get_drawing_name
+        procedure, pass (this), public  :: set_drawing_name
     end type drawing
 
     interface drawing
@@ -69,6 +70,13 @@ public
         implicit none
             class (drawing), intent (in)    :: this
         end subroutine export_drawing
+    end interface
+
+    interface
+        pure module subroutine finalise_drawing (this)
+        implicit none
+            type (drawing), intent (inout)  :: this
+        end subroutine finalise_drawing
     end interface
 
     interface
