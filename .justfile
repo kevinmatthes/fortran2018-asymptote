@@ -98,9 +98,11 @@ lnk-f18 := '-I. ' + lflags
 
 # Create the Doxygen documentation for this project.
 @doxygen:
-    doxygen doxygen.cfg
+    doxygen doxygen.cfg 2>> doxygen.log
     cd latex/ && latexmk -f -r ../.latexmkrc --silent refman
     cp latex/refman.pdf doxygen.pdf
+    cat doxygen.log
+    rm -rf doxygen.log
 
 # Create the Fortran interfaces.
 @interfaces:
