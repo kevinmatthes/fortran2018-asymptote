@@ -3,6 +3,12 @@ Added
 
 - declare type for Asymptote drawings
 
-- define formatted writing logic for Asymptote drawings
+- define constructor for new Asymptote drawings
 
-- define setter for drawing name
+- define export logic to create an Asymptote source file from a given drawing
+
+- define getter method for drawing name
+
+- define setter method for drawing name
+
+- define submodule for Asymptote drawing logic
