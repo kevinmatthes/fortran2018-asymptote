@@ -33,7 +33,7 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   Create a new Asymptote drawing.
-!> \param   init    The new Asymptote drawing's name.
+!> \param   name    The new Asymptote drawing's name.
 !> \return  The new Asymptote drawing.
 !>
 !> This function will construct a new Asymptote drawing entity base on the given
