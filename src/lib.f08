@@ -48,44 +48,51 @@ module libf18asy
 implicit none
 public
     !> This library's version.
-    character (*), parameter :: version = 'v0.0.0'
+    character (*), parameter    :: library_version = 'v0.0.0'
 
     !> The Asymptote drawing to produce.
-    type, public :: asymptote
+    type, public    :: drawing
         !> This drawing's name.
-        character (:), allocatable, private :: name
+        character (:), pointer, private :: drawing_name => null ()
     contains
-        !> \sa output_drawing \return Nothing.
-        generic :: write ( !> \sa output_drawing
-                           formatted
-                         ) => output_drawing
+        procedure, pass (this)  :: export_drawing
+        procedure, pass (this)  :: get_drawing_name
+        procedure, pass (this)  :: set_drawing_name
+    end type drawing
 
-        !> \sa output_drawing \return Nothing.
-        procedure, nopass       :: output_drawing
-
-        !> \sa set_name \return Nothing.
-        procedure, pass (this)  :: set_name
-    end type asymptote
+    interface drawing
+        module procedure init_drawing
+    end interface drawing
 
     interface
-        module subroutine output_drawing                                       &
-            (this, unit, io_type, value_list, io_status, io_message)
+        module subroutine export_drawing (this)
         implicit none
-            character (*), intent (in)          :: io_type
-            character (*), intent (inout)       :: io_message
-            class (asymptote), intent (in)      :: this
-            integer, dimension (:), intent (in) :: value_list
-            integer, intent (in)                :: unit
-            integer, intent (out)               :: io_status
-        end subroutine
+            class (drawing), intent (in)    :: this
+        end subroutine export_drawing
     end interface
 
     interface
-        pure module subroutine set_name (this, name)
+        pure module subroutine get_drawing_name (this, name)
         implicit none
-            character (*), intent (in)          :: name
-            class (asymptote), intent (inout)   :: this
-        end subroutine set_name
+            character (:), pointer, intent (out)    :: name
+            class (drawing), intent (in)            :: this
+        end subroutine get_drawing_name
+    end interface
+
+    interface
+        pure module function init_drawing (name)
+        implicit none
+            character (*), intent (in)  :: name
+            type (drawing)              :: init_drawing
+        end function init_drawing
+    end interface
+
+    interface
+        pure module subroutine set_drawing_name (this, name)
+        implicit none
+            character (*), intent (in)      :: name
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_name
     end interface
 end module libf18asy
 
