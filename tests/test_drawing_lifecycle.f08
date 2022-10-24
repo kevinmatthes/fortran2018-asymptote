@@ -41,6 +41,7 @@
 !> * the constructed drawing's name can be retrieved.
 !> * the constructed drawing can be exported.
 !> * the constructed drawing's name can be modified.
+!> * the modified drawing name can be retrieved.
 !> * the modified drawing can be exported.
 !> * the memory management is working.
 !!
@@ -50,9 +51,26 @@ program test_drawing_lifecycle
     use, non_intrinsic :: libf18asy, only: drawing
     use, non_intrinsic :: libf18asy, only: finalise_drawing
 implicit none
-    type (drawing) :: asymptote
+    character (:), pointer  :: name
+    type (drawing)          :: asymptote
 
     asymptote = drawing ('name')
+    call asymptote % get_name (name)
+
+    if (name /= 'name') then
+        error stop '[drawing] Original name not retrievable!'
+    end if
+
+    deallocate (name)
+    call asymptote % export
+    call asymptote % set_name ('new_name')
+    call asymptote % get_name (name)
+
+    if (name /= 'new_name') then
+        error stop '[drawing] Modified name not retrievable!'
+    end if
+
+    deallocate (name)
     call asymptote % export
     call finalise_drawing (asymptote)
 end program test_drawing_lifecycle
