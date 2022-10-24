@@ -32,7 +32,7 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate all requested memory regions.
+!> \brief   Deallocate all memory regions requested for this drawing.
 !> \param   this    The Asymptote drawing to finalise.
 !>
 !> This subroutine will finalise this Asymptote drawing in order to avoid memory
