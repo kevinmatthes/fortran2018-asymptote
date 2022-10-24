@@ -34,8 +34,11 @@
 !>
 !> \brief   The module containing all symbols to be exported.
 !>
-!> This library is intended to provide an interface to the Aymptote Vector
-!> Graphics Language \cite hammerlindl.bowman.prince:asymptote:2021:2.69
+!> This Fortran 2018 library \cite chivers.sleightholme:fortran:2018
+!> \cite kuhme.witschital:fortran:1991 \cite metcalf.reid.cohen:fortran:2018
+!> is intended to provide the functionality to export drawings using the
+!> Asymptote Vector Graphics Language 
+!> \cite hammerlindl.bowman.prince:asymptote:2021:2.69
 !> \cite hammerlindl.bowman.prince:asymptote:2022:2.83.  It is tested with
 !> Asymptote, version 2.69 \cite hammerlindl.bowman.prince:asymptote:2021:2.69.
 !!
