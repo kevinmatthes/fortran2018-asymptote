@@ -72,12 +72,12 @@ public
         end subroutine export_drawing
     end interface
 
-    interface
+    interface finalise
         pure module subroutine finalise_drawing (this)
         implicit none
             type (drawing), intent (inout)  :: this
         end subroutine finalise_drawing
-    end interface
+    end interface finalise
 
     interface
         pure module subroutine get_drawing_name (this, name)
