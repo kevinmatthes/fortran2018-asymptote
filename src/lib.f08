@@ -56,9 +56,9 @@ public
         character (:), pointer, private :: drawing_name => null ()
     contains
         final                           :: finalise_drawing
-        procedure, pass (this), public  :: export_drawing
-        procedure, pass (this), public  :: get_drawing_name
-        procedure, pass (this), public  :: set_drawing_name
+        procedure, pass (this), public  :: export   => export_drawing
+        procedure, pass (this), public  :: get_name => get_drawing_name
+        procedure, pass (this), public  :: set_name => set_drawing_name
     end type drawing
 
     interface drawing
