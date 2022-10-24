@@ -49,7 +49,7 @@
 
 program test_drawing_lifecycle
     use, non_intrinsic :: libf18asy, only: drawing
-    use, non_intrinsic :: libf18asy, only: finalise_drawing
+    use, non_intrinsic :: libf18asy, only: finalise
 implicit none
     character (:), pointer  :: name
     type (drawing)          :: asymptote
@@ -72,7 +72,7 @@ implicit none
 
     deallocate (name)
     call asymptote % export
-    call finalise_drawing (asymptote)
+    call finalise (asymptote)
 end program test_drawing_lifecycle
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
