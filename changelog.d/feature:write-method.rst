@@ -5,6 +5,8 @@ Added
 
 - define constructor for new Asymptote drawings
 
+- define destructor for Asymptote drawings
+
 - define export logic to create an Asymptote source file from a given drawing
 
 - define getter method for a drawing's name
@@ -12,3 +14,5 @@ Added
 - define setter method for a drawing's name
 
 - define submodule for Asymptote drawing logic
+
+- define unit test for drawing life cycle
