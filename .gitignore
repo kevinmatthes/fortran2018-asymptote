@@ -34,6 +34,7 @@
 target/
 
 *.a
+*.asy
 *.dll
 *.exe
 *.lib
