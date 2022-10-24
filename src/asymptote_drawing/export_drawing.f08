@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file output-drawing.f08
+!> \file export_drawing.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,43 +32,41 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The writing logic for the Asymptote drawing.
-!> \param   this        The Asymptote drawing to output.
-!> \param   unit        The file to write this Asymptote drawing to.
-!> \param   io_type     How this drawing is going to be written.
-!> \param   value_list  Additional information concerning the style of writing.
-!> \param   io_status   Whether this operation succeeded.
-!> \param   io_message  An additional information about the writing process.
+!> \brief   Write this Asymptote drawing to an Asymptote source file.
+!> \param   this        The Asymptote drawing to export.
 !>
-!> This subroutine will produce the Asymptote drawing by writing it to the given
-!> unit.
+!> This subroutine will produce the Asymptote drawing by writing it to an
+!> Asymptote source file.  The output source file is determined by the name of
+!> this drawing, `drawing_name`.  The file will always be newly created,
+!> replacing any recent file of the same name.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine output_drawing   ( this                                             &
-                            , unit                                             &
-                            , io_type                                          &
-                            , value_list                                       &
-                            , io_status                                        &
-                            , io_message                                       &
-                            )
+subroutine export_drawing (this)
+    use, intrinsic :: iso_fortran_env, only: error_unit
 implicit none
-    character (*), intent (in)          :: io_type
-    character (*), intent (inout)       :: io_message
-    class (asymptote), intent (in)      :: this
-    integer, dimension (:), intent (in) :: value_list
-    integer, intent (in)                :: unit
-    integer, intent (out)               :: io_status
+    class (drawing), intent (in)    :: this
 
-    character (*), parameter    :: fmt = '(a, a, a, a)'
+    integer :: status
+    integer :: unit
 
-    write (unit = unit, fmt = fmt, iostat = io_status, iomsg = io_message)     &
-        '// Drawing ''', this % name ,''' produced by libf18asy, ', version, '.'
+    if (associated (this % drawing_name)) then
+        open    ( file = this % drawing_name // '.asy'                         &
+                , iostat = status                                              &
+                , newunit = unit                                               &
+                , status = 'replace'                                           &
+                )
 
-    return
-
-    print *, value_list (1)
-    print *, io_type
-end subroutine output_drawing
+        if (status /= 0) then
+            write (unit = error_unit, fmt = '(a, a, a)')                       &
+                'Asymptote drawing '''                                         &
+            ,   this % drawing_name                                            &
+            ,   ''' cannot be created.'
+        else
+            write (unit = unit, fmt = '(a, a, a)')                             &
+                '// LIBF18ASY, ', library_version, '.'
+        end if
+    end if
+end subroutine export_drawing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
