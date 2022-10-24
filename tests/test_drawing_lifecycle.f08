@@ -53,7 +53,7 @@ implicit none
     type (drawing) :: asymptote
 
     asymptote = drawing ('name')
-    call asymptote % export_drawing
+    call asymptote % export
     call finalise_drawing (asymptote)
 end program test_drawing_lifecycle
 
