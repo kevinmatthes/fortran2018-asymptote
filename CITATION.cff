@@ -39,7 +39,9 @@ date-released: 2022-10-19
 version: 0.0.0
 
 # Project information.
-abstract: A Fortran 2018 interface for the Asymptote Vector Graphics Language.
+abstract: >-
+  A Fortran 2018 library to generate drawings using the Asymptote Vector Graphics
+  Language.
 authors:
   - alias: kevinmatthes
     family-names: Matthes
