@@ -32,7 +32,7 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The unit test for this library's  version number.
+!> \brief   The unit test for this library's version number.
 !> \return  Whether this test succeeds.
 !>
 !> This unit test will check whether this library's version number
@@ -43,11 +43,11 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 program test_library_version
-    use, non_intrinsic :: libf18asy, only: version
+    use, non_intrinsic :: libf18asy, only: library_version
 implicit none
     character (*), parameter :: expectation = 'v0.0.0'
 
-    if (version /= expectation) then
+    if (library_version /= expectation) then
         error stop '[version] The version string has an unexpected value!'
     end if
 end program test_library_version
