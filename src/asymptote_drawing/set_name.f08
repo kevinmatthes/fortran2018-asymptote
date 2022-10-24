@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set-name.f08
+!> \file set_drawing_name.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -34,27 +34,36 @@
 !>
 !> \brief   Modify the name of this Asymptote drawing.
 !> \param   this    The Asymptote drawing whose name shall be altered.
-!> \param   name    The new to assign to this Asymptote drawing.
+!> \param   name    The new name to assign to this Asymptote drawing.
 !>
-!> This subroutine will assign a new name to this Asymptote drawing.
+!> This subroutine will assign a new name to this Asymptote drawing.  The given
+!> will therefore be copied into a new memory region, without any trailing
+!> blanks.
+!>
+!> If this drawing did not already have a name, the copy will be assigned.  If
+!> there should already be a name, the old name will be disallocated before the
+!> the new one is assigned.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_name (this, name)
+pure subroutine set_drawing_name (this, name)
 implicit none
-    character (*), intent (in)          :: name
-    class (asymptote), intent (inout)   :: this
+    character (*), intent (in)      :: name
+    class (drawing), intent (inout) :: this
 
     integer :: i
+    integer :: string_length
 
-    i = 1
+    if (associated (this % drawing_name)) then
+        deallocate (this % drawing_name)
+    end if
 
-    deallocate (this % name)
-    allocate (character (len_trim (name)) :: this % name)
+    string_length = len_trim (name)
+    allocate (character (string_length) :: this % drawing_name)
 
-    do i = 1, len_trim (name)
-        this % name (i : i) = name (i : i)
+    do i = 1, string_length
+        this % drawing_name (i : i) = name (i : i)
     end do
-end subroutine set_name
+end subroutine set_drawing_name
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
