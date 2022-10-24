@@ -48,11 +48,13 @@
 
 program test_drawing_lifecycle
     use, non_intrinsic :: libf18asy, only: drawing
+    use, non_intrinsic :: libf18asy, only: finalise_drawing
 implicit none
     type (drawing) :: asymptote
 
     asymptote = drawing ('name')
     call asymptote % export_drawing
+    call finalise_drawing (asymptote)
 end program test_drawing_lifecycle
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
