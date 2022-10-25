@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file init_drawing.f08
+!> \file set_drawing_pdflatex.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,29 +32,24 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Create a new Asymptote drawing.
-!> \param   name    The new Asymptote drawing's name.
-!> \return  The new Asymptote drawing.
+!> \brief   Alter the preferred compiler for this Asymptote drawing.
+!> \param   this    The Asymptote drawing whose preferred compiler shall be set.
 !>
-!> This function will construct a new Asymptote drawing entity base on the given
-!> data.
+!> This subroutine will assign the compiler `pdflatex` to this Asymptote
+!> drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure function init_drawing (name)
+pure subroutine set_drawing_pdflatex (this)
 implicit none
-    character (*), intent (in)      :: name
-    type (drawing)                  :: init_drawing
+    class (drawing), intent (inout) :: this
 
-    integer :: i
-    integer :: string_length
+    if (associated (this % compiler)) then
+        deallocate (this % compiler)
+    end if
 
-    string_length = len_trim (name)
-    allocate (character (string_length) :: init_drawing % name)
-
-    do i = 1, string_length
-        init_drawing % name (i : i) = name (i : i)
-    end do
-end function init_drawing
+    allocate (character (8) :: this % compiler)
+    this % compiler = 'pdflatex'
+end subroutine set_drawing_pdflatex
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

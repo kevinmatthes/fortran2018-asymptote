@@ -39,6 +39,10 @@
 !> This subroutine will assign a deep copy of this drawing's name to the output
 !> parameter.  If this drawing does not already have a name, the ouput parameter
 !> will remain disassociated.
+!>
+!> \note This operation will allocate memory for its output parameter.  This
+!> allocation needs to be freed by the caller as the memory allocation is not
+!> managed automatically.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -52,12 +56,12 @@ implicit none
 
     name => null ()
 
-    if (associated (this % drawing_name)) then
-        string_length = len (this % drawing_name)
+    if (associated (this % name)) then
+        string_length = len (this % name)
         allocate (character (string_length) :: name)
 
         do i = 1, string_length
-            name (i : i) = this % drawing_name (i : i)
+            name (i : i) = this % name (i : i)
         end do
     end if
 end subroutine get_drawing_name

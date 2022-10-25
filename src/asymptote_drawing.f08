@@ -42,11 +42,14 @@
 submodule (libf18asy) asymptote_drawing
 implicit none
 contains
+    include 'asymptote_drawing/drawing_can_be_exported.f08'
     include 'asymptote_drawing/export_drawing.f08'
     include 'asymptote_drawing/finalise_drawing.f08'
     include 'asymptote_drawing/get_drawing_name.f08'
     include 'asymptote_drawing/init_drawing.f08'
     include 'asymptote_drawing/set_drawing_name.f08'
+    include 'asymptote_drawing/set_drawing_pdf.f08'
+    include 'asymptote_drawing/set_drawing_pdflatex.f08'
 end submodule asymptote_drawing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

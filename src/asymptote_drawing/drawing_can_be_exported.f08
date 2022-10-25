@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file export_drawing.f08
+!> \file drawing_can_be_exported.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,60 +32,26 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Write this Asymptote drawing to an Asymptote source file.
-!> \param   this    The Asymptote drawing to export.
-!> \return  Whether this drawing could be exported.
+!> \brief   Check whether this Asymptote drawing can be exported.
+!> \param   this    The drawing to test.
+!> \return  Whether this Asymptote drawing can be exported.
 !>
-!> This subroutine will produce the Asymptote drawing by writing it to an
-!> Asymptote source file.  The output source file is determined by the name of
-!> this drawing.  The file will always be newly created, replacing any recent
-!> file of the same name.
+!> An Asymptote drawing can be exported if
 !>
-!> A valid drawing has at least the following information configured.
-!>
-!> * name
-!> * output format
-!> * preferred compiler
-!>
-!> If an IO failure should occur or at least one of these information should be
-!> missing, the drawing is not going to be exported.
+!> * it has a name;
+!> * an output format is set; and
+!> * a preferred compiler is chosen.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-function export_drawing (this)
-    use, intrinsic :: iso_fortran_env, only: error_unit
+pure function drawing_can_be_exported (this)
 implicit none
     class (drawing), intent (in)    :: this
-    logical                         :: export_drawing
+    logical                         :: drawing_can_be_exported
 
-    character (*), parameter    :: fmt = '(a, a, a)'
-    integer                     :: status
-    integer                     :: unit
-
-    export_drawing = .false.
-
-    if (this % drawing_can_be_exported ()) then
-        open    ( file = this % name // '.asy'                                 &
-                , iostat = status                                              &
-                , newunit = unit                                               &
-                , status = 'replace'                                           &
-                )
-
-        if (status /= 0) then
-            write (unit = error_unit, fmt = fmt)                               &
-                'Asymptote drawing ''', this % name, ''' cannot be created.'
-        else
-            write (unit, fmt = fmt)                                            &
-                '// Created by LIBF18ASY, ', library_version, '.'
-            write (unit, fmt = fmt) 'defaultfilename = "', this % name, '";'
-            write (unit, fmt = fmt)                                            &
-                'settings.outformat = "', this % output_format, '";'
-            write (unit, fmt = fmt) 'settings.tex = "', this % compiler, '";'
-            close (unit)
-
-            export_drawing = .true.
-        end if
-    end if
-end function export_drawing
+    drawing_can_be_exported =       associated (this % compiler)               &
+                            .and.   associated (this % name)                   &
+                            .and.   associated (this % output_format)
+end function drawing_can_be_exported
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

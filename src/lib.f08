@@ -41,6 +41,15 @@
 !> \cite hammerlindl.bowman.prince:asymptote:2021:2.69
 !> \cite hammerlindl.bowman.prince:asymptote:2022:2.83.  It is tested with
 !> Asymptote, version 2.69 \cite hammerlindl.bowman.prince:asymptote:2021:2.69.
+!>
+!> In order to define an Asymptote drawing with this library, a new `drawing`
+!> instance needs to be created and modified in order to define the intended
+!> drawing.
+!>
+!> \note Any `drawing` instance needs to be freed with a call to its finaliser,
+!> `finalise`.  This is a generic subroutine freeing all instances of the data
+!> types provided by this library.  At option, one may also call the subroutine
+!> specific to the `drawing` type:  `finalise_drawing`.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -52,24 +61,46 @@ public
 
     !> The Asymptote drawing to produce.
     type, public    :: drawing
+        !> This drawing's compiler.
+        character (:), pointer, private :: compiler         => null ()
+
         !> This drawing's name.
-        character (:), pointer, private :: drawing_name => null ()
+        character (:), pointer, private :: name             => null ()
+
+        !> This drawing's output format.
+        character (:), pointer, private :: output_format    => null ()
     contains
         final                           :: finalise_drawing
-        procedure, pass (this), public  :: export   => export_drawing
-        procedure, pass (this), public  :: get_name => get_drawing_name
-        procedure, pass (this), public  :: set_name => set_drawing_name
+        procedure, pass (this), public  :: drawing_can_be_exported
+        procedure, pass (this), public  :: export       => export_drawing
+        procedure, pass (this), public  :: get_name     => get_drawing_name
+        procedure, pass (this), public  :: set_name     => set_drawing_name
+        procedure, pass (this), public  :: set_pdf      => set_drawing_pdf
+        procedure, pass (this), public  :: set_pdflatex => set_drawing_pdflatex
     end type drawing
 
     interface drawing
-        module procedure init_drawing
+        pure module function init_drawing (name)
+        implicit none
+            character (*), intent (in)  :: name
+            type (drawing)              :: init_drawing
+        end function init_drawing
     end interface drawing
 
     interface
-        module subroutine export_drawing (this)
+        pure module function drawing_can_be_exported (this)
         implicit none
             class (drawing), intent (in)    :: this
-        end subroutine export_drawing
+            logical                         :: drawing_can_be_exported
+        end function drawing_can_be_exported
+    end interface
+
+    interface
+        module function export_drawing (this)
+        implicit none
+            class (drawing), intent (in)    :: this
+            logical                         :: export_drawing
+        end function export_drawing
     end interface
 
     interface finalise
@@ -88,19 +119,25 @@ public
     end interface
 
     interface
-        pure module function init_drawing (name)
-        implicit none
-            character (*), intent (in)  :: name
-            type (drawing)              :: init_drawing
-        end function init_drawing
-    end interface
-
-    interface
         pure module subroutine set_drawing_name (this, name)
         implicit none
             character (*), intent (in)      :: name
             class (drawing), intent (inout) :: this
         end subroutine set_drawing_name
+    end interface
+
+    interface
+        pure module subroutine set_drawing_pdf (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_pdf
+    end interface
+
+    interface
+        pure module subroutine set_drawing_pdflatex (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_pdflatex
     end interface
 end module libf18asy
 
