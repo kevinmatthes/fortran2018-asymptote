@@ -44,7 +44,17 @@ pure subroutine finalise_drawing (this)
 implicit none
     type (drawing), intent (inout)  :: this
 
-    deallocate (this % drawing_name)
+    if (associated (this % compiler)) then
+        deallocate (this % compiler)
+    end if
+
+    if (associated (this % name)) then
+        deallocate (this % name)
+    end if
+
+    if (associated (this % output_format)) then
+        deallocate (this % output_format)
+    end if
 end subroutine finalise_drawing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
