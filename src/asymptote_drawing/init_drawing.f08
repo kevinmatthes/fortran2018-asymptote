@@ -50,10 +50,10 @@ implicit none
     integer :: string_length
 
     string_length = len_trim (name)
-    allocate (character (string_length) :: init_drawing % drawing_name)
+    allocate (character (string_length) :: init_drawing % name)
 
     do i = 1, string_length
-        init_drawing % drawing_name (i : i) = name (i : i)
+        init_drawing % name (i : i) = name (i : i)
     end do
 end function init_drawing
 
