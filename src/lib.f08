@@ -41,6 +41,15 @@
 !> \cite hammerlindl.bowman.prince:asymptote:2021:2.69
 !> \cite hammerlindl.bowman.prince:asymptote:2022:2.83.  It is tested with
 !> Asymptote, version 2.69 \cite hammerlindl.bowman.prince:asymptote:2021:2.69.
+!>
+!> In order to define an Asymptote drawing with this library, a new `drawing`
+!> instance needs to be created and modified in order to define the intended
+!> drawing.
+!>
+!> \note Any `drawing` instance needs to be freed with a call to its finaliser,
+!> `finalise`.  This is a generic subroutine freeing all instances of the data
+!> types defined by this library.  At option, one may also call the subroutine
+!> specific to the `drawing` type:  `finalise_drawing`.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
