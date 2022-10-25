@@ -52,12 +52,12 @@ implicit none
 
     name => null ()
 
-    if (associated (this % drawing_name)) then
-        string_length = len (this % drawing_name)
+    if (associated (this % name)) then
+        string_length = len (this % name)
         allocate (character (string_length) :: name)
 
         do i = 1, string_length
-            name (i : i) = this % drawing_name (i : i)
+            name (i : i) = this % name (i : i)
         end do
     end if
 end subroutine get_drawing_name
