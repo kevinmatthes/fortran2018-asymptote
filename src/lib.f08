@@ -96,10 +96,11 @@ public
     end interface
 
     interface
-        module subroutine export_drawing (this)
+        module function export_drawing (this)
         implicit none
             class (drawing), intent (in)    :: this
-        end subroutine export_drawing
+            logical                         :: export_drawing
+        end function export_drawing
     end interface
 
     interface finalise
