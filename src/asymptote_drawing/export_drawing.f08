@@ -37,8 +37,8 @@
 !>
 !> This subroutine will produce the Asymptote drawing by writing it to an
 !> Asymptote source file.  The output source file is determined by the name of
-!> this drawing, `drawing_name`.  The file will always be newly created,
-!> replacing any recent file of the same name.
+!> this drawing.  The file will always be newly created, replacing any recent
+!> file of the same name.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -51,8 +51,8 @@ implicit none
     integer                     :: status
     integer                     :: unit
 
-    if (associated (this % drawing_name)) then
-        open    ( file = this % drawing_name // '.asy'                         &
+    if (this % drawing_can_be_exported ()) then
+        open    ( file = this % name // '.asy'                                 &
                 , iostat = status                                              &
                 , newunit = unit                                               &
                 , status = 'replace'                                           &
@@ -60,14 +60,14 @@ implicit none
 
         if (status /= 0) then
             write (unit = error_unit, fmt = fmt)                               &
-                'Asymptote drawing '''                                         &
-            ,   this % drawing_name                                            &
-            ,   ''' cannot be created.'
+                'Asymptote drawing ''', this % name, ''' cannot be created.'
         else
             write (unit, fmt = fmt)                                            &
                 '// Created by LIBF18ASY, ', library_version, '.'
+            write (unit, fmt = fmt) 'defaultfilename = "', this % name, '";'
             write (unit, fmt = fmt)                                            &
-                'defaultfilename = "', this % drawing_name, '";'
+                'settings.outformat = "', this % output_format, '";'
+            write (unit, fmt = fmt) 'settings.tex = "', this % compiler, '";'
             close (unit)
         end if
     end if
