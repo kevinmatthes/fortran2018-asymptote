@@ -39,7 +39,11 @@
 !>
 !> * a new Asymptote drawing can be constructed.
 !> * the constructed drawing's name can be retrieved.
-!> * the constructed drawing can be exported.
+!> * the constructed drawing can be exported with both compiler and output
+!>   format being unset.
+!> * the output format can be set to PDF.
+!> * the constructed drawing can be exported without a compiler being set.
+!> * the compiler can be set to `pdflatex`.
 !> * the constructed drawing's name can be modified.
 !> * the modified drawing name can be retrieved.
 !> * the modified drawing can be exported.
@@ -51,7 +55,7 @@ program test_drawing_lifecycle
     use, non_intrinsic :: libf18asy, only: drawing
     use, non_intrinsic :: libf18asy, only: finalise
 implicit none
-    character (:), pointer  :: name
+    character (:), pointer  :: name => null ()
     type (drawing)          :: asymptote
 
     asymptote = drawing ('name')
@@ -59,18 +63,32 @@ implicit none
 
     if (name /= 'name') then
         error stop '[drawing] Original name not retrievable!'
+    else
+        deallocate (name)
     end if
 
-    deallocate (name)
+    if (asymptote % drawing_can_be_exported ()) then
+        error stop 'Drawing export does not need compiler and output format inf&
+        &ormation!'
+    end if
+
+    call asymptote % set_pdf
+
+    if (asymptote % drawing_can_be_exported ()) then
+        error stop 'Drawing export does not need a compiler being set!'
+    end if
+
+    call asymptote % set_pdflatex
     call asymptote % export
     call asymptote % set_name ('new_name')
     call asymptote % get_name (name)
 
     if (name /= 'new_name') then
-        error stop '[drawing] Modified name not retrievable!'
+        error stop 'Modified drawing name cannot be retrieved!'
+    else
+        deallocate (name)
     end if
 
-    deallocate (name)
     call asymptote % export
     call finalise (asymptote)
 end program test_drawing_lifecycle
