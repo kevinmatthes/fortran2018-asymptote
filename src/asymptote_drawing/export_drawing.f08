@@ -33,7 +33,8 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   Write this Asymptote drawing to an Asymptote source file.
-!> \param   this        The Asymptote drawing to export.
+!> \param   this    The Asymptote drawing to export.
+!> \return  Whether this drawing could be exported.
 !>
 !> This subroutine will produce the Asymptote drawing by writing it to an
 !> Asymptote source file.  The output source file is determined by the name of
@@ -42,14 +43,17 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine export_drawing (this)
+function export_drawing (this)
     use, intrinsic :: iso_fortran_env, only: error_unit
 implicit none
     class (drawing), intent (in)    :: this
+    logical                         :: export_drawing
 
     character (*), parameter    :: fmt = '(a, a, a)'
     integer                     :: status
     integer                     :: unit
+
+    export_drawing = .false.
 
     if (this % drawing_can_be_exported ()) then
         open    ( file = this % name // '.asy'                                 &
@@ -69,8 +73,10 @@ implicit none
                 'settings.outformat = "', this % output_format, '";'
             write (unit, fmt = fmt) 'settings.tex = "', this % compiler, '";'
             close (unit)
+
+            export_drawing = .true.
         end if
     end if
-end subroutine export_drawing
+end function export_drawing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
