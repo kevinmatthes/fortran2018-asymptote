@@ -37,7 +37,7 @@
 !> \param   name    The new name to assign to this Asymptote drawing.
 !>
 !> This subroutine will assign a new name to this Asymptote drawing.  The given
-!> will therefore be copied into a new memory region, without any trailing
+!> name will therefore be copied into a new memory region, without any trailing
 !> blanks.
 !>
 !> If this drawing did not already have a name, the copy will be assigned.  If
@@ -54,15 +54,15 @@ implicit none
     integer :: i
     integer :: string_length
 
-    if (associated (this % drawing_name)) then
-        deallocate (this % drawing_name)
+    if (associated (this % name)) then
+        deallocate (this % name)
     end if
 
     string_length = len_trim (name)
-    allocate (character (string_length) :: this % drawing_name)
+    allocate (character (string_length) :: this % name)
 
     do i = 1, string_length
-        this % drawing_name (i : i) = name (i : i)
+        this % name (i : i) = name (i : i)
     end do
 end subroutine set_drawing_name
 
