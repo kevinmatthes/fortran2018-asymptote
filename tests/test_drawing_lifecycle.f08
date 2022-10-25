@@ -79,7 +79,11 @@ implicit none
     end if
 
     call asymptote % set_pdflatex
-    call asymptote % export
+
+    if (.not. asymptote % export ()) then
+        error stop 'Valid drawing cannot be exported!'
+    end if
+
     call asymptote % set_name ('new_name')
     call asymptote % get_name (name)
 
@@ -89,7 +93,10 @@ implicit none
         deallocate (name)
     end if
 
-    call asymptote % export
+    if (.not. asymptote % export ()) then
+        error stop 'Valid drawing cannot be exported!'
+    end if
+
     call finalise (asymptote)
 end program test_drawing_lifecycle
 
