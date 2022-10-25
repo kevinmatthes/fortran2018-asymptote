@@ -40,6 +40,12 @@
 !> Asymptote source file.  The output source file is determined by the name of
 !> this drawing.  The file will always be newly created, replacing any recent
 !> file of the same name.
+!>
+!> A valid drawing has at least the following information configured.
+!>
+!> * name
+!> * output format
+!> * preferred compiler
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
