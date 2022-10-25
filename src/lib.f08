@@ -62,7 +62,11 @@ public
     end type drawing
 
     interface drawing
-        module procedure init_drawing
+        pure module function init_drawing (name)
+        implicit none
+            character (*), intent (in)  :: name
+            type (drawing)              :: init_drawing
+        end function init_drawing
     end interface drawing
 
     interface
@@ -85,14 +89,6 @@ public
             character (:), pointer, intent (out)    :: name
             class (drawing), intent (in)            :: this
         end subroutine get_drawing_name
-    end interface
-
-    interface
-        pure module function init_drawing (name)
-        implicit none
-            character (*), intent (in)  :: name
-            type (drawing)              :: init_drawing
-        end function init_drawing
     end interface
 
     interface
