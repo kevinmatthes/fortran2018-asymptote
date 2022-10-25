@@ -48,7 +48,7 @@ implicit none
     character (*), parameter :: expectation = 'v0.0.0'
 
     if (library_version /= expectation) then
-        error stop '[version] The version string has an unexpected value!'
+        error stop 'The library version string has an unexpected value!'
     end if
 end program test_library_version
 
