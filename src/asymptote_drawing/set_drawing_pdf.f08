@@ -35,8 +35,7 @@
 !> \brief   Alter the output format of this Asymptote drawing.
 !> \param   this    The Asymptote drawing whose output format shall be set.
 !>
-!> This subroutine will assign the output format `pdf` to this Asymptote
-!> drawing.
+!> This subroutine will assign the output format PDF to this Asymptote drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
