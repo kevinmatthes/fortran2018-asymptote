@@ -48,7 +48,7 @@
 !>
 !> \note Any `drawing` instance needs to be freed with a call to its finaliser,
 !> `finalise`.  This is a generic subroutine freeing all instances of the data
-!> types defined by this library.  At option, one may also call the subroutine
+!> types provided by this library.  At option, one may also call the subroutine
 !> specific to the `drawing` type:  `finalise_drawing`.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
