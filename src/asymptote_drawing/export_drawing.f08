@@ -46,6 +46,9 @@
 !> * name
 !> * output format
 !> * preferred compiler
+!>
+!> If an IO failure should occur or at least one of these information should be
+!> missing, the drawing is not going to be exported.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
