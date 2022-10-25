@@ -62,7 +62,7 @@ implicit none
     call asymptote % get_name (name)
 
     if (name /= 'name') then
-        error stop '[drawing] Original name not retrievable!'
+        error stop 'Original drawing name cannot be retrieved!'
     else
         deallocate (name)
     end if
