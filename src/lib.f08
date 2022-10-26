@@ -61,19 +61,15 @@ public
 
     !> The Asymptote drawing to produce.
     type, public    :: drawing
-        !> This drawing's compiler.
         character (:), pointer, private :: compiler         => null ()
-
-        !> This drawing's name.
         character (:), pointer, private :: name             => null ()
-
-        !> This drawing's output format.
         character (:), pointer, private :: output_format    => null ()
     contains
         final                           :: finalise_drawing
         procedure, pass (this), public  :: drawing_can_be_exported
         procedure, pass (this), public  :: export       => export_drawing
         procedure, pass (this), public  :: get_name     => get_drawing_name
+        procedure, pass (this), public  :: set_eps      => set_drawing_eps
         procedure, pass (this), public  :: set_name     => set_drawing_name
         procedure, pass (this), public  :: set_pdf      => set_drawing_pdf
         procedure, pass (this), public  :: set_pdflatex => set_drawing_pdflatex
@@ -116,6 +112,13 @@ public
             character (:), pointer, intent (out)    :: name
             class (drawing), intent (in)            :: this
         end subroutine get_drawing_name
+    end interface
+
+    interface
+        pure module subroutine set_drawing_eps (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_eps
     end interface
 
     interface
