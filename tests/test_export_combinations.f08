@@ -44,7 +44,7 @@
 !>
 !> * `lualatex`,
 !> * `pdflatex`, and
-!> * `xelatex
+!> * `xelatex`
 !>
 !> as the preferred compilers, respectively.
 !!
