@@ -61,22 +61,20 @@ public
 
     !> The Asymptote drawing to produce.
     type, public    :: drawing
-        !> This drawing's compiler.
         character (:), pointer, private :: compiler         => null ()
-
-        !> This drawing's name.
         character (:), pointer, private :: name             => null ()
-
-        !> This drawing's output format.
         character (:), pointer, private :: output_format    => null ()
     contains
         final                           :: finalise_drawing
         procedure, pass (this), public  :: drawing_can_be_exported
         procedure, pass (this), public  :: export       => export_drawing
         procedure, pass (this), public  :: get_name     => get_drawing_name
+        procedure, pass (this), public  :: set_eps      => set_drawing_eps
+        procedure, pass (this), public  :: set_lualatex => set_drawing_lualatex
         procedure, pass (this), public  :: set_name     => set_drawing_name
         procedure, pass (this), public  :: set_pdf      => set_drawing_pdf
         procedure, pass (this), public  :: set_pdflatex => set_drawing_pdflatex
+        procedure, pass (this), public  :: set_xelatex  => set_drawing_xelatex
     end type drawing
 
     interface drawing
@@ -119,6 +117,20 @@ public
     end interface
 
     interface
+        pure module subroutine set_drawing_eps (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_eps
+    end interface
+
+    interface
+        pure module subroutine set_drawing_lualatex (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_lualatex
+    end interface
+
+    interface
         pure module subroutine set_drawing_name (this, name)
         implicit none
             character (*), intent (in)      :: name
@@ -138,6 +150,13 @@ public
         implicit none
             class (drawing), intent (inout) :: this
         end subroutine set_drawing_pdflatex
+    end interface
+
+    interface
+        pure module subroutine set_drawing_xelatex (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_xelatex
     end interface
 end module libf18asy
 

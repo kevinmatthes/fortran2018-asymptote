@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_drawing.f08
+!> \file test_export_combinations.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,27 +32,69 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing.
+!> \brief   A simple test whether all possible export option combinations work.
+!> \return  Whether this test succeeds.
 !>
-!> This submodule contains the procedures associated with the Asymptote drawing
-!> to produce.
+!> This unit test will check whether Asymptote drawings can be exported as
+!>
+!> * EPS files, and
+!> * PDF files
+!>
+!> being compiled with
+!>
+!> * `lualatex`,
+!> * `pdflatex`, and
+!> * `xelatex`
+!>
+!> as the preferred compilers, respectively.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_drawing
+program test_export_combinations
+    use, non_intrinsic :: libf18asy, only: drawing
+    use, non_intrinsic :: libf18asy, only: finalise
 implicit none
-contains
-    include 'asymptote_drawing/drawing_can_be_exported.f08'
-    include 'asymptote_drawing/export_drawing.f08'
-    include 'asymptote_drawing/finalise_drawing.f08'
-    include 'asymptote_drawing/get_drawing_name.f08'
-    include 'asymptote_drawing/init_drawing.f08'
-    include 'asymptote_drawing/set_drawing_eps.f08'
-    include 'asymptote_drawing/set_drawing_lualatex.f08'
-    include 'asymptote_drawing/set_drawing_name.f08'
-    include 'asymptote_drawing/set_drawing_pdf.f08'
-    include 'asymptote_drawing/set_drawing_pdflatex.f08'
-    include 'asymptote_drawing/set_drawing_xelatex.f08'
-end submodule asymptote_drawing
+    type (drawing)  :: asymptote
+
+    asymptote = drawing ('eps_lualatex')
+    call asymptote % set_eps
+    call asymptote % set_lualatex
+    if (.not. asymptote % export ()) then
+        error stop 'Export of EPS / `lualatex` drawing failed!'
+    end if
+
+    call asymptote % set_name ('eps_pdflatex')
+    call asymptote % set_pdflatex
+    if (.not. asymptote % export ()) then
+        error stop 'Export of EPS / `pdflatex` drawing failed!'
+    end if
+
+    call asymptote % set_name ('eps_xelatex')
+    call asymptote % set_xelatex
+    if (.not. asymptote % export ()) then
+        error stop 'Export of EPS / `xelatex` drawing failed!'
+    end if
+
+    call asymptote % set_name ('pdf_lualatex')
+    call asymptote % set_pdf
+    call asymptote % set_lualatex
+    if (.not. asymptote % export ()) then
+        error stop 'Export of PDF / `lualatex` drawing failed!'
+    end if
+
+    call asymptote % set_name ('pdf_pdflatex')
+    call asymptote % set_pdflatex
+    if (.not. asymptote % export ()) then
+        error stop 'Export of PDF / `pdflatex` drawing failed!'
+    end if
+
+    call asymptote % set_name ('pdf_xelatex')
+    call asymptote % set_xelatex
+    if (.not. asymptote % export ()) then
+        error stop 'Export of PDF / `xelatex` drawing failed!'
+    end if
+
+    call finalise (asymptote)
+end program test_export_combinations
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

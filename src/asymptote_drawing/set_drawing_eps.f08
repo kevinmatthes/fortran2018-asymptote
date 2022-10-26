@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_drawing.f08
+!> \file set_drawing_eps.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,27 +32,23 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing.
+!> \brief   Alter the output format of this Asymptote drawing.
+!> \param   this    The Asymptote drawing whose output format shall be set.
 !>
-!> This submodule contains the procedures associated with the Asymptote drawing
-!> to produce.
+!> This subroutine will assign the output format EPS to this Asymptote drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_drawing
+pure subroutine set_drawing_eps (this)
 implicit none
-contains
-    include 'asymptote_drawing/drawing_can_be_exported.f08'
-    include 'asymptote_drawing/export_drawing.f08'
-    include 'asymptote_drawing/finalise_drawing.f08'
-    include 'asymptote_drawing/get_drawing_name.f08'
-    include 'asymptote_drawing/init_drawing.f08'
-    include 'asymptote_drawing/set_drawing_eps.f08'
-    include 'asymptote_drawing/set_drawing_lualatex.f08'
-    include 'asymptote_drawing/set_drawing_name.f08'
-    include 'asymptote_drawing/set_drawing_pdf.f08'
-    include 'asymptote_drawing/set_drawing_pdflatex.f08'
-    include 'asymptote_drawing/set_drawing_xelatex.f08'
-end submodule asymptote_drawing
+    class (drawing), intent (inout) :: this
+
+    if (associated (this % output_format)) then
+        deallocate (this % output_format)
+    end if
+
+    allocate (character (3) :: this % output_format)
+    this % output_format = 'eps'
+end subroutine set_drawing_eps
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
