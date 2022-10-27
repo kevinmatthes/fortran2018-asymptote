@@ -76,9 +76,7 @@ lnk-f18 := '-I. ' + lflags
 
 # Compile the Asymptote drawing type.
 @asymptote_drawing: interfaces library_utilities
-    gfortran {{f18-lib}} src/asymptote_drawing.f08
-    ar rsv {{library}} *.o
-    rm -rf *.o
+    just compile src/asymptote_drawing.f08
 
 # Increment the version numbers.
 @bump part:
@@ -92,6 +90,12 @@ lnk-f18 := '-I. ' + lflags
 @clear:
     git clean -dfx
 
+# Compile the given source file and add it to the library.
+@compile source_file:
+    gfortran {{f18-lib}} {{source_file}}
+    ar rsv {{library}} *.o
+    rm -rf *.o
+
 # Create the required directories.
 @directories:
     mkdir -p target/
@@ -104,18 +108,14 @@ lnk-f18 := '-I. ' + lflags
 
 # Create the Fortran interfaces.
 @interfaces:
-    gfortran {{f18-lib}} src/lib.f08
-    ar rsv {{library}} *.o
-    rm -rf *.o
+    just compile src/lib.f08
 
 # Create the project library.
 @library: asymptote_drawing interfaces library_utilities
 
 # Compile the library utility procedures.
 @library_utilities: interfaces
-    gfortran {{f18-lib}} src/library_utilities.f08
-    ar rsv {{library}} *.o
-    rm -rf *.o
+    just compile src/library_utilities.f08
 
 # Compile and run a single unit test.
 @test name: directories library
