@@ -54,6 +54,10 @@ implicit none
     integer :: i
     integer :: string_length
 
+    intrinsic   :: associated
+    intrinsic   :: len
+    intrinsic   :: null
+
     name => null ()
 
     if (associated (this % name)) then
