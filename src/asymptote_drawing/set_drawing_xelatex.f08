@@ -44,10 +44,7 @@ pure subroutine set_drawing_xelatex (this)
 implicit none
     class (drawing), intent (inout) :: this
 
-    if (associated (this % compiler)) then
-        deallocate (this % compiler)
-    end if
-
+    call conditional_free (this % compiler)
     allocate (character (7) :: this % compiler)
     this % compiler = 'xelatex'
 end subroutine set_drawing_xelatex
