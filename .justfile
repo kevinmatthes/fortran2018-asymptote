@@ -75,7 +75,7 @@ lnk-f18 := '-I. ' + lflags
 @all: check doxygen
 
 # Compile the Asymptote drawing type.
-@asymptote_drawing: interfaces
+@asymptote_drawing: interfaces library_utilities
     gfortran {{f18-lib}} src/asymptote_drawing.f08
     ar rsv {{library}} *.o
     rm -rf *.o
@@ -109,7 +109,13 @@ lnk-f18 := '-I. ' + lflags
     rm -rf *.o
 
 # Create the project library.
-@library: asymptote_drawing interfaces
+@library: asymptote_drawing interfaces library_utilities
+
+# Compile the library utility procedures.
+@library_utilities: interfaces
+    gfortran {{f18-lib}} src/library_utilities.f08
+    ar rsv {{library}} *.o
+    rm -rf *.o
 
 # Compile and run a single unit test.
 @test name: directories library
