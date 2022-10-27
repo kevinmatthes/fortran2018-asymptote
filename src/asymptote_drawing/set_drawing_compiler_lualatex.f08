@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_drawing_lualatex.f08
+!> \file set_drawing_compiler_lualatex.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -40,13 +40,13 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_drawing_lualatex (this)
+pure subroutine set_drawing_compiler_lualatex (this)
 implicit none
     class (drawing), intent (inout) :: this
 
     call conditional_free (this % compiler)
     allocate (character (8) :: this % compiler)
     this % compiler = 'lualatex'
-end subroutine set_drawing_lualatex
+end subroutine set_drawing_compiler_lualatex
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
