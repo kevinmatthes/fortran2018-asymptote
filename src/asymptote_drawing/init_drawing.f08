@@ -49,6 +49,8 @@ implicit none
     integer :: i
     integer :: string_length
 
+    intrinsic   :: len_trim
+
     string_length = len_trim (name)
     allocate (character (string_length) :: init_drawing % name)
 
