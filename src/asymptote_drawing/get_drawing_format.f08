@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_drawing.f08
+!> \file get_drawing_format.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,29 +32,38 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing.
+!> \brief   Create a deep copy of this drawing's output format.
+!> \param   this            The Asymptote drawing whose format shall be copied.
+!> \param   output_format   The pointer to pointing to the output memory region.
 !>
-!> This submodule contains the procedures associated with the Asymptote drawing
-!> to produce.
+!> This subroutine will assign a deep copy of this drawing's intended output
+!> format to the output parameter.  If this drawing does not already have an
+!> intended output format, the ouput parameter will remain disassociated.
+!>
+!> \note This operation will allocate memory for its output parameter.  This
+!> allocation needs to be freed by the caller as the memory allocation is not
+!> managed automatically.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_drawing
+pure subroutine get_drawing_format (this, output_format)
 implicit none
-contains
-    include 'asymptote_drawing/drawing_can_be_exported.f08'
-    include 'asymptote_drawing/export_drawing.f08'
-    include 'asymptote_drawing/finalise_drawing.f08'
-    include 'asymptote_drawing/get_drawing_compiler.f08'
-    include 'asymptote_drawing/get_drawing_format.f08'
-    include 'asymptote_drawing/get_drawing_name.f08'
-    include 'asymptote_drawing/init_drawing.f08'
-    include 'asymptote_drawing/set_drawing_eps.f08'
-    include 'asymptote_drawing/set_drawing_lualatex.f08'
-    include 'asymptote_drawing/set_drawing_name.f08'
-    include 'asymptote_drawing/set_drawing_pdf.f08'
-    include 'asymptote_drawing/set_drawing_pdflatex.f08'
-    include 'asymptote_drawing/set_drawing_xelatex.f08'
-end submodule asymptote_drawing
+    character (:), pointer, intent (out)    :: output_format
+    class (drawing), intent (in)            :: this
+
+    integer :: i
+    integer :: string_length
+
+    output_format => null ()
+
+    if (associated (this % output_format)) then
+        string_length = len (this % output_format)
+        allocate (character (string_length) :: output_format)
+
+        do i = 1, string_length
+            output_format (i : i) = this % output_format (i : i)
+        end do
+    end if
+end subroutine get_drawing_format
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -68,6 +68,8 @@ public
         final                           :: finalise_drawing
         procedure, pass (this), public  :: drawing_can_be_exported
         procedure, pass (this), public  :: export       => export_drawing
+        procedure, pass (this), public  :: get_compiler => get_drawing_compiler
+        procedure, pass (this), public  :: get_format   => get_drawing_format
         procedure, pass (this), public  :: get_name     => get_drawing_name
         procedure, pass (this), public  :: set_eps      => set_drawing_eps
         procedure, pass (this), public  :: set_lualatex => set_drawing_lualatex
@@ -107,6 +109,22 @@ public
             type (drawing), intent (inout)  :: this
         end subroutine finalise_drawing
     end interface finalise
+
+    interface
+        pure module subroutine get_drawing_compiler (this, compiler)
+        implicit none
+            character (:), pointer, intent (out)    :: compiler
+            class (drawing), intent (in)            :: this
+        end subroutine get_drawing_compiler
+    end interface
+
+    interface
+        pure module subroutine get_drawing_format (this, output_format)
+        implicit none
+            character (:), pointer, intent (out)    :: output_format
+            class (drawing), intent (in)            :: this
+        end subroutine get_drawing_format
+    end interface
 
     interface
         pure module subroutine get_drawing_name (this, name)

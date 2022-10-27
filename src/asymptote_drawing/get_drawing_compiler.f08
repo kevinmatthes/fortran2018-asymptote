@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_drawing.f08
+!> \file get_drawing_compiler.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,29 +32,38 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing.
+!> \brief   Create a deep copy of this drawing's preferred compiler.
+!> \param   this        The Asymptote drawing whose compiler shall be copied.
+!> \param   compiler    The pointer to pointing to the output memory region.
 !>
-!> This submodule contains the procedures associated with the Asymptote drawing
-!> to produce.
+!> This subroutine will assign a deep copy of this drawing's preferred compiler
+!> to the output parameter.  If this drawing does not already have a preferred
+!> compiler, the ouput parameter will remain disassociated.
+!>
+!> \note This operation will allocate memory for its output parameter.  This
+!> allocation needs to be freed by the caller as the memory allocation is not
+!> managed automatically.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_drawing
+pure subroutine get_drawing_compiler (this, compiler)
 implicit none
-contains
-    include 'asymptote_drawing/drawing_can_be_exported.f08'
-    include 'asymptote_drawing/export_drawing.f08'
-    include 'asymptote_drawing/finalise_drawing.f08'
-    include 'asymptote_drawing/get_drawing_compiler.f08'
-    include 'asymptote_drawing/get_drawing_format.f08'
-    include 'asymptote_drawing/get_drawing_name.f08'
-    include 'asymptote_drawing/init_drawing.f08'
-    include 'asymptote_drawing/set_drawing_eps.f08'
-    include 'asymptote_drawing/set_drawing_lualatex.f08'
-    include 'asymptote_drawing/set_drawing_name.f08'
-    include 'asymptote_drawing/set_drawing_pdf.f08'
-    include 'asymptote_drawing/set_drawing_pdflatex.f08'
-    include 'asymptote_drawing/set_drawing_xelatex.f08'
-end submodule asymptote_drawing
+    character (:), pointer, intent (out)    :: compiler
+    class (drawing), intent (in)            :: this
+
+    integer :: i
+    integer :: string_length
+
+    compiler => null ()
+
+    if (associated (this % compiler)) then
+        string_length = len (this % compiler)
+        allocate (character (string_length) :: compiler)
+
+        do i = 1, string_length
+            compiler (i : i) = this % compiler (i : i)
+        end do
+    end if
+end subroutine get_drawing_compiler
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

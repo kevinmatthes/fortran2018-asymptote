@@ -54,45 +54,163 @@ program test_export_combinations
     use, non_intrinsic :: libf18asy, only: drawing
     use, non_intrinsic :: libf18asy, only: finalise
 implicit none
-    type (drawing)  :: asymptote
+    character (:), pointer  :: compiler         => null ()
+    character (:), pointer  :: output_format    => null ()
+    type (drawing)          :: asymptote
+
+
 
     asymptote = drawing ('eps_lualatex')
     call asymptote % set_eps
     call asymptote % set_lualatex
+
     if (.not. asymptote % export ()) then
         error stop 'Export of EPS / `lualatex` drawing failed!'
     end if
 
+    call asymptote % get_compiler (compiler)
+
+    if (compiler /= 'lualatex') then
+        error stop 'Drawing compiler cannot be retrieved!'
+    else
+        deallocate (compiler)
+    end if
+
+    call asymptote % get_format (output_format)
+
+    if (output_format /= 'eps') then
+        error stop 'Drawing output format cannot be retrieved!'
+    else
+        deallocate (output_format)
+    end if
+
+
+
     call asymptote % set_name ('eps_pdflatex')
     call asymptote % set_pdflatex
+
     if (.not. asymptote % export ()) then
         error stop 'Export of EPS / `pdflatex` drawing failed!'
     end if
 
+    call asymptote % get_compiler (compiler)
+
+    if (compiler /= 'pdflatex') then
+        error stop 'Drawing compiler cannot be retrieved!'
+    else
+        deallocate (compiler)
+    end if
+
+    call asymptote % get_format (output_format)
+
+    if (output_format /= 'eps') then
+        error stop 'Drawing output format cannot be retrieved!'
+    else
+        deallocate (output_format)
+    end if
+
+
+
     call asymptote % set_name ('eps_xelatex')
     call asymptote % set_xelatex
+
     if (.not. asymptote % export ()) then
         error stop 'Export of EPS / `xelatex` drawing failed!'
     end if
 
+    call asymptote % get_compiler (compiler)
+
+    if (compiler /= 'xelatex') then
+        error stop 'Drawing compiler cannot be retrieved!'
+    else
+        deallocate (compiler)
+    end if
+
+    call asymptote % get_format (output_format)
+
+    if (output_format /= 'eps') then
+        error stop 'Drawing output format cannot be retrieved!'
+    else
+        deallocate (output_format)
+    end if
+
+
+
     call asymptote % set_name ('pdf_lualatex')
     call asymptote % set_pdf
     call asymptote % set_lualatex
+
     if (.not. asymptote % export ()) then
         error stop 'Export of PDF / `lualatex` drawing failed!'
     end if
 
+    call asymptote % get_compiler (compiler)
+
+    if (compiler /= 'lualatex') then
+        error stop 'Drawing compiler cannot be retrieved!'
+    else
+        deallocate (compiler)
+    end if
+
+    call asymptote % get_format (output_format)
+
+    if (output_format /= 'pdf') then
+        error stop 'Drawing output format cannot be retrieved!'
+    else
+        deallocate (output_format)
+    end if
+
+
+
     call asymptote % set_name ('pdf_pdflatex')
     call asymptote % set_pdflatex
+
     if (.not. asymptote % export ()) then
         error stop 'Export of PDF / `pdflatex` drawing failed!'
     end if
 
+    call asymptote % get_compiler (compiler)
+
+    if (compiler /= 'pdflatex') then
+        error stop 'Drawing compiler cannot be retrieved!'
+    else
+        deallocate (compiler)
+    end if
+
+    call asymptote % get_format (output_format)
+
+    if (output_format /= 'pdf') then
+        error stop 'Drawing output format cannot be retrieved!'
+    else
+        deallocate (output_format)
+    end if
+
+
+
     call asymptote % set_name ('pdf_xelatex')
     call asymptote % set_xelatex
+
     if (.not. asymptote % export ()) then
         error stop 'Export of PDF / `xelatex` drawing failed!'
     end if
+
+    call asymptote % get_compiler (compiler)
+
+    if (compiler /= 'xelatex') then
+        error stop 'Drawing compiler cannot be retrieved!'
+    else
+        deallocate (compiler)
+    end if
+
+    call asymptote % get_format (output_format)
+
+    if (output_format /= 'pdf') then
+        error stop 'Drawing output format cannot be retrieved!'
+    else
+        deallocate (output_format)
+    end if
+
+
 
     call finalise (asymptote)
 end program test_export_combinations
