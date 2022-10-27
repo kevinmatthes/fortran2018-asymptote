@@ -43,10 +43,7 @@ pure subroutine set_drawing_pdf (this)
 implicit none
     class (drawing), intent (inout) :: this
 
-    if (associated (this % output_format)) then
-        deallocate (this % output_format)
-    end if
-
+    call conditional_free (this % output_format)
     allocate (character (3) :: this % output_format)
     this % output_format = 'pdf'
 end subroutine set_drawing_pdf
