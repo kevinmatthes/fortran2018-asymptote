@@ -37,8 +37,8 @@
 !> \param   name    The pointer to pointing to the output memory region.
 !>
 !> This subroutine will assign a deep copy of this drawing's name to the output
-!> parameter.  If this drawing does not already have a name, the ouput parameter
-!> will remain disassociated.
+!> parameter.  If this drawing does not already have a name, the output
+!> parameter will remain disassociated.
 !>
 !> \note This operation will allocate memory for its output parameter.  This
 !> allocation needs to be freed by the caller as the memory allocation is not
