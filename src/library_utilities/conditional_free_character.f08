@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_drawing_pdf.f08
+!> \file conditional_free_character.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,20 +32,23 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Alter the output format of this Asymptote drawing.
-!> \param   this    The Asymptote drawing whose output format shall be set.
+!> \brief   Deallocate the given pointer if it is associated with a target.
+!> \param   ptr The pointer to deallocate.
 !>
-!> This subroutine will assign the output format PDF to this Asymptote drawing.
+!> If the given pointer is associated with a target, it will be deallocated.
+!> Thereby, the pointer becomes disassociated.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_drawing_pdf (this)
+pure subroutine conditional_free_character (ptr)
 implicit none
-    class (drawing), intent (inout) :: this
+    character (:), pointer, intent (inout)  :: ptr
 
-    call conditional_free (this % output_format)
-    allocate (character (3) :: this % output_format)
-    this % output_format = 'pdf'
-end subroutine set_drawing_pdf
+    intrinsic   :: associated
+
+    if (associated (ptr)) then
+        deallocate (ptr)
+    end if
+end subroutine conditional_free_character
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

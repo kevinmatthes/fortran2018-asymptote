@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_drawing_pdf.f08
+!> \file library_utilities.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,20 +32,16 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Alter the output format of this Asymptote drawing.
-!> \param   this    The Asymptote drawing whose output format shall be set.
+!> \brief   The submodule defining some utility procedures for this library.
 !>
-!> This subroutine will assign the output format PDF to this Asymptote drawing.
+!> This submodule contains a set of utility procedures for this library.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_drawing_pdf (this)
+submodule (libf18asy) library_utilities
 implicit none
-    class (drawing), intent (inout) :: this
-
-    call conditional_free (this % output_format)
-    allocate (character (3) :: this % output_format)
-    this % output_format = 'pdf'
-end subroutine set_drawing_pdf
+contains
+    include 'library_utilities/conditional_free_character.f08'
+end submodule library_utilities
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

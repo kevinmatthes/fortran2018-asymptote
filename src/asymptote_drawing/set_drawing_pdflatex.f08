@@ -44,10 +44,7 @@ pure subroutine set_drawing_pdflatex (this)
 implicit none
     class (drawing), intent (inout) :: this
 
-    if (associated (this % compiler)) then
-        deallocate (this % compiler)
-    end if
-
+    call conditional_free (this % compiler)
     allocate (character (8) :: this % compiler)
     this % compiler = 'pdflatex'
 end subroutine set_drawing_pdflatex
