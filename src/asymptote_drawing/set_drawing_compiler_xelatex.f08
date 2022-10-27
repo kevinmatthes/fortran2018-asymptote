@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_drawing_xelatex.f08
+!> \file set_drawing_compiler_xelatex.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -40,13 +40,13 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_drawing_xelatex (this)
+pure subroutine set_drawing_compiler_xelatex (this)
 implicit none
     class (drawing), intent (inout) :: this
 
     call conditional_free (this % compiler)
     allocate (character (7) :: this % compiler)
     this % compiler = 'xelatex'
-end subroutine set_drawing_xelatex
+end subroutine set_drawing_compiler_xelatex
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
