@@ -54,10 +54,7 @@ implicit none
     integer :: i
     integer :: string_length
 
-    if (associated (this % name)) then
-        deallocate (this % name)
-    end if
-
+    call conditional_free (this % name)
     string_length = len_trim (name)
     allocate (character (string_length) :: this % name)
 
