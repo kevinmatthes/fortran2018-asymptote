@@ -35,8 +35,8 @@
 !> \brief   Deallocate the given pointer if it is associated with a target.
 !> \param   ptr The pointer to deallocate.
 !>
-!> If the given pointer is associated with a target, it will be deallocated thus
-!> becoming disassociated.
+!> If the given pointer is associated with a target, it will be deallocated.
+!> Thereby, the pointer becomes disassociated.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
