@@ -79,6 +79,13 @@ public
         procedure, pass (this), public  :: set_xelatex  => set_drawing_xelatex
     end type drawing
 
+    interface conditional_free
+        pure module subroutine conditional_free_character (ptr)
+        implicit none
+            character (:), pointer, intent (inout)  :: ptr
+        end subroutine conditional_free_character
+    end interface conditional_free
+
     interface drawing
         pure module function init_drawing (name)
         implicit none
