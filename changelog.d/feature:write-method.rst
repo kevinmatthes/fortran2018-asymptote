@@ -15,4 +15,4 @@ Added
 
 - define submodule for Asymptote drawing logic
 
-- unit test:  drawing life cycle
+- unit test:  drawing life cycle (creation, settings, export, finalisation)
