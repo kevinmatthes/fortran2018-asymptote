@@ -130,11 +130,11 @@ public
     end interface conditional_free
 
     interface drawing
-        pure module function init_drawing (name)
+        pure module function initialise_drawing (name)
         implicit none
             character (*), intent (in)  :: name
-            type (drawing)              :: init_drawing
-        end function init_drawing
+            type (drawing)              :: initialise_drawing
+        end function initialise_drawing
     end interface drawing
 
     interface
