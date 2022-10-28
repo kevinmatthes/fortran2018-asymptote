@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_drawing_lualatex.f08
+!> \file set_drawing_format_eps.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,21 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Alter the preferred compiler for this Asymptote drawing.
-!> \param   this    The Asymptote drawing whose preferred compiler shall be set.
+!> \brief   Alter the output format of this Asymptote drawing.
+!> \param   this    The Asymptote drawing whose output format shall be set.
 !>
-!> This subroutine will assign the compiler `lualatex` to this Asymptote
-!> drawing.
+!> This subroutine will assign the output format EPS to this Asymptote drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_drawing_lualatex (this)
+pure subroutine set_drawing_format_eps (this)
 implicit none
     class (drawing), intent (inout) :: this
 
-    call conditional_free (this % compiler)
-    allocate (character (8) :: this % compiler)
-    this % compiler = 'lualatex'
-end subroutine set_drawing_lualatex
+    call conditional_free (this % output_format)
+    allocate (character (3) :: this % output_format)
+    this % output_format = 'eps'
+end subroutine set_drawing_format_eps
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_drawing_xelatex.f08
+!> \file set_size_unit_centimetre.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,21 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Alter the preferred compiler for this Asymptote drawing.
-!> \param   this    The Asymptote drawing whose preferred compiler shall be set.
+!> \brief   Alter the length unit of these size settings.
+!> \param   this    The size settings whose length unit shall be set.
 !>
-!> This subroutine will assign the compiler `xelatex` to this Asymptote
-!> drawing.
+!> This subroutine will assign the unit `cm` (centimetres) to these size
+!> settings.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_drawing_xelatex (this)
+pure subroutine set_size_unit_centimetre (this)
 implicit none
-    class (drawing), intent (inout) :: this
+    class (size), intent (inout)    :: this
 
-    call conditional_free (this % compiler)
-    allocate (character (7) :: this % compiler)
-    this % compiler = 'xelatex'
-end subroutine set_drawing_xelatex
+    call conditional_free (this % unit)
+    allocate (character (2) :: this % unit)
+    this % unit = 'cm'
+end subroutine set_size_unit_centimetre
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

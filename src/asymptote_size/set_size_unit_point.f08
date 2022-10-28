@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_drawing_eps.f08
+!> \file set_size_unit_point.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,20 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Alter the output format of this Asymptote drawing.
-!> \param   this    The Asymptote drawing whose output format shall be set.
+!> \brief   Alter the length unit of these size settings.
+!> \param   this    The size settings whose length unit shall be set.
 !>
-!> This subroutine will assign the output format EPS to this Asymptote drawing.
+!> This subroutine will assign the unit `pt` (points) to these size settings.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_drawing_eps (this)
+pure subroutine set_size_unit_point (this)
 implicit none
-    class (drawing), intent (inout) :: this
+    class (size), intent (inout)    :: this
 
-    call conditional_free (this % output_format)
-    allocate (character (3) :: this % output_format)
-    this % output_format = 'eps'
-end subroutine set_drawing_eps
+    call conditional_free (this % unit)
+    allocate (character (2) :: this % unit)
+    this % unit = 'pt'
+end subroutine set_size_unit_point
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

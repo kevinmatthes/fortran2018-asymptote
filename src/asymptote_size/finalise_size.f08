@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_drawing.f08
+!> \file finalise_size.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,29 +32,19 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing's methods.
+!> \brief   Deallocate all memory regions requested for these size settings.
+!> \param   this    The size settings to finalise.
 !>
-!> This submodule contains the procedures associated with the Asymptote drawing
-!> to produce.
+!> This subroutine will finalise these size settings in order to avoid memory
+!> leaks.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_drawing
+pure subroutine finalise_size (this)
 implicit none
-contains
-    include 'asymptote_drawing/drawing_can_be_exported.f08'
-    include 'asymptote_drawing/export_drawing.f08'
-    include 'asymptote_drawing/finalise_drawing.f08'
-    include 'asymptote_drawing/get_drawing_compiler.f08'
-    include 'asymptote_drawing/get_drawing_format.f08'
-    include 'asymptote_drawing/get_drawing_name.f08'
-    include 'asymptote_drawing/initialise_drawing.f08'
-    include 'asymptote_drawing/set_drawing_compiler_lualatex.f08'
-    include 'asymptote_drawing/set_drawing_compiler_pdflatex.f08'
-    include 'asymptote_drawing/set_drawing_compiler_xelatex.f08'
-    include 'asymptote_drawing/set_drawing_format_eps.f08'
-    include 'asymptote_drawing/set_drawing_format_pdf.f08'
-    include 'asymptote_drawing/set_drawing_name.f08'
-end submodule asymptote_drawing
+    type (size), intent (inout) :: this
+
+    call conditional_free (this % unit)
+end subroutine finalise_size
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

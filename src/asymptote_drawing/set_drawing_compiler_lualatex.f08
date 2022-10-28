@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_drawing_pdflatex.f08
+!> \file set_drawing_compiler_lualatex.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -35,18 +35,18 @@
 !> \brief   Alter the preferred compiler for this Asymptote drawing.
 !> \param   this    The Asymptote drawing whose preferred compiler shall be set.
 !>
-!> This subroutine will assign the compiler `pdflatex` to this Asymptote
+!> This subroutine will assign the compiler `lualatex` to this Asymptote
 !> drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_drawing_pdflatex (this)
+pure subroutine set_drawing_compiler_lualatex (this)
 implicit none
     class (drawing), intent (inout) :: this
 
     call conditional_free (this % compiler)
     allocate (character (8) :: this % compiler)
-    this % compiler = 'pdflatex'
-end subroutine set_drawing_pdflatex
+    this % compiler = 'lualatex'
+end subroutine set_drawing_compiler_lualatex
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

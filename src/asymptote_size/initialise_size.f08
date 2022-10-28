@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_drawing.f08
+!> \file initialise_size.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,29 +32,43 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing's methods.
+!> \brief   Create new size settings for an Asymptote drawing.
+!> \param   width   The width of the resulting drawing.
+!> \param   height  The height of the resulting drawing.
+!> \param   aspect  Whether the aspect ratio shall be kept.
+!> \return  The new size settings.
 !>
-!> This submodule contains the procedures associated with the Asymptote drawing
-!> to produce.
+!> This function will construct a new size settings entity based on the given
+!> data.
+!>
+!> \note This constructor will only set the width, height and aspect information
+!> of the settings entity.  The unit to measure the lengths needs to be set
+!> separately with the therefore intended methods.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_drawing
+pure function initialise_size (width, height, aspect)
 implicit none
-contains
-    include 'asymptote_drawing/drawing_can_be_exported.f08'
-    include 'asymptote_drawing/export_drawing.f08'
-    include 'asymptote_drawing/finalise_drawing.f08'
-    include 'asymptote_drawing/get_drawing_compiler.f08'
-    include 'asymptote_drawing/get_drawing_format.f08'
-    include 'asymptote_drawing/get_drawing_name.f08'
-    include 'asymptote_drawing/initialise_drawing.f08'
-    include 'asymptote_drawing/set_drawing_compiler_lualatex.f08'
-    include 'asymptote_drawing/set_drawing_compiler_pdflatex.f08'
-    include 'asymptote_drawing/set_drawing_compiler_xelatex.f08'
-    include 'asymptote_drawing/set_drawing_format_eps.f08'
-    include 'asymptote_drawing/set_drawing_format_pdf.f08'
-    include 'asymptote_drawing/set_drawing_name.f08'
-end submodule asymptote_drawing
+    logical, intent (in), optional  :: aspect
+    real, intent (in)               :: width
+    real, intent (in), optional     :: height
+    type (size)                     :: initialise_size
+
+    intrinsic   :: present
+
+    initialise_size % width = width
+
+    if (present (height)) then
+        initialise_size % height = height
+    else
+        initialise_size % height = initialise_size % width
+    end if
+
+    if (present (aspect)) then
+        initialise_size % aspect = aspect
+    else
+        initialise_size % aspect = .true.
+    end if
+end function initialise_size
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
