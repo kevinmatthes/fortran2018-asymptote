@@ -137,6 +137,10 @@ public
                                         => set_size_unit_point
     end type size
 
+    private :: conditional_free
+    private :: conditional_free_character
+    private :: write_library_version_header
+
     interface conditional_free
         pure module subroutine conditional_free_character (ptr)
         implicit none
@@ -291,6 +295,13 @@ public
             type (size)                     :: initialise_size
         end function initialise_size
     end interface size
+
+    interface
+        module subroutine write_library_version_header (unit)
+        implicit none
+            integer, intent (in), optional  :: unit
+        end subroutine write_library_version_header
+    end interface
 end module libf18asy
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

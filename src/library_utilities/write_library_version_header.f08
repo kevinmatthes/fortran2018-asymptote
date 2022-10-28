@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file library_utilities.f08
+!> \file write_library_version_header.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,17 +32,34 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining some utility procedures for this library.
+!> \brief   Output this library's version number in an informative header.
+!> \param   unit    The unit to write to.
 !>
-!> This submodule contains a set of utility procedures for this library.
+!> This subroutine will write the version number of this library to the given
+!> IO unit.  If there is no unit number given, the default output unit will be
+!> used for output.  The information about this library's version number will be
+!> given together with this library's name in a small header.  This is
+!> especially useful when exporting an Asymptote drawing with this library.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) library_utilities
+subroutine write_library_version_header (unit)
+    use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-contains
-    include 'library_utilities/conditional_free_character.f08'
-    include 'library_utilities/write_library_version_header.f08'
-end submodule library_utilities
+    integer, intent (in), optional  :: unit
+
+    integer :: writing_unit
+
+    intrinsic   :: present
+
+    if (present (unit)) then
+        writing_unit = unit
+    else
+        writing_unit = output_unit
+    end if
+
+    write (writing_unit, fmt = '(a, a, a)')                                    &
+        '// Created by LIBF18ASY, ', library_version, '.'
+end subroutine write_library_version_header
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
