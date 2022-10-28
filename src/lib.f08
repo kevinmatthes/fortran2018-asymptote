@@ -231,6 +231,16 @@ public
             class (drawing), intent (inout) :: this
         end subroutine set_drawing_name
     end interface
+
+    interface size
+        pure module function initialise_size (width, height, aspect)
+        implicit none
+            logical, intent (in), optional  :: aspect
+            real, intent (in)               :: width
+            real, intent (in), optional     :: height
+            type (size)                     :: intialise_size
+        end function initialise_size
+    end interface size
 end module libf18asy
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
