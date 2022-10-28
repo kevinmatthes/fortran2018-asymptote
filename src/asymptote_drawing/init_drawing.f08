@@ -36,8 +36,8 @@
 !> \param   name    The new Asymptote drawing's name.
 !> \return  The new Asymptote drawing.
 !>
-!> This function will construct a new Asymptote drawing entity base on the given
-!> data.
+!> This function will construct a new Asymptote drawing entity based on the
+!> given data.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
