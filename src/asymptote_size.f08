@@ -44,6 +44,11 @@ implicit none
 contains
     include 'asymptote_size/finalise_size.f08'
     include 'asymptote_size/initialise_size.f08'
+    include 'asymptote_size/set_size_unit_big_point.f08'
+    include 'asymptote_size/set_size_unit_centimetre.f08'
+    include 'asymptote_size/set_size_unit_inch.f08'
+    include 'asymptote_size/set_size_unit_millimetre.f08'
+    include 'asymptote_size/set_size_unit_point.f08'
 end submodule asymptote_size
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
