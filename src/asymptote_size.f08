@@ -43,6 +43,7 @@ submodule (libf18asy) asymptote_size
 implicit none
 contains
     include 'asymptote_size/finalise_size.f08'
+    include 'asymptote_size/initialise_size.f08'
 end submodule asymptote_size
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
