@@ -7,12 +7,12 @@ Added
 
 - define destructor for Asymptote size settings
 
-- define setter method for the length unit of the drawing (big point)
+- define setter method for the length unit of the drawing (big points)
 
-- define setter method for the length unit of the drawing (centimetre)
+- define setter method for the length unit of the drawing (centimetres)
 
-- define setter method for the length unit of the drawing (inch)
+- define setter method for the length unit of the drawing (inches)
 
-- define setter method for the length unit of the drawing (millimetre)
+- define setter method for the length unit of the drawing (millimetres)
 
-- define setter method for the length unit of the drawing (point)
+- define setter method for the length unit of the drawing (points)
