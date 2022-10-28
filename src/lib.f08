@@ -120,6 +120,21 @@ public
                         =  0.0
     contains
         final   :: finalise_size
+
+        procedure, pass (this), public  :: set_big_point                       &
+                                        => set_size_unit_big_point
+
+        procedure, pass (this), public  :: set_centimetre                      &
+                                        => set_size_unit_centimetre
+
+        procedure, pass (this), public  :: set_inch                            &
+                                        => set_size_unit_inch
+
+        procedure, pass (this), public  :: set_millimetre                      &
+                                        => set_size_unit_millimetre
+
+        procedure, pass (this), public  :: set_point                           &
+                                        => set_size_unit_point
     end type size
 
     interface conditional_free
@@ -230,6 +245,41 @@ public
             character (*), intent (in)      :: name
             class (drawing), intent (inout) :: this
         end subroutine set_drawing_name
+    end interface
+
+    interface
+        pure module subroutine set_size_unit_big_point (this)
+        implicit none
+            class (size), intent (inout)    :: this
+        end subroutine set_size_unit_big_point
+    end interface
+
+    interface
+        pure module subroutine set_size_unit_centimetre (this)
+        implicit none
+            class (size), intent (inout)    :: this
+        end subroutine set_size_unit_centimetre
+    end interface
+
+    interface
+        pure module subroutine set_size_unit_inch (this)
+        implicit none
+            class (size), intent (inout)    :: this
+        end subroutine set_size_unit_inch
+    end interface
+
+    interface
+        pure module subroutine set_size_unit_millimetre (this)
+        implicit none
+            class (size), intent (inout)    :: this
+        end subroutine set_size_unit_millimetre
+    end interface
+
+    interface
+        pure module subroutine set_size_unit_point (this)
+        implicit none
+            class (size), intent (inout)    :: this
+        end subroutine set_size_unit_point
     end interface
 
     interface size
