@@ -35,7 +35,7 @@
 !> \brief   Alter the length unit of these size settings.
 !> \param   this    The size settings whose length unit shall be set.
 !>
-!> This subroutine will assign the unit `pt` (point) to these size settings.
+!> This subroutine will assign the unit `pt` (points) to these size settings.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
