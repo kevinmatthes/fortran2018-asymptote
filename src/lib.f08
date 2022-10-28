@@ -105,6 +105,23 @@ public
                                         => set_drawing_compiler_xelatex
     end type drawing
 
+    !> The size of the Asymptote drawing to be produced.
+    type, public    :: size
+        character (:), pointer, private :: unit                                &
+                                        => null ()
+
+        logical, private    :: aspect                                          &
+                            =  .true.
+
+        real, private   :: height                                              &
+                        =  0.0
+
+        real, private   :: width                                               &
+                        =  0.0
+    contains
+        final   :: finalise_size
+    end type size
+
     interface conditional_free
         pure module subroutine conditional_free_character (ptr)
         implicit none
@@ -141,6 +158,11 @@ public
         implicit none
             type (drawing), intent (inout)  :: this
         end subroutine finalise_drawing
+
+        pure module subroutine finalise_size (this)
+        implicit none
+            type (size), intent (inout) :: this
+        end subroutine finalise_size
     end interface finalise
 
     interface
