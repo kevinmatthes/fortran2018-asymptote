@@ -60,6 +60,6 @@ implicit none
 
     write (output_unit, fmt = '(a, a, a)')                                     &
         '// Created by LIBF18ASY, ', library_version, '.'
-end subroutine conditional_free_character
+end subroutine write_library_version_header
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
