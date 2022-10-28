@@ -58,7 +58,7 @@ implicit none
         writing_unit = output_unit
     end if
 
-    write (output_unit, fmt = '(a, a, a)')                                     &
+    write (writing_unit, fmt = '(a, a, a)')                                    &
         '// Created by LIBF18ASY, ', library_version, '.'
 end subroutine write_library_version_header
 
