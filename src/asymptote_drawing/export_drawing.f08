@@ -75,8 +75,7 @@ implicit none
             write (unit = error_unit, fmt = fmt)                               &
                 'Asymptote drawing ''', this % name, ''' cannot be created.'
         else
-            write (unit, fmt = fmt)                                            &
-                '// Created by LIBF18ASY, ', library_version, '.'
+            call write_library_version_header (unit)
             write (unit, fmt = fmt) 'defaultfilename = "', this % name, '";'
             write (unit, fmt = fmt)                                            &
                 'settings.outformat = "', this % output_format, '";'
