@@ -238,7 +238,7 @@ public
             logical, intent (in), optional  :: aspect
             real, intent (in)               :: width
             real, intent (in), optional     :: height
-            type (size)                     :: intialise_size
+            type (size)                     :: initialise_size
         end function initialise_size
     end interface size
 end module libf18asy
