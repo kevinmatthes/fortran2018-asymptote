@@ -38,6 +38,11 @@
 !> This subroutine will assign no unit (big point) to these size settings.  This
 !> unit is the Asymptote default for length measuring
 !> \cite hammerlindl.bowman.prince:asymptote:2021:2.69, page 10.
+!>
+!> \note As this method will deallocate the unit field of these size settings
+!> which will, thus, become disassociated, the field will be in the same state
+!> as when these size settings were freshly constructed.  Hence, the size
+!> settings type also defaults to big points as length unit.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
