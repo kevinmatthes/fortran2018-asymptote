@@ -32,7 +32,7 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing.
+!> \brief   The submodule defining the Asymptote drawing's methods.
 !>
 !> This submodule contains the procedures associated with the Asymptote drawing
 !> to produce.
