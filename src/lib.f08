@@ -137,6 +137,9 @@ public
                                         => set_size_unit_point
     end type size
 
+    private :: conditional_free
+    private :: conditional_free_character
+
     interface conditional_free
         pure module subroutine conditional_free_character (ptr)
         implicit none
