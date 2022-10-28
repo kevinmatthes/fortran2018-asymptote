@@ -78,7 +78,7 @@ lnk-f18 := '-I. ' + lflags
 @asymptote_drawing: asymptote_size interfaces library_utilities
     just compile src/asymptote_drawing.f08
 
-# Compile the Asymptote drawing size settings.
+# Compile the Asymptote drawing's size settings.
 @asymptote_size: interfaces library_utilities
     just compile src/asymptote_size.f08
 
