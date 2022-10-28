@@ -35,8 +35,9 @@
 !> \brief   Alter the length unit of these size settings.
 !> \param   this    The size settings whose length unit shall be set.
 !>
-!> This subroutine will assign no unit (big point) to these size settings.  This
-!> unit is the Asymptote default for length measuring
+!> This subroutine will assign no unit to these size settings.  Hence, the
+!> drawing is going to default to big points as unit.  This is also Asymptote's
+!> default unit for length measuring
 !> \cite hammerlindl.bowman.prince:asymptote:2021:2.69, page 10.
 !>
 !> \note As this method will deallocate the unit field of these size settings
