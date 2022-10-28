@@ -48,7 +48,7 @@ contains
     include 'asymptote_drawing/get_drawing_compiler.f08'
     include 'asymptote_drawing/get_drawing_format.f08'
     include 'asymptote_drawing/get_drawing_name.f08'
-    include 'asymptote_drawing/init_drawing.f08'
+    include 'asymptote_drawing/initialise_drawing.f08'
     include 'asymptote_drawing/set_drawing_compiler_lualatex.f08'
     include 'asymptote_drawing/set_drawing_compiler_pdflatex.f08'
     include 'asymptote_drawing/set_drawing_compiler_xelatex.f08'
