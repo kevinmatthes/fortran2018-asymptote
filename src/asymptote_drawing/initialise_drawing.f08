@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file init_drawing.f08
+!> \file initialise_drawing.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -38,13 +38,17 @@
 !>
 !> This function will construct a new Asymptote drawing entity based on the
 !> given data.
+!>
+!> \note This constructor will only set the name of the new Asymptote drawing.
+!> Both the desired output format as well as the preferred compiler need to be
+!> be set separately with the therefore intended methods.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure function init_drawing (name)
+pure function initialise_drawing (name)
 implicit none
     character (*), intent (in)      :: name
-    type (drawing)                  :: init_drawing
+    type (drawing)                  :: initialise_drawing
 
     integer :: i
     integer :: string_length
@@ -52,11 +56,11 @@ implicit none
     intrinsic   :: len_trim
 
     string_length = len_trim (name)
-    allocate (character (string_length) :: init_drawing % name)
+    allocate (character (string_length) :: initialise_drawing % name)
 
     do i = 1, string_length
-        init_drawing % name (i : i) = name (i : i)
+        initialise_drawing % name (i : i) = name (i : i)
     end do
-end function init_drawing
+end function initialise_drawing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
