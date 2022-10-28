@@ -37,7 +37,7 @@
 !>
 !> This subroutine will assign no unit (big point) to these size settings.  This
 !> unit is the Asymptote default for length measuring
-!> \cite hammerlindl.bowman.prince:asymptote:2022:2.83.
+!> \cite hammerlindl.bowman.prince:asymptote:2021:2.69, page 10.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
