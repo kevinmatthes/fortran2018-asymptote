@@ -47,6 +47,7 @@ implicit none
     call conditional_free (this % compiler)
     call conditional_free (this % name)
     call conditional_free (this % output_format)
+    call conditional_free (this % unit)
 end subroutine finalise_drawing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
