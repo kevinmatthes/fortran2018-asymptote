@@ -32,12 +32,12 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Create a deep copy of these size settings' length unit.
-!> \param   this    The size settings whose unit shall be copied.
+!> \brief   Create a deep copy of this drawing's length unit.
+!> \param   this    The drawing whose unit shall be copied.
 !> \param   unit    The pointer pointing to the output memory region.
 !>
-!> This subroutine will assign a deep copy of these size settings' unit to the
-!> output parameter.  If these settings do not already have a unit, the output
+!> This subroutine will assign a deep copy of this drawing's unit to the output
+!> parameter.  If this drawing does not already have a unit, the output
 !> parameter will remain disassociated.
 !>
 !> \note This operation will allocate memory for its output parameter.  This
