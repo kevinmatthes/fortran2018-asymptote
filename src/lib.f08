@@ -103,6 +103,9 @@ private
 
         procedure, pass (this), public  :: set_xelatex                         &
                                         => set_drawing_compiler_xelatex
+
+        procedure, pass (this), public  :: write                               &
+                                        => write_size_settings
     end type drawing
 
     !> The size of the Asymptote drawing to be produced.
@@ -388,6 +391,13 @@ private
         implicit none
             integer, intent (in), optional  :: unit
         end subroutine write_library_version_header
+    end interface
+
+    interface
+        module subroutine write_size_settings (unit)
+        implicit none
+            integer, intent (in), optional  :: unit
+        end subroutine write_size_settings
     end interface
 end module libf18asy
 
