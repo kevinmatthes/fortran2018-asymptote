@@ -162,7 +162,6 @@ private
     end type size
 
     private :: conditional_free
-    private :: conditional_free_character
     private :: write_library_version_header
 
     public  :: finalise
