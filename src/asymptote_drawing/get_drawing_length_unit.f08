@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file get_size_unit.f08
+!> \file get_drawing_length_unit.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -46,10 +46,10 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine get_size_unit (this, unit)
+pure subroutine get_drawing_length_unit (this, length_unit)
 implicit none
-    character (:), pointer, intent (out)    :: unit
-    class (size), intent (in)               :: this
+    character (:), pointer, intent (out)    :: length_unit
+    class (drawing), intent (in)            :: this
 
     integer :: i
     integer :: string_length
@@ -58,16 +58,16 @@ implicit none
     intrinsic   :: len
     intrinsic   :: null
 
-    unit => null ()
+    length_unit => null ()
 
-    if (associated (this % unit)) then
-        string_length = len (this % unit)
-        allocate (character (string_length) :: unit)
+    if (associated (this % length_unit)) then
+        string_length = len (this % length_unit)
+        allocate (character (string_length) :: length_unit)
 
         do i = 1, string_length
-            unit (i : i) = this % unit (i : i)
+            length_unit (i : i) = this % length_unit (i : i)
         end do
     end if
-end subroutine get_size_unit
+end subroutine get_drawing_length_unit
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
