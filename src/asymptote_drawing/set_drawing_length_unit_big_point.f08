@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_size_unit_big_point.f08
+!> \file set_drawing_length_unit_big_point.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,26 +32,26 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Alter the length unit of these size settings.
-!> \param   this    The size settings whose length unit shall be set.
+!> \brief   Alter the length unit of this drawing.
+!> \param   this    The drawing whose length unit shall be set.
 !>
-!> This subroutine will assign no unit to these size settings.  Hence, the
-!> drawing is going to default to big points as unit.  This is also Asymptote's
-!> default unit for length measuring
+!> This subroutine will assign no unit to this drawing.  Hence, the drawing is
+!> going to default to big points as unit.  This is also Asymptote's default
+!> unit for length measuring
 !> \cite hammerlindl.bowman.prince:asymptote:2021:2.69, page 10.
 !>
-!> \note As this method will deallocate the unit field of these size settings
-!> which will, thus, become disassociated, the field will be in the same state
-!> as when these size settings were freshly constructed.  Hence, the size
-!> settings type also defaults to big points as length unit.
+!> \note As this method will deallocate the unit field of this drawing which
+!> will, thus, become disassociated, the field will be in the same state as when
+!> this drawing was freshly constructed.  Hence, the drawing type also defaults
+!> to big points as length unit.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_size_unit_big_point (this)
+pure subroutine set_drawing_length_unit_big_point (this)
 implicit none
-    class (size), intent (inout)    :: this
+    class (drawing), intent (inout) :: this
 
     call conditional_free (this % unit)
-end subroutine set_size_unit_big_point
+end subroutine set_drawing_length_unit_big_point
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
