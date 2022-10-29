@@ -34,7 +34,7 @@
 !>
 !> \brief   Create a deep copy of these size settings' length unit.
 !> \param   this    The size settings whose unit shall be copied.
-!> \param   unit    The pointer to pointing to the output memory region.
+!> \param   unit    The pointer pointing to the output memory region.
 !>
 !> This subroutine will assign a deep copy of these size settings' unit to the
 !> output parameter.  If these settings do not already have a unit, the output
