@@ -57,6 +57,7 @@ contains
     include 'asymptote_size/set_size_unit_millimetre.f08'
     include 'asymptote_size/set_size_unit_point.f08'
     include 'asymptote_size/set_size_width.f08'
+    include 'asymptote_size/write_size_settings.f08'
 end submodule asymptote_size
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

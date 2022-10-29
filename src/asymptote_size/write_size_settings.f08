@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file get_size_aspect.f08
+!> \file write_size_settings.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,21 +32,44 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Retrieve the value of the `aspect` field of these size settings.
-!> \param   this    The size settings which shall be queried.
-!> \return  The value of the `aspect` field.
+!> \brief   Output these size settings.
+!> \param   this    The size settings to export.
+!> \param   unit    The unit to write to.
 !>
-!> This function will return the scalar intrinsic value of the `aspect` field of
-!> these size settings.
+!> This subroutine will write these size settings to the given IO unit.  If
+!> there is no unit number given, the default output unit will be used for
+!> output.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure function get_size_aspect (this)
+subroutine write_size_settings (this, unit)
+    use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-    class (size), intent (in)   :: this
-    logical                     :: get_size_aspect
+    class (size), intent (in)       :: this
+    integer, intent (in), optional  :: unit
 
-    get_size_aspect = this % aspect
-end function get_size_aspect
+    character (:), allocatable  :: length_unit
+    integer                     :: writing_unit
+
+    intrinsic   :: associated
+    intrinsic   :: present
+
+    allocate (character (0) :: length_unit)
+
+    if (associated (this % unit)) then
+        length_unit = ' ' // this % unit
+    end if
+
+    if (present (unit)) then
+        writing_unit = unit
+    else
+        writing_unit = output_unit
+    end if
+
+    write (writing_unit, fmt = '(a, e13.4e4, a, a, e13.4e4, a, a)')            &
+        'size (', this % width  , length_unit                                  &
+    ,   ', '    , this % height , length_unit                                  &
+    ,   ');'
+end subroutine write_size_settings
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

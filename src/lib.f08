@@ -159,6 +159,9 @@ private
 
         procedure, pass (this), public  :: set_width                           &
                                         => set_size_width
+
+        procedure, pass (this), public  :: write                               &
+                                        => write_size_settings
     end type size
 
     private :: conditional_free
@@ -388,6 +391,14 @@ private
         implicit none
             integer, intent (in), optional  :: unit
         end subroutine write_library_version_header
+    end interface
+
+    interface
+        module subroutine write_size_settings (this, unit)
+        implicit none
+            class (size), intent (in)       :: this
+            integer, intent (in), optional  :: unit
+        end subroutine write_size_settings
     end interface
 end module libf18asy
 
