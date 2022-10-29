@@ -72,8 +72,6 @@ implicit none
 
     if (present (aspect)) then
         initialise_drawing % aspect = aspect
-    else
-        initialise_drawing % aspect = .true.
     end if
 
     string_length = len_trim (name)
