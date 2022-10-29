@@ -66,7 +66,7 @@ implicit none
         writing_unit = output_unit
     end if
 
-    write (writing_unit, fmt = '(a, e13.4e4, a, a, e13.4e4, a, a)')            &
+    write (writing_unit, fmt = '(a, e17.4e4, a, a, e17.4e4, a, a)')            &
         'size (', this % width  , length_unit                                  &
     ,   ', '    , this % height , length_unit                                  &
     ,   ');'
