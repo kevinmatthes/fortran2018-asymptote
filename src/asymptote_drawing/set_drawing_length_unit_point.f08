@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_size_unit_point.f08
+!> \file set_drawing_length_unit_point.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,20 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Alter the length unit of these size settings.
-!> \param   this    The size settings whose length unit shall be set.
+!> \brief   Alter the length unit of this drawing.
+!> \param   this    The drawing whose length unit shall be set.
 !>
-!> This subroutine will assign the unit `pt` (points) to these size settings.
+!> This subroutine will assign the unit `pt` (points) to this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_size_unit_point (this)
+pure subroutine set_drawing_length_unit_point (this)
 implicit none
-    class (size), intent (inout)    :: this
+    class (drawing), intent (inout) :: this
 
-    call conditional_free (this % unit)
-    allocate (character (2) :: this % unit)
-    this % unit = 'pt'
-end subroutine set_size_unit_point
+    call conditional_free (this % length_unit)
+    allocate (character (2) :: this % length_unit)
+    this % length_unit = 'pt'
+end subroutine set_drawing_length_unit_point
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
