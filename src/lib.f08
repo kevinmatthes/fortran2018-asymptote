@@ -223,6 +223,38 @@ private
     end interface
 
     interface
+        pure module function get_size_aspect (this)
+        implicit none
+            class (size), intent (in)   :: this
+            logical                     :: get_size_aspect
+        end function get_size_aspect
+    end interface
+
+    interface
+        pure module function get_size_height (this)
+        implicit none
+            class (size), intent (in)   :: this
+            real                        :: get_size_height
+        end function get_size_height
+    end interface
+
+    interface
+        pure module subroutine get_size_unit (this, unit)
+        implicit none
+            character (:), pointer, intent (out)    :: unit
+            class (size), intent (in)               :: this
+        end subroutine get_size_unit
+    end interface
+
+    interface
+        pure module function get_size_width (this)
+        implicit none
+            class (size), intent (in)   :: this
+            real                        :: get_size_width
+        end function get_size_width
+    end interface
+
+    interface
         pure module subroutine set_drawing_compiler_lualatex (this)
         implicit none
             class (drawing), intent (inout) :: this
