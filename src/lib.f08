@@ -64,13 +64,13 @@ private
         character (:), pointer, private :: compiler                            &
                                         => null ()
 
+        character (:), pointer, private :: length_unit                         &
+                                        => null ()
+
         character (:), pointer, private :: name                                &
                                         => null ()
 
         character (:), pointer, private :: output_format                       &
-                                        => null ()
-
-        character (:), pointer, private :: unit                                &
                                         => null ()
 
         logical, private    :: aspect                                          &
@@ -115,6 +115,9 @@ private
 
         procedure, pass (this), public  :: set_xelatex                         &
                                         => set_drawing_compiler_xelatex
+
+        procedure, pass (this), private :: write_size_settings                 &
+                                        => write_drawing_size_settings
     end type drawing
 
     !> The size of the Asymptote drawing to be produced.
@@ -160,9 +163,6 @@ private
 
         procedure, pass (this), public  :: set_width                           &
                                         => set_size_width
-
-        procedure, pass (this), public  :: write                               &
-                                        => write_size_settings
     end type size
 
     private :: conditional_free
