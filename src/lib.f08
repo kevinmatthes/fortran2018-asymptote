@@ -121,6 +121,18 @@ private
     contains
         final   :: finalise_size
 
+        procedure, pass (this), public  :: get_aspect                          &
+                                        => get_size_aspect
+
+        procedure, pass (this), public  :: get_height                          &
+                                        => get_size_height
+
+        procedure, pass (this), public  :: get_unit                            &
+                                        => get_size_unit
+
+        procedure, pass (this), public  :: get_width                           &
+                                        => get_size_width
+
         procedure, pass (this), public  :: ignore_aspect                       &
                                         => set_size_aspect_false
 
