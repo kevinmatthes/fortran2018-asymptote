@@ -33,8 +33,8 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   Create a deep copy of this drawing's length unit.
-!> \param   this    The drawing whose unit shall be copied.
-!> \param   unit    The pointer pointing to the output memory region.
+!> \param   this        The drawing whose unit shall be copied.
+!> \param   length_unit The pointer pointing to the output memory region.
 !>
 !> This subroutine will assign a deep copy of this drawing's unit to the output
 !> parameter.  If this drawing does not already have a unit, the output
