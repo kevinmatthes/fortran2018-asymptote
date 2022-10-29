@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_size_height.f08
+!> \file set_drawing_height.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,21 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Modify the height of these size settings.
-!> \param   this    The size settings whose height shall be set.
+!> \brief   Modify the height of this drawing.
+!> \param   this    The drawing whose height shall be set.
 !> \param   height  The new value for the respective field.
 !>
-!> This subroutine will assign a new value for the height of a drawing to the
-!> respective field of these size settings.
+!> This subroutine will assign a new value for the height of this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_size_height (this, height)
+pure subroutine set_drawing_height (this, height)
 implicit none
-    class (size), intent (inout)    :: this
+    class (drawing), intent (inout) :: this
     real, intent (in)               :: height
 
     this % height = height
-end subroutine set_size_height
+end subroutine set_drawing_height
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
