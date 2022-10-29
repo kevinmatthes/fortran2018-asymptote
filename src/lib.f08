@@ -266,6 +266,28 @@ private
     end interface
 
     interface
+        pure module subroutine set_size_aspect_false (this)
+        implicit none
+            class (size), intent (inout)    :: this
+        end subroutine set_size_aspect_false
+    end interface
+
+    interface
+        pure module subroutine set_size_aspect_true (this)
+        implicit none
+            class (size), intent (inout)    :: this
+        end subroutine set_size_aspect_true
+    end interface
+
+    interface
+        pure module subroutine set_size_height (this, height)
+        implicit none
+            class (size), intent (inout)    :: this
+            real, intent (in)               :: height
+        end subroutine set_size_height
+    end interface
+
+    interface
         pure module subroutine set_size_unit_big_point (this)
         implicit none
             class (size), intent (inout)    :: this
@@ -298,6 +320,14 @@ private
         implicit none
             class (size), intent (inout)    :: this
         end subroutine set_size_unit_point
+    end interface
+
+    interface
+        pure module subroutine set_size_width (this, width)
+        implicit none
+            class (size), intent (inout)    :: this
+            real, intent (in)               :: width
+        end subroutine set_size_width
     end interface
 
     interface size
