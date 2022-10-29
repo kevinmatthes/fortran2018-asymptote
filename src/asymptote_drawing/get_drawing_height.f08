@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file get_size_height.f08
+!> \file get_drawing_height.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,21 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Retrieve the value of the `height` field of these size settings.
-!> \param   this    The size settings which shall be queried.
+!> \brief   Retrieve the value of the `height` field of this drawing.
+!> \param   this    The drawing which shall be queried.
 !> \return  The value of the `height` field.
 !>
 !> This function will return the scalar intrinsic value of the `height` field of
-!> these size settings.
+!> this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure function get_size_height (this)
+pure function get_drawing_height (this)
 implicit none
-    class (size), intent (in)   :: this
-    real                        :: get_size_height
+    class (drawing), intent (in)    :: this
+    real                            :: get_drawing_height
 
-    get_size_height = this % height
-end function get_size_height
+    get_drawing_height = this % height
+end function get_drawing_height
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
