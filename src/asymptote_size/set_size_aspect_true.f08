@@ -36,7 +36,7 @@
 !> \param   this    The size settings whose aspect settings shall be altered.
 !>
 !> This subroutine will assign `.true.` to the `aspect` field of these size
-!> settings.
+!> settings.  This will cause the aspect ratio to be kept.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
