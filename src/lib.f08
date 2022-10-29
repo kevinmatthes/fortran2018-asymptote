@@ -55,7 +55,7 @@
 
 module libf18asy
 implicit none
-public
+private
     !> This library's version.
     character (*), parameter, public    :: library_version = 'v0.0.0'
 
@@ -140,6 +140,8 @@ public
     private :: conditional_free
     private :: conditional_free_character
     private :: write_library_version_header
+
+    public  :: finalise
 
     interface conditional_free
         pure module subroutine conditional_free_character (ptr)
