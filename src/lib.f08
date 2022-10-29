@@ -395,11 +395,11 @@ private
     end interface
 
     interface
-        module subroutine write_size_settings (this, unit)
+        module subroutine write_drawing_size_settings (this, unit)
         implicit none
             class (size), intent (in)       :: this
             integer, intent (in), optional  :: unit
-        end subroutine write_size_settings
+        end subroutine write_drawing_size_settings
     end interface
 end module libf18asy
 
