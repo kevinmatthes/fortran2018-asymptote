@@ -34,7 +34,7 @@
 !>
 !> \brief   Create a deep copy of this drawing's name.
 !> \param   this    The Asymptote drawing whose name shall be copied.
-!> \param   name    The pointer to pointing to the output memory region.
+!> \param   name    The pointer pointing to the output memory region.
 !>
 !> This subroutine will assign a deep copy of this drawing's name to the output
 !> parameter.  If this drawing does not already have a name, the output
