@@ -121,11 +121,20 @@ private
     contains
         final   :: finalise_size
 
+        procedure, pass (this), public  :: ignore_aspect                       &
+                                        => set_size_aspect_false
+
+        procedure, pass (this), public  :: keep_aspect                         &
+                                        => set_size_aspect_true
+
         procedure, pass (this), public  :: set_big_point                       &
                                         => set_size_unit_big_point
 
         procedure, pass (this), public  :: set_centimetre                      &
                                         => set_size_unit_centimetre
+
+        procedure, pass (this), public  :: set_height                          &
+                                        => set_size_height
 
         procedure, pass (this), public  :: set_inch                            &
                                         => set_size_unit_inch
@@ -135,6 +144,9 @@ private
 
         procedure, pass (this), public  :: set_point                           &
                                         => set_size_unit_point
+
+        procedure, pass (this), public  :: set_width                           &
+                                        => set_size_width
     end type size
 
     private :: conditional_free
