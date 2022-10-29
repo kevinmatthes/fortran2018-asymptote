@@ -34,7 +34,7 @@
 !>
 !> \brief   Retrieve the value of the `width` field of these size settings.
 !> \param   this    The size settings which shall be queried.
-!> \returm  The value of the `width` field.
+!> \return  The value of the `width` field.
 !>
 !> This function will return the scalar intrinsic value of the `width` field of
 !> these size settings.
