@@ -57,7 +57,7 @@ module libf18asy
 implicit none
 public
     !> This library's version.
-    character (*), parameter    :: library_version = 'v0.0.0'
+    character (*), parameter, public    :: library_version = 'v0.0.0'
 
     !> The Asymptote drawing to produce.
     type, public    :: drawing
