@@ -397,7 +397,7 @@ private
     interface
         module subroutine write_drawing_size_settings (this, unit)
         implicit none
-            class (size), intent (in)       :: this
+            class (drawing), intent (in)    :: this
             integer, intent (in), optional  :: unit
         end subroutine write_drawing_size_settings
     end interface
