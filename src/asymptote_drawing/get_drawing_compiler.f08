@@ -34,7 +34,7 @@
 !>
 !> \brief   Create a deep copy of this drawing's preferred compiler.
 !> \param   this        The Asymptote drawing whose compiler shall be copied.
-!> \param   compiler    The pointer to pointing to the output memory region.
+!> \param   compiler    The pointer pointing to the output memory region.
 !>
 !> This subroutine will assign a deep copy of this drawing's preferred compiler
 !> to the output parameter.  If this drawing does not already have a preferred
