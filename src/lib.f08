@@ -89,20 +89,53 @@ private
         procedure, pass (this), public  :: export                              &
                                         => export_drawing
 
+        procedure, pass (this), public  :: get_aspect                          &
+                                        => get_drawing_aspect
+
         procedure, pass (this), public  :: get_compiler                        &
                                         => get_drawing_compiler
 
         procedure, pass (this), public  :: get_format                          &
                                         => get_drawing_format
 
+        procedure, pass (this), public  :: get_height                          &
+                                        => get_drawing_height
+
+        procedure, pass (this), public  :: get_length_unit                     &
+                                        => get_drawing_length_unit
+
         procedure, pass (this), public  :: get_name                            &
                                         => get_drawing_name
+
+        procedure, pass (this), public  :: get_width                           &
+                                        => get_drawing_width
+
+        procedure, pass (this), public  :: ignore_aspect                       &
+                                        => set_drawing_aspect_false
+
+        procedure, pass (this), public  :: keep_aspect                         &
+                                        => set_drawing_aspect_true
+
+        procedure, pass (this), public  :: set_big_point                       &
+                                        => set_drawing_length_unit_big_point
+
+        procedure, pass (this), public  :: set_centimetre                      &
+                                        => set_drawing_length_unit_centimetre
 
         procedure, pass (this), public  :: set_eps                             &
                                         => set_drawing_format_eps
 
+        procedure, pass (this), public  :: set_height                          &
+                                        => set_drawing_height
+
+        procedure, pass (this), public  :: set_inch                            &
+                                        => set_drawing_length_unit_inch
+
         procedure, pass (this), public  :: set_lualatex                        &
                                         => set_drawing_compiler_lualatex
+
+        procedure, pass (this), public  :: set_millimetre                      &
+                                        => set_drawing_length_unit_millimetre
 
         procedure, pass (this), public  :: set_name                            &
                                         => set_drawing_name
@@ -112,6 +145,12 @@ private
 
         procedure, pass (this), public  :: set_pdflatex                        &
                                         => set_drawing_compiler_pdflatex
+
+        procedure, pass (this), public  :: set_point                           &
+                                        => set_size_unit_point
+
+        procedure, pass (this), public  :: set_width                           &
+                                        => set_size_width
 
         procedure, pass (this), public  :: set_xelatex                         &
                                         => set_drawing_compiler_xelatex
@@ -123,46 +162,6 @@ private
     !> The size of the Asymptote drawing to be produced.
     type, public    :: size
     contains
-        final   :: finalise_size
-
-        procedure, pass (this), public  :: get_aspect                          &
-                                        => get_size_aspect
-
-        procedure, pass (this), public  :: get_height                          &
-                                        => get_size_height
-
-        procedure, pass (this), public  :: get_unit                            &
-                                        => get_size_unit
-
-        procedure, pass (this), public  :: get_width                           &
-                                        => get_size_width
-
-        procedure, pass (this), public  :: ignore_aspect                       &
-                                        => set_size_aspect_false
-
-        procedure, pass (this), public  :: keep_aspect                         &
-                                        => set_size_aspect_true
-
-        procedure, pass (this), public  :: set_big_point                       &
-                                        => set_size_unit_big_point
-
-        procedure, pass (this), public  :: set_centimetre                      &
-                                        => set_size_unit_centimetre
-
-        procedure, pass (this), public  :: set_height                          &
-                                        => set_size_height
-
-        procedure, pass (this), public  :: set_inch                            &
-                                        => set_size_unit_inch
-
-        procedure, pass (this), public  :: set_millimetre                      &
-                                        => set_size_unit_millimetre
-
-        procedure, pass (this), public  :: set_point                           &
-                                        => set_size_unit_point
-
-        procedure, pass (this), public  :: set_width                           &
-                                        => set_size_width
     end type size
 
     private :: conditional_free
