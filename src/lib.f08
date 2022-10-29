@@ -69,6 +69,18 @@ private
 
         character (:), pointer, private :: output_format                       &
                                         => null ()
+
+        character (:), pointer, private :: unit                                &
+                                        => null ()
+
+        logical, private    :: aspect                                          &
+                            =  .true.
+
+        real, private   :: height                                              &
+                        =  0.0
+
+        real, private   :: width                                               &
+                        =  0.0
     contains
         final   :: finalise_drawing
 
@@ -107,17 +119,6 @@ private
 
     !> The size of the Asymptote drawing to be produced.
     type, public    :: size
-        character (:), pointer, private :: unit                                &
-                                        => null ()
-
-        logical, private    :: aspect                                          &
-                            =  .true.
-
-        real, private   :: height                                              &
-                        =  0.0
-
-        real, private   :: width                                               &
-                        =  0.0
     contains
         final   :: finalise_size
 
