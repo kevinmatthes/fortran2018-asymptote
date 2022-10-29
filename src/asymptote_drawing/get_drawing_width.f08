@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_size_unit_point.f08
+!> \file get_drawing_width.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,20 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Alter the length unit of these size settings.
-!> \param   this    The size settings whose length unit shall be set.
+!> \brief   Retrieve the value of the `width` field of this drawing.
+!> \param   this    The drawing which shall be queried.
+!> \return  The value of the `width` field.
 !>
-!> This subroutine will assign the unit `pt` (points) to these size settings.
+!> This function will return the scalar intrinsic value of the `width` field of
+!> this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_size_unit_point (this)
+pure function get_drawing_width (this)
 implicit none
-    class (size), intent (inout)    :: this
+    class (drawing), intent (in)    :: this
+    real                            :: get_drawing_width
 
-    call conditional_free (this % unit)
-    allocate (character (2) :: this % unit)
-    this % unit = 'pt'
-end subroutine set_size_unit_point
+    get_drawing_width = this % width
+end function get_drawing_width
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

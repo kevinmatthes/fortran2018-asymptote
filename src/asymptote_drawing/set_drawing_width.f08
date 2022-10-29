@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_size_aspect_true.f08
+!> \file set_drawing_width.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,19 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The aspect ratio shall be kept.
-!> \param   this    The size settings whose aspect settings shall be altered.
+!> \brief   Modify the width of this drawing.
+!> \param   this    The drawing whose width shall be set.
+!> \param   width   The new value for the respective field.
 !>
-!> This subroutine will assign `.true.` to the `aspect` field of these size
-!> settings.  This will cause the aspect ratio to be kept.
+!> This subroutine will assign a new value for the width of this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_size_aspect_true (this)
+pure subroutine set_drawing_width (this, width)
 implicit none
-    class (size), intent (inout)    :: this
+    class (drawing), intent (inout) :: this
+    real, intent (in)               :: width
 
-    this % aspect = .true.
-end subroutine set_size_aspect_true
+    this % width = width
+end subroutine set_drawing_width
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

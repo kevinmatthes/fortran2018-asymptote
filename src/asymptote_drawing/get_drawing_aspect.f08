@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file get_size_width.f08
+!> \file get_drawing_aspect.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,21 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Retrieve the value of the `width` field of these size settings.
-!> \param   this    The size settings which shall be queried.
-!> \return  The value of the `width` field.
+!> \brief   Retrieve the value of the `aspect` field of this drawing.
+!> \param   this    The drawing which shall be queried.
+!> \return  The value of the `aspect` field.
 !>
-!> This function will return the scalar intrinsic value of the `width` field of
-!> these size settings.
+!> This function will return the scalar intrinsic value of the `aspect` field of
+!> this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure function get_size_width (this)
+pure function get_drawing_aspect (this)
 implicit none
-    class (size), intent (in)   :: this
-    real                        :: get_size_width
+    class (drawing), intent (in)    :: this
+    logical                         :: get_drawing_aspect
 
-    get_size_width = this % width
-end function get_size_width
+    get_drawing_aspect = this % aspect
+end function get_drawing_aspect
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

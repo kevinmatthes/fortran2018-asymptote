@@ -64,50 +64,13 @@ private
         character (:), pointer, private :: compiler                            &
                                         => null ()
 
+        character (:), pointer, private :: length_unit                         &
+                                        => null ()
+
         character (:), pointer, private :: name                                &
                                         => null ()
 
         character (:), pointer, private :: output_format                       &
-                                        => null ()
-    contains
-        final   :: finalise_drawing
-
-        procedure, pass (this), public  :: drawing_can_be_exported
-
-        procedure, pass (this), public  :: export                              &
-                                        => export_drawing
-
-        procedure, pass (this), public  :: get_compiler                        &
-                                        => get_drawing_compiler
-
-        procedure, pass (this), public  :: get_format                          &
-                                        => get_drawing_format
-
-        procedure, pass (this), public  :: get_name                            &
-                                        => get_drawing_name
-
-        procedure, pass (this), public  :: set_eps                             &
-                                        => set_drawing_format_eps
-
-        procedure, pass (this), public  :: set_lualatex                        &
-                                        => set_drawing_compiler_lualatex
-
-        procedure, pass (this), public  :: set_name                            &
-                                        => set_drawing_name
-
-        procedure, pass (this), public  :: set_pdf                             &
-                                        => set_drawing_format_pdf
-
-        procedure, pass (this), public  :: set_pdflatex                        &
-                                        => set_drawing_compiler_pdflatex
-
-        procedure, pass (this), public  :: set_xelatex                         &
-                                        => set_drawing_compiler_xelatex
-    end type drawing
-
-    !> The size of the Asymptote drawing to be produced.
-    type, public    :: size
-        character (:), pointer, private :: unit                                &
                                         => null ()
 
         logical, private    :: aspect                                          &
@@ -119,50 +82,82 @@ private
         real, private   :: width                                               &
                         =  0.0
     contains
-        final   :: finalise_size
+        final   :: finalise_drawing
+
+        procedure, pass (this), public  :: drawing_can_be_exported
+
+        procedure, pass (this), public  :: export                              &
+                                        => export_drawing
 
         procedure, pass (this), public  :: get_aspect                          &
-                                        => get_size_aspect
+                                        => get_drawing_aspect
+
+        procedure, pass (this), public  :: get_compiler                        &
+                                        => get_drawing_compiler
+
+        procedure, pass (this), public  :: get_format                          &
+                                        => get_drawing_format
 
         procedure, pass (this), public  :: get_height                          &
-                                        => get_size_height
+                                        => get_drawing_height
 
-        procedure, pass (this), public  :: get_unit                            &
-                                        => get_size_unit
+        procedure, pass (this), public  :: get_length_unit                     &
+                                        => get_drawing_length_unit
+
+        procedure, pass (this), public  :: get_name                            &
+                                        => get_drawing_name
 
         procedure, pass (this), public  :: get_width                           &
-                                        => get_size_width
+                                        => get_drawing_width
 
         procedure, pass (this), public  :: ignore_aspect                       &
-                                        => set_size_aspect_false
+                                        => set_drawing_aspect_false
 
         procedure, pass (this), public  :: keep_aspect                         &
-                                        => set_size_aspect_true
+                                        => set_drawing_aspect_true
 
         procedure, pass (this), public  :: set_big_point                       &
-                                        => set_size_unit_big_point
+                                        => set_drawing_length_unit_big_point
 
         procedure, pass (this), public  :: set_centimetre                      &
-                                        => set_size_unit_centimetre
+                                        => set_drawing_length_unit_centimetre
+
+        procedure, pass (this), public  :: set_eps                             &
+                                        => set_drawing_format_eps
 
         procedure, pass (this), public  :: set_height                          &
-                                        => set_size_height
+                                        => set_drawing_height
 
         procedure, pass (this), public  :: set_inch                            &
-                                        => set_size_unit_inch
+                                        => set_drawing_length_unit_inch
+
+        procedure, pass (this), public  :: set_lualatex                        &
+                                        => set_drawing_compiler_lualatex
 
         procedure, pass (this), public  :: set_millimetre                      &
-                                        => set_size_unit_millimetre
+                                        => set_drawing_length_unit_millimetre
+
+        procedure, pass (this), public  :: set_name                            &
+                                        => set_drawing_name
+
+        procedure, pass (this), public  :: set_pdf                             &
+                                        => set_drawing_format_pdf
+
+        procedure, pass (this), public  :: set_pdflatex                        &
+                                        => set_drawing_compiler_pdflatex
 
         procedure, pass (this), public  :: set_point                           &
-                                        => set_size_unit_point
+                                        => set_drawing_length_unit_point
 
         procedure, pass (this), public  :: set_width                           &
-                                        => set_size_width
+                                        => set_drawing_width
 
-        procedure, pass (this), public  :: write                               &
-                                        => write_size_settings
-    end type size
+        procedure, pass (this), public  :: set_xelatex                         &
+                                        => set_drawing_compiler_xelatex
+
+        procedure, pass (this), private :: write_size_settings                 &
+                                        => write_drawing_size_settings
+    end type drawing
 
     private :: conditional_free
     private :: write_library_version_header
@@ -177,10 +172,13 @@ private
     end interface conditional_free
 
     interface drawing
-        pure module function initialise_drawing (name)
+        pure module function initialise_drawing (name, width, height, aspect)
         implicit none
-            character (*), intent (in)  :: name
-            type (drawing)              :: initialise_drawing
+            character (*), intent (in)      :: name
+            logical, intent (in), optional  :: aspect
+            real, intent (in)               :: width
+            real, intent (in), optional     :: height
+            type (drawing)                  :: initialise_drawing
         end function initialise_drawing
     end interface drawing
 
@@ -205,12 +203,15 @@ private
         implicit none
             type (drawing), intent (inout)  :: this
         end subroutine finalise_drawing
-
-        pure module subroutine finalise_size (this)
-        implicit none
-            type (size), intent (inout) :: this
-        end subroutine finalise_size
     end interface finalise
+
+    interface
+        pure module function get_drawing_aspect (this)
+        implicit none
+            class (drawing), intent (in)    :: this
+            logical                         :: get_drawing_aspect
+        end function get_drawing_aspect
+    end interface
 
     interface
         pure module subroutine get_drawing_compiler (this, compiler)
@@ -229,6 +230,22 @@ private
     end interface
 
     interface
+        pure module function get_drawing_height (this)
+        implicit none
+            class (drawing), intent (in)    :: this
+            real                            :: get_drawing_height
+        end function get_drawing_height
+    end interface
+
+    interface
+        pure module subroutine get_drawing_length_unit (this, length_unit)
+        implicit none
+            character (:), pointer, intent (out)    :: length_unit
+            class (drawing), intent (in)            :: this
+        end subroutine get_drawing_length_unit
+    end interface
+
+    interface
         pure module subroutine get_drawing_name (this, name)
         implicit none
             character (:), pointer, intent (out)    :: name
@@ -237,35 +254,25 @@ private
     end interface
 
     interface
-        pure module function get_size_aspect (this)
+        pure module function get_drawing_width (this)
         implicit none
-            class (size), intent (in)   :: this
-            logical                     :: get_size_aspect
-        end function get_size_aspect
+            class (drawing), intent (in)    :: this
+            real                            :: get_drawing_width
+        end function get_drawing_width
     end interface
 
     interface
-        pure module function get_size_height (this)
+        pure module subroutine set_drawing_aspect_false (this)
         implicit none
-            class (size), intent (in)   :: this
-            real                        :: get_size_height
-        end function get_size_height
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_aspect_false
     end interface
 
     interface
-        pure module subroutine get_size_unit (this, unit)
+        pure module subroutine set_drawing_aspect_true (this)
         implicit none
-            character (:), pointer, intent (out)    :: unit
-            class (size), intent (in)               :: this
-        end subroutine get_size_unit
-    end interface
-
-    interface
-        pure module function get_size_width (this)
-        implicit none
-            class (size), intent (in)   :: this
-            real                        :: get_size_width
-        end function get_size_width
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_aspect_true
     end interface
 
     interface
@@ -304,6 +311,49 @@ private
     end interface
 
     interface
+        pure module subroutine set_drawing_height (this, height)
+        implicit none
+            class (drawing), intent (inout) :: this
+            real, intent (in)               :: height
+        end subroutine set_drawing_height
+    end interface
+
+    interface
+        pure module subroutine set_drawing_length_unit_big_point (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_length_unit_big_point
+    end interface
+
+    interface
+        pure module subroutine set_drawing_length_unit_centimetre (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_length_unit_centimetre
+    end interface
+
+    interface
+        pure module subroutine set_drawing_length_unit_inch (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_length_unit_inch
+    end interface
+
+    interface
+        pure module subroutine set_drawing_length_unit_millimetre (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_length_unit_millimetre
+    end interface
+
+    interface
+        pure module subroutine set_drawing_length_unit_point (this)
+        implicit none
+            class (drawing), intent (inout) :: this
+        end subroutine set_drawing_length_unit_point
+    end interface
+
+    interface
         pure module subroutine set_drawing_name (this, name)
         implicit none
             character (*), intent (in)      :: name
@@ -312,93 +362,26 @@ private
     end interface
 
     interface
-        pure module subroutine set_size_aspect_false (this)
+        pure module subroutine set_drawing_width (this, width)
         implicit none
-            class (size), intent (inout)    :: this
-        end subroutine set_size_aspect_false
-    end interface
-
-    interface
-        pure module subroutine set_size_aspect_true (this)
-        implicit none
-            class (size), intent (inout)    :: this
-        end subroutine set_size_aspect_true
-    end interface
-
-    interface
-        pure module subroutine set_size_height (this, height)
-        implicit none
-            class (size), intent (inout)    :: this
-            real, intent (in)               :: height
-        end subroutine set_size_height
-    end interface
-
-    interface
-        pure module subroutine set_size_unit_big_point (this)
-        implicit none
-            class (size), intent (inout)    :: this
-        end subroutine set_size_unit_big_point
-    end interface
-
-    interface
-        pure module subroutine set_size_unit_centimetre (this)
-        implicit none
-            class (size), intent (inout)    :: this
-        end subroutine set_size_unit_centimetre
-    end interface
-
-    interface
-        pure module subroutine set_size_unit_inch (this)
-        implicit none
-            class (size), intent (inout)    :: this
-        end subroutine set_size_unit_inch
-    end interface
-
-    interface
-        pure module subroutine set_size_unit_millimetre (this)
-        implicit none
-            class (size), intent (inout)    :: this
-        end subroutine set_size_unit_millimetre
-    end interface
-
-    interface
-        pure module subroutine set_size_unit_point (this)
-        implicit none
-            class (size), intent (inout)    :: this
-        end subroutine set_size_unit_point
-    end interface
-
-    interface
-        pure module subroutine set_size_width (this, width)
-        implicit none
-            class (size), intent (inout)    :: this
+            class (drawing), intent (inout) :: this
             real, intent (in)               :: width
-        end subroutine set_size_width
+        end subroutine set_drawing_width
     end interface
 
-    interface size
-        pure module function initialise_size (width, height, aspect)
+    interface
+        module subroutine write_drawing_size_settings (this, unit)
         implicit none
-            logical, intent (in), optional  :: aspect
-            real, intent (in)               :: width
-            real, intent (in), optional     :: height
-            type (size)                     :: initialise_size
-        end function initialise_size
-    end interface size
+            class (drawing), intent (in)    :: this
+            integer, intent (in), optional  :: unit
+        end subroutine write_drawing_size_settings
+    end interface
 
     interface
         module subroutine write_library_version_header (unit)
         implicit none
             integer, intent (in), optional  :: unit
         end subroutine write_library_version_header
-    end interface
-
-    interface
-        module subroutine write_size_settings (this, unit)
-        implicit none
-            class (size), intent (in)       :: this
-            integer, intent (in), optional  :: unit
-        end subroutine write_size_settings
     end interface
 end module libf18asy
 

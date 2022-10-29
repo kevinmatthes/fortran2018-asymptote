@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_size_aspect_false.f08
+!> \file set_drawing_length_unit_inch.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,19 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The aspect ratio shall be ignored.
-!> \param   this    The size settings whose aspect settings shall be altered.
+!> \brief   Alter the length unit of this drawing.
+!> \param   this    The drawing whose length unit shall be set.
 !>
-!> This subroutine will assign `.false.` to the `aspect` field of these size
-!> settings.  This will cause the aspect ratio to be ignored.
+!> This subroutine will assign the unit `inch` (inches) to this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_size_aspect_false (this)
+pure subroutine set_drawing_length_unit_inch (this)
 implicit none
-    class (size), intent (inout)    :: this
+    class (drawing), intent (inout) :: this
 
-    this % aspect = .false.
-end subroutine set_size_aspect_false
+    call conditional_free (this % length_unit)
+    allocate (character (4) :: this % length_unit)
+    this % length_unit = 'inch'
+end subroutine set_drawing_length_unit_inch
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

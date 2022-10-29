@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file get_size_height.f08
+!> \file set_drawing_height.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,21 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Retrieve the value of the `height` field of these size settings.
-!> \param   this    The size settings which shall be queried.
-!> \return  The value of the `height` field.
+!> \brief   Modify the height of this drawing.
+!> \param   this    The drawing whose height shall be set.
+!> \param   height  The new value for the respective field.
 !>
-!> This function will return the scalar intrinsic value of the `height` field of
-!> these size settings.
+!> This subroutine will assign a new value for the height of this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure function get_size_height (this)
+pure subroutine set_drawing_height (this, height)
 implicit none
-    class (size), intent (in)   :: this
-    real                        :: get_size_height
+    class (drawing), intent (inout) :: this
+    real, intent (in)               :: height
 
-    get_size_height = this % height
-end function get_size_height
+    this % height = height
+end subroutine set_drawing_height
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

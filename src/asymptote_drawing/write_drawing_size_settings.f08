@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_size_width.f08
+!> \file write_drawing_size_settings.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,21 +32,44 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Modify the width of these size settings.
-!> \param   this    The size settings whose width shall be set.
-!> \param   width   The new value for the respective field.
+!> \brief   Output the size settings of this drawing.
+!> \param   this    The size settings to export.
+!> \param   unit    The unit to write to.
 !>
-!> This subroutine will assign a new value for the width of a drawing to the
-!> respective field of these size settings.
+!> This subroutine will write the size settings of this drawing to the given IO
+!> unit.  If there is no unit number given, the default output unit will be used
+!> for output.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_size_width (this, width)
+subroutine write_drawing_size_settings (this, unit)
+    use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-    class (size), intent (inout)    :: this
-    real, intent (in)               :: width
+    class (drawing), intent (in)    :: this
+    integer, intent (in), optional  :: unit
 
-    this % width = width
-end subroutine set_size_width
+    character (:), allocatable  :: length_unit
+    integer                     :: writing_unit
+
+    intrinsic   :: associated
+    intrinsic   :: present
+
+    allocate (character (0) :: length_unit)
+
+    if (associated (this % length_unit)) then
+        length_unit = ' ' // this % length_unit
+    end if
+
+    if (present (unit)) then
+        writing_unit = unit
+    else
+        writing_unit = output_unit
+    end if
+
+    write (writing_unit, fmt = '(a, f13.4, a, a, f13.4, a, a)')                &
+        'size (', this % width  , length_unit                                  &
+    ,   ', '    , this % height , length_unit                                  &
+    ,   ');'
+end subroutine write_drawing_size_settings
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -80,6 +80,7 @@ implicit none
             write (unit, fmt = fmt)                                            &
                 'settings.outformat = "', this % output_format, '";'
             write (unit, fmt = fmt) 'settings.tex = "', this % compiler, '";'
+            call this % write_size_settings (unit)
             close (unit)
 
             export_drawing = .true.

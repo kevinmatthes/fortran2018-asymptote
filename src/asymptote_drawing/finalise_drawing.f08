@@ -45,6 +45,7 @@ implicit none
     type (drawing), intent (inout)  :: this
 
     call conditional_free (this % compiler)
+    call conditional_free (this % length_unit)
     call conditional_free (this % name)
     call conditional_free (this % output_format)
 end subroutine finalise_drawing

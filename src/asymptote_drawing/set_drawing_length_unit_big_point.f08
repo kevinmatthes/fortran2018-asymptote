@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file initialise_size.f08
+!> \file set_drawing_length_unit_big_point.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,43 +32,26 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Create new size settings for an Asymptote drawing.
-!> \param   width   The width of the resulting drawing.
-!> \param   height  The height of the resulting drawing.
-!> \param   aspect  Whether the aspect ratio shall be kept.
-!> \return  The new size settings.
+!> \brief   Alter the length unit of this drawing.
+!> \param   this    The drawing whose length unit shall be set.
 !>
-!> This function will construct a new size settings entity based on the given
-!> data.
+!> This subroutine will assign no unit to this drawing.  Hence, the drawing is
+!> going to default to big points as unit.  This is also Asymptote's default
+!> unit for length measuring
+!> \cite hammerlindl.bowman.prince:asymptote:2021:2.69, page 10.
 !>
-!> \note This constructor will only set the width, height and aspect information
-!> of the settings entity.  The unit to measure the lengths needs to be set
-!> separately with the therefore intended methods.
+!> \note As this method will deallocate the unit field of this drawing which
+!> will, thus, become disassociated, the field will be in the same state as when
+!> this drawing was freshly constructed.  Hence, the drawing type also defaults
+!> to big points as length unit.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure function initialise_size (width, height, aspect)
+pure subroutine set_drawing_length_unit_big_point (this)
 implicit none
-    logical, intent (in), optional  :: aspect
-    real, intent (in)               :: width
-    real, intent (in), optional     :: height
-    type (size)                     :: initialise_size
+    class (drawing), intent (inout) :: this
 
-    intrinsic   :: present
-
-    initialise_size % width = width
-
-    if (present (height)) then
-        initialise_size % height = height
-    else
-        initialise_size % height = initialise_size % width
-    end if
-
-    if (present (aspect)) then
-        initialise_size % aspect = aspect
-    else
-        initialise_size % aspect = .true.
-    end if
-end function initialise_size
+    call conditional_free (this % length_unit)
+end subroutine set_drawing_length_unit_big_point
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

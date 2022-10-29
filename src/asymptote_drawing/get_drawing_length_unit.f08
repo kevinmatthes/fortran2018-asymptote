@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file finalise_size.f08
+!> \file get_drawing_length_unit.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,19 +32,42 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate all memory regions requested for these size settings.
-!> \param   this    The size settings to finalise.
+!> \brief   Create a deep copy of this drawing's length unit.
+!> \param   this        The drawing whose unit shall be copied.
+!> \param   length_unit The pointer pointing to the output memory region.
 !>
-!> This subroutine will finalise these size settings in order to avoid memory
-!> leaks.
+!> This subroutine will assign a deep copy of this drawing's unit to the output
+!> parameter.  If this drawing does not already have a unit, the output
+!> parameter will remain disassociated.
+!>
+!> \note This operation will allocate memory for its output parameter.  This
+!> allocation needs to be freed by the caller as the memory allocation is not
+!> managed automatically.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine finalise_size (this)
+pure subroutine get_drawing_length_unit (this, length_unit)
 implicit none
-    type (size), intent (inout) :: this
+    character (:), pointer, intent (out)    :: length_unit
+    class (drawing), intent (in)            :: this
 
-    call conditional_free (this % unit)
-end subroutine finalise_size
+    integer :: i
+    integer :: string_length
+
+    intrinsic   :: associated
+    intrinsic   :: len
+    intrinsic   :: null
+
+    length_unit => null ()
+
+    if (associated (this % length_unit)) then
+        string_length = len (this % length_unit)
+        allocate (character (string_length) :: length_unit)
+
+        do i = 1, string_length
+            length_unit (i : i) = this % length_unit (i : i)
+        end do
+    end if
+end subroutine get_drawing_length_unit
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

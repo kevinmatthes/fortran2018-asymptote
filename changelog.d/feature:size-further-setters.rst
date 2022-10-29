@@ -5,6 +5,6 @@ Added
 
 - define setter for aspect keeping
 
-- define setter for size height
+- define setter for drawing height
 
-- define setter for size width
+- define setter for drawing width

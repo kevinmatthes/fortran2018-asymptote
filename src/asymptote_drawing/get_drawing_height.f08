@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_size.f08
+!> \file get_drawing_height.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,32 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing's size's methods.
+!> \brief   Retrieve the value of the `height` field of this drawing.
+!> \param   this    The drawing which shall be queried.
+!> \return  The value of the `height` field.
 !>
-!> This submodule contains the procedures associated with the size of the
-!> Asymptote drawing to produce.
+!> This function will return the scalar intrinsic value of the `height` field of
+!> this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_size
+pure function get_drawing_height (this)
 implicit none
-contains
-    include 'asymptote_size/finalise_size.f08'
-    include 'asymptote_size/get_size_aspect.f08'
-    include 'asymptote_size/get_size_height.f08'
-    include 'asymptote_size/get_size_unit.f08'
-    include 'asymptote_size/get_size_width.f08'
-    include 'asymptote_size/initialise_size.f08'
-    include 'asymptote_size/set_size_aspect_false.f08'
-    include 'asymptote_size/set_size_aspect_true.f08'
-    include 'asymptote_size/set_size_height.f08'
-    include 'asymptote_size/set_size_unit_big_point.f08'
-    include 'asymptote_size/set_size_unit_centimetre.f08'
-    include 'asymptote_size/set_size_unit_inch.f08'
-    include 'asymptote_size/set_size_unit_millimetre.f08'
-    include 'asymptote_size/set_size_unit_point.f08'
-    include 'asymptote_size/set_size_width.f08'
-    include 'asymptote_size/write_size_settings.f08'
-end submodule asymptote_size
+    class (drawing), intent (in)    :: this
+    real                            :: get_drawing_height
+
+    get_drawing_height = this % height
+end function get_drawing_height
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

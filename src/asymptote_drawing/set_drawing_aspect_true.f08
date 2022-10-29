@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file get_size_unit.f08
+!> \file set_drawing_aspect_true.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,42 +32,19 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Create a deep copy of these size settings' length unit.
-!> \param   this    The size settings whose unit shall be copied.
-!> \param   unit    The pointer pointing to the output memory region.
+!> \brief   The aspect ratio shall be kept.
+!> \param   this    The drawing whose aspect settings shall be altered.
 !>
-!> This subroutine will assign a deep copy of these size settings' unit to the
-!> output parameter.  If these settings do not already have a unit, the output
-!> parameter will remain disassociated.
-!>
-!> \note This operation will allocate memory for its output parameter.  This
-!> allocation needs to be freed by the caller as the memory allocation is not
-!> managed automatically.
+!> This subroutine will assign `.true.` to the `aspect` field of this drawing.
+!> This will cause the aspect ratio to be kept.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine get_size_unit (this, unit)
+pure subroutine set_drawing_aspect_true (this)
 implicit none
-    character (:), pointer, intent (out)    :: unit
-    class (size), intent (in)               :: this
+    class (drawing), intent (inout) :: this
 
-    integer :: i
-    integer :: string_length
-
-    intrinsic   :: associated
-    intrinsic   :: len
-    intrinsic   :: null
-
-    unit => null ()
-
-    if (associated (this % unit)) then
-        string_length = len (this % unit)
-        allocate (character (string_length) :: unit)
-
-        do i = 1, string_length
-            unit (i : i) = this % unit (i : i)
-        end do
-    end if
-end subroutine get_size_unit
+    this % aspect = .true.
+end subroutine set_drawing_aspect_true
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
