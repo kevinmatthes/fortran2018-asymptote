@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_size.f08
+!> \file set_size_aspect_false.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,27 +32,19 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing's size's methods.
+!> \brief   The aspect ratio shall be ignored.
+!> \param   this    The size settings whose aspect settings shall be altered.
 !>
-!> This submodule contains the procedures associated with the size of the
-!> Asymptote drawing to produce.
+!> This subroutine will assign `.false.` to the `aspect` field of these size
+!> settings.  This will cause the aspect ratio to be ignored.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_size
+pure subroutine set_size_aspect_false (this)
 implicit none
-contains
-    include 'asymptote_size/finalise_size.f08'
-    include 'asymptote_size/initialise_size.f08'
-    include 'asymptote_size/set_size_aspect_false.f08'
-    include 'asymptote_size/set_size_aspect_true.f08'
-    include 'asymptote_size/set_size_height.f08'
-    include 'asymptote_size/set_size_unit_big_point.f08'
-    include 'asymptote_size/set_size_unit_centimetre.f08'
-    include 'asymptote_size/set_size_unit_inch.f08'
-    include 'asymptote_size/set_size_unit_millimetre.f08'
-    include 'asymptote_size/set_size_unit_point.f08'
-    include 'asymptote_size/set_size_width.f08'
-end submodule asymptote_size
+    class (size), intent (inout)    :: this
+
+    this % aspect = .false.
+end subroutine set_size_aspect_false
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

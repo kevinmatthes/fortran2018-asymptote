@@ -55,9 +55,9 @@
 
 module libf18asy
 implicit none
-public
+private
     !> This library's version.
-    character (*), parameter    :: library_version = 'v0.0.0'
+    character (*), parameter, public    :: library_version = 'v0.0.0'
 
     !> The Asymptote drawing to produce.
     type, public    :: drawing
@@ -121,11 +121,20 @@ public
     contains
         final   :: finalise_size
 
+        procedure, pass (this), public  :: ignore_aspect                       &
+                                        => set_size_aspect_false
+
+        procedure, pass (this), public  :: keep_aspect                         &
+                                        => set_size_aspect_true
+
         procedure, pass (this), public  :: set_big_point                       &
                                         => set_size_unit_big_point
 
         procedure, pass (this), public  :: set_centimetre                      &
                                         => set_size_unit_centimetre
+
+        procedure, pass (this), public  :: set_height                          &
+                                        => set_size_height
 
         procedure, pass (this), public  :: set_inch                            &
                                         => set_size_unit_inch
@@ -135,11 +144,16 @@ public
 
         procedure, pass (this), public  :: set_point                           &
                                         => set_size_unit_point
+
+        procedure, pass (this), public  :: set_width                           &
+                                        => set_size_width
     end type size
 
     private :: conditional_free
     private :: conditional_free_character
     private :: write_library_version_header
+
+    public  :: finalise
 
     interface conditional_free
         pure module subroutine conditional_free_character (ptr)
@@ -252,6 +266,28 @@ public
     end interface
 
     interface
+        pure module subroutine set_size_aspect_false (this)
+        implicit none
+            class (size), intent (inout)    :: this
+        end subroutine set_size_aspect_false
+    end interface
+
+    interface
+        pure module subroutine set_size_aspect_true (this)
+        implicit none
+            class (size), intent (inout)    :: this
+        end subroutine set_size_aspect_true
+    end interface
+
+    interface
+        pure module subroutine set_size_height (this, height)
+        implicit none
+            class (size), intent (inout)    :: this
+            real, intent (in)               :: height
+        end subroutine set_size_height
+    end interface
+
+    interface
         pure module subroutine set_size_unit_big_point (this)
         implicit none
             class (size), intent (inout)    :: this
@@ -284,6 +320,14 @@ public
         implicit none
             class (size), intent (inout)    :: this
         end subroutine set_size_unit_point
+    end interface
+
+    interface
+        pure module subroutine set_size_width (this, width)
+        implicit none
+            class (size), intent (inout)    :: this
+            real, intent (in)               :: width
+        end subroutine set_size_width
     end interface
 
     interface size

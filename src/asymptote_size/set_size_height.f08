@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_size.f08
+!> \file set_size_height.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,27 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining the Asymptote drawing's size's methods.
+!> \brief   Modify the height of these size settings.
+!> \param   this    The size settings whose height shall be set.
+!> \param   height  The new value for the respective field.
 !>
-!> This submodule contains the procedures associated with the size of the
-!> Asymptote drawing to produce.
+!> This subroutine will assign a new value for the height of a drawing to the
+!> respective field of these size settings.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_size
+pure subroutine set_size_height (this, height)
 implicit none
-contains
-    include 'asymptote_size/finalise_size.f08'
-    include 'asymptote_size/initialise_size.f08'
-    include 'asymptote_size/set_size_aspect_false.f08'
-    include 'asymptote_size/set_size_aspect_true.f08'
-    include 'asymptote_size/set_size_height.f08'
-    include 'asymptote_size/set_size_unit_big_point.f08'
-    include 'asymptote_size/set_size_unit_centimetre.f08'
-    include 'asymptote_size/set_size_unit_inch.f08'
-    include 'asymptote_size/set_size_unit_millimetre.f08'
-    include 'asymptote_size/set_size_unit_point.f08'
-    include 'asymptote_size/set_size_width.f08'
-end submodule asymptote_size
+    class (size), intent (inout)    :: this
+    real, intent (in)               :: height
+
+    this % height = height
+end subroutine set_size_height
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
