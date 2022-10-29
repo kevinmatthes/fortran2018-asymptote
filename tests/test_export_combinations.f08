@@ -60,7 +60,8 @@ implicit none
 
 
 
-    asymptote = drawing ('eps_lualatex')
+    asymptote = drawing ('eps_lualatex', 3., 3.)
+    call asymptote % set_centimetre
     call asymptote % set_eps
     call asymptote % set_lualatex
 
