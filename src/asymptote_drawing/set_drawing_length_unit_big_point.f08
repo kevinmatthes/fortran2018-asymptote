@@ -51,7 +51,7 @@ pure subroutine set_drawing_length_unit_big_point (this)
 implicit none
     class (drawing), intent (inout) :: this
 
-    call conditional_free (this % unit)
+    call conditional_free (this % length_unit)
 end subroutine set_drawing_length_unit_big_point
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
