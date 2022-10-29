@@ -121,6 +121,18 @@ private
     contains
         final   :: finalise_size
 
+        procedure, pass (this), public  :: get_aspect                          &
+                                        => get_size_aspect
+
+        procedure, pass (this), public  :: get_height                          &
+                                        => get_size_height
+
+        procedure, pass (this), public  :: get_unit                            &
+                                        => get_size_unit
+
+        procedure, pass (this), public  :: get_width                           &
+                                        => get_size_width
+
         procedure, pass (this), public  :: ignore_aspect                       &
                                         => set_size_aspect_false
 
@@ -150,7 +162,6 @@ private
     end type size
 
     private :: conditional_free
-    private :: conditional_free_character
     private :: write_library_version_header
 
     public  :: finalise
@@ -220,6 +231,38 @@ private
             character (:), pointer, intent (out)    :: name
             class (drawing), intent (in)            :: this
         end subroutine get_drawing_name
+    end interface
+
+    interface
+        pure module function get_size_aspect (this)
+        implicit none
+            class (size), intent (in)   :: this
+            logical                     :: get_size_aspect
+        end function get_size_aspect
+    end interface
+
+    interface
+        pure module function get_size_height (this)
+        implicit none
+            class (size), intent (in)   :: this
+            real                        :: get_size_height
+        end function get_size_height
+    end interface
+
+    interface
+        pure module subroutine get_size_unit (this, unit)
+        implicit none
+            character (:), pointer, intent (out)    :: unit
+            class (size), intent (in)               :: this
+        end subroutine get_size_unit
+    end interface
+
+    interface
+        pure module function get_size_width (this)
+        implicit none
+            class (size), intent (in)   :: this
+            real                        :: get_size_width
+        end function get_size_width
     end interface
 
     interface

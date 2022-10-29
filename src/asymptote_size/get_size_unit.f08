@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file get_drawing_name.f08
+!> \file get_size_unit.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,12 +32,12 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Create a deep copy of this drawing's name.
-!> \param   this    The Asymptote drawing whose name shall be copied.
-!> \param   name    The pointer pointing to the output memory region.
+!> \brief   Create a deep copy of these size settings' length unit.
+!> \param   this    The size settings whose unit shall be copied.
+!> \param   unit    The pointer pointing to the output memory region.
 !>
-!> This subroutine will assign a deep copy of this drawing's name to the output
-!> parameter.  If this drawing does not already have a name, the output
+!> This subroutine will assign a deep copy of these size settings' unit to the
+!> output parameter.  If these settings do not already have a unit, the output
 !> parameter will remain disassociated.
 !>
 !> \note This operation will allocate memory for its output parameter.  This
@@ -46,10 +46,10 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine get_drawing_name (this, name)
+pure subroutine get_size_unit (this, unit)
 implicit none
-    character (:), pointer, intent (out)    :: name
-    class (drawing), intent (in)            :: this
+    character (:), pointer, intent (out)    :: unit
+    class (size), intent (in)               :: this
 
     integer :: i
     integer :: string_length
@@ -58,16 +58,16 @@ implicit none
     intrinsic   :: len
     intrinsic   :: null
 
-    name => null ()
+    unit => null ()
 
-    if (associated (this % name)) then
-        string_length = len (this % name)
-        allocate (character (string_length) :: name)
+    if (associated (this % unit)) then
+        string_length = len (this % unit)
+        allocate (character (string_length) :: unit)
 
         do i = 1, string_length
-            name (i : i) = this % name (i : i)
+            unit (i : i) = this % unit (i : i)
         end do
     end if
-end subroutine get_drawing_name
+end subroutine get_size_unit
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

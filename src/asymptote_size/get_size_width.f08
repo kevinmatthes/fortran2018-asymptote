@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file get_drawing_name.f08
+!> \file get_size_width.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,42 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Create a deep copy of this drawing's name.
-!> \param   this    The Asymptote drawing whose name shall be copied.
-!> \param   name    The pointer pointing to the output memory region.
+!> \brief   Retrieve the value of the `width` field of these size settings.
+!> \param   this    The size settings which shall be queried.
+!> \returm  The value of the `width` field.
 !>
-!> This subroutine will assign a deep copy of this drawing's name to the output
-!> parameter.  If this drawing does not already have a name, the output
-!> parameter will remain disassociated.
-!>
-!> \note This operation will allocate memory for its output parameter.  This
-!> allocation needs to be freed by the caller as the memory allocation is not
-!> managed automatically.
+!> This function will return the scalar intrinsic value of the `width` field of
+!> these size settings.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine get_drawing_name (this, name)
+pure function get_size_width (this)
 implicit none
-    character (:), pointer, intent (out)    :: name
-    class (drawing), intent (in)            :: this
+    class (size), intent (in)   :: this
+    real                        :: get_size_width
 
-    integer :: i
-    integer :: string_length
-
-    intrinsic   :: associated
-    intrinsic   :: len
-    intrinsic   :: null
-
-    name => null ()
-
-    if (associated (this % name)) then
-        string_length = len (this % name)
-        allocate (character (string_length) :: name)
-
-        do i = 1, string_length
-            name (i : i) = this % name (i : i)
-        end do
-    end if
-end subroutine get_drawing_name
+    get_size_width = this % width
+end function get_size_width
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

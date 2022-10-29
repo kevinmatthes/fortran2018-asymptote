@@ -34,7 +34,7 @@
 !>
 !> \brief   Create a deep copy of this drawing's output format.
 !> \param   this            The Asymptote drawing whose format shall be copied.
-!> \param   output_format   The pointer to pointing to the output memory region.
+!> \param   output_format   The pointer pointing to the output memory region.
 !>
 !> This subroutine will assign a deep copy of this drawing's intended output
 !> format to the output parameter.  If this drawing does not already have an
