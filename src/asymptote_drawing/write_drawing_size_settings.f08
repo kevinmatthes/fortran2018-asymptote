@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file write_size_settings.f08
+!> \file write_drawing_size_settings.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,20 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Output these size settings.
+!> \brief   Output the size settings of this drawing.
 !> \param   this    The size settings to export.
 !> \param   unit    The unit to write to.
 !>
-!> This subroutine will write these size settings to the given IO unit.  If
-!> there is no unit number given, the default output unit will be used for
-!> output.
+!> This subroutine will write the size settings of this drawing to the given IO
+!> unit.  If there is no unit number given, the default output unit will be used
+!> for output.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine write_size_settings (this, unit)
+subroutine write_drawing_size_settings (this, unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-    class (size), intent (in)       :: this
+    class (drawing), intent (in)    :: this
     integer, intent (in), optional  :: unit
 
     character (:), allocatable  :: length_unit
@@ -56,8 +56,8 @@ implicit none
 
     allocate (character (0) :: length_unit)
 
-    if (associated (this % unit)) then
-        length_unit = ' ' // this % unit
+    if (associated (this % length_unit)) then
+        length_unit = ' ' // this % length_unit
     end if
 
     if (present (unit)) then
@@ -70,6 +70,6 @@ implicit none
         'size (', this % width  , length_unit                                  &
     ,   ', '    , this % height , length_unit                                  &
     ,   ');'
-end subroutine write_size_settings
+end subroutine write_drawing_size_settings
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
