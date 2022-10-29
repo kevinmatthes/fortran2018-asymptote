@@ -62,7 +62,7 @@ implicit none
     intrinsic   :: len_trim
     intrinsic   :: present
 
-    intialise_drawing % width = width
+    initialise_drawing % width = width
 
     if (present (height)) then
         initialise_drawing % height = height
