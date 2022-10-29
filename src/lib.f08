@@ -147,10 +147,10 @@ private
                                         => set_drawing_compiler_pdflatex
 
         procedure, pass (this), public  :: set_point                           &
-                                        => set_size_unit_point
+                                        => set_drawing_length_unit_point
 
         procedure, pass (this), public  :: set_width                           &
-                                        => set_size_width
+                                        => set_drawing_width
 
         procedure, pass (this), public  :: set_xelatex                         &
                                         => set_drawing_compiler_xelatex
