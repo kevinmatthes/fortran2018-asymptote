@@ -58,7 +58,7 @@ implicit none
     character (:), pointer  :: name => null ()
     type (drawing)          :: asymptote
 
-    asymptote = drawing ('name', 3., 3.)
+    asymptote = drawing ('name', 3.0, 3.0)
     call asymptote % set_centimetre
     call asymptote % get_name (name)
 
