@@ -43,6 +43,10 @@ submodule (libf18asy) asymptote_size
 implicit none
 contains
     include 'asymptote_size/finalise_size.f08'
+    include 'asymptote_size/get_size_aspect.f08'
+    include 'asymptote_size/get_size_height.f08'
+    include 'asymptote_size/get_size_unit.f08'
+    include 'asymptote_size/get_size_width.f08'
     include 'asymptote_size/initialise_size.f08'
     include 'asymptote_size/set_size_aspect_false.f08'
     include 'asymptote_size/set_size_aspect_true.f08'
