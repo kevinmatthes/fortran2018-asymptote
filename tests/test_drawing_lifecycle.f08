@@ -58,7 +58,8 @@ implicit none
     character (:), pointer  :: name => null ()
     type (drawing)          :: asymptote
 
-    asymptote = drawing ('name')
+    asymptote = drawing ('name', 3, 3)
+    call asymptote % set_centimetre
     call asymptote % get_name (name)
 
     if (name /= 'name') then
