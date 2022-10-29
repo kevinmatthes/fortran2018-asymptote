@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_size_width.f08
+!> \file set_drawing_width.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,21 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Modify the width of these size settings.
-!> \param   this    The size settings whose width shall be set.
+!> \brief   Modify the width of this drawing.
+!> \param   this    The drawing whose width shall be set.
 !> \param   width   The new value for the respective field.
 !>
-!> This subroutine will assign a new value for the width of a drawing to the
-!> respective field of these size settings.
+!> This subroutine will assign a new value for the width of this drawing.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_size_width (this, width)
+pure subroutine set_drawing_width (this, width)
 implicit none
-    class (size), intent (inout)    :: this
+    class (drawing), intent (inout) :: this
     real, intent (in)               :: width
 
     this % width = width
-end subroutine set_size_width
+end subroutine set_drawing_width
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
