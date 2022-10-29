@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file set_size_aspect_false.f08
+!> \file set_drawing_aspect_false.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -33,18 +33,18 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   The aspect ratio shall be ignored.
-!> \param   this    The size settings whose aspect settings shall be altered.
+!> \param   this    The drawing whose aspect settings shall be altered.
 !>
-!> This subroutine will assign `.false.` to the `aspect` field of these size
-!> settings.  This will cause the aspect ratio to be ignored.
+!> This subroutine will assign `.false.` to the `aspect` field of this drawing.
+!> This will cause the aspect ratio to be ignored.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine set_size_aspect_false (this)
+pure subroutine set_drawing_aspect_false (this)
 implicit none
-    class (size), intent (inout)    :: this
+    class (drawing), intent (inout) :: this
 
     this % aspect = .false.
-end subroutine set_size_aspect_false
+end subroutine set_drawing_aspect_false
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
