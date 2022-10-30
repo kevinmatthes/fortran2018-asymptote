@@ -146,6 +146,13 @@ private
                                         => write_drawing_size_settings
     end type drawing
 
+    !> A simple, 2D point.
+    type, public    :: point_2
+        real, public    :: fst  = 0.0
+        real, public    :: snd  = 0.0
+    contains
+    end type point_2
+
     private :: conditional_free
     private :: write_library_version_header
     public  :: finalise
