@@ -61,16 +61,16 @@ private
 
     !> The Asymptote drawing to produce.
     type, public    :: drawing
-        character (:), pointer, private :: compiler                            &
+        character (:), allocatable, private :: compiler                        &
+                                            => null ()
+
+        character (:), allocatable, private :: length_unit                     &
                                         => null ()
 
-        character (:), pointer, private :: length_unit                         &
+        character (:), allocatable, private :: name                            &
                                         => null ()
 
-        character (:), pointer, private :: name                                &
-                                        => null ()
-
-        character (:), pointer, private :: output_format                       &
+        character (:), allocatable, private :: output_format                   &
                                         => null ()
 
         logical, private    :: aspect                                          &
@@ -165,9 +165,9 @@ private
     public  :: finalise
 
     interface conditional_free
-        pure module subroutine conditional_free_character (ptr)
+        pure module subroutine conditional_free_character (object)
         implicit none
-            character (:), pointer, intent (inout)  :: ptr
+            character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
     end interface conditional_free
 
@@ -216,16 +216,16 @@ private
     interface
         pure module subroutine get_drawing_compiler (this, compiler)
         implicit none
-            character (:), pointer, intent (out)    :: compiler
-            class (drawing), intent (in)            :: this
+            character (:), allocatable, intent (out)    :: compiler
+            class (drawing), intent (in)                :: this
         end subroutine get_drawing_compiler
     end interface
 
     interface
         pure module subroutine get_drawing_format (this, output_format)
         implicit none
-            character (:), pointer, intent (out)    :: output_format
-            class (drawing), intent (in)            :: this
+            character (:), allocatable, intent (out)    :: output_format
+            class (drawing), intent (in)                :: this
         end subroutine get_drawing_format
     end interface
 
@@ -240,16 +240,16 @@ private
     interface
         pure module subroutine get_drawing_length_unit (this, length_unit)
         implicit none
-            character (:), pointer, intent (out)    :: length_unit
-            class (drawing), intent (in)            :: this
+            character (:), allocatable, intent (out)    :: length_unit
+            class (drawing), intent (in)                :: this
         end subroutine get_drawing_length_unit
     end interface
 
     interface
         pure module subroutine get_drawing_name (this, name)
         implicit none
-            character (:), pointer, intent (out)    :: name
-            class (drawing), intent (in)            :: this
+            character (:), allocatable, intent (out)    :: name
+            class (drawing), intent (in)                :: this
         end subroutine get_drawing_name
     end interface
 
