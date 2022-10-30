@@ -7,6 +7,10 @@ Added
 
 - declare type for commands
 
+- define constructor for 2D point type
+
+- define line constructor:  2D point, 2D point
+
 - define submodule for 2D point type
 
 - define write method for output settings
