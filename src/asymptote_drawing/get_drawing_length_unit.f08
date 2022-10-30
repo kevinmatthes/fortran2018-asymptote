@@ -50,11 +50,7 @@ pure subroutine get_drawing_length_unit (this, length_unit)
 implicit none
     character (:), allocatable, intent (out)    :: length_unit
     class (drawing), intent (in)                :: this
-
-    integer :: i
-    integer :: string_length
-
-    intrinsic   :: allocated
+    intrinsic                                   :: allocated
 
     allocate (character (0) :: length_unit)
 
