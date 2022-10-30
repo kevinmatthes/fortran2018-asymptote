@@ -55,12 +55,11 @@
 function export_drawing (this)
     use, intrinsic :: iso_fortran_env, only: error_unit
 implicit none
+    character (*), parameter        :: fmt = '(a, a, a)'
     class (drawing), intent (in)    :: this
+    integer                         :: status
+    integer                         :: unit
     logical                         :: export_drawing
-
-    character (*), parameter    :: fmt = '(a, a, a)'
-    integer                     :: status
-    integer                     :: unit
 
     export_drawing = .false.
 
