@@ -50,11 +50,7 @@ pure subroutine get_drawing_format (this, output_format)
 implicit none
     character (:), allocatable, intent (out)    :: output_format
     class (drawing), intent (in)                :: this
-
-    integer :: i
-    integer :: string_length
-
-    intrinsic   :: allocated
+    intrinsic                                   :: allocated
 
     allocate (character (0) :: output_format)
 
