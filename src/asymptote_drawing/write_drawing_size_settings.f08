@@ -45,14 +45,12 @@
 subroutine write_drawing_size_settings (this, unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
+    character (:), allocatable      :: length_unit
     class (drawing), intent (in)    :: this
+    integer                         :: writing_unit
     integer, intent (in), optional  :: unit
-
-    character (:), allocatable  :: length_unit
-    integer                     :: writing_unit
-
-    intrinsic   :: allocated
-    intrinsic   :: present
+    intrinsic                       :: allocated
+    intrinsic                       :: present
 
     allocate (character (0) :: length_unit)
 
