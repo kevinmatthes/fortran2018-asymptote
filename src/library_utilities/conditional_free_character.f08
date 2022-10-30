@@ -32,22 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate the given pointer if it is associated with a target.
-!> \param   ptr The pointer to deallocate.
+!> \brief   Deallocate the given allocatable object if it is allocated.
+!> \param   object  The object to deallocate.
 !>
-!> If the given pointer is associated with a target, it will be deallocated.
-!> Thereby, the pointer becomes disassociated.
+!> If the given allocatable object is allocated, it will be deallocated.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine conditional_free_character (ptr)
+pure subroutine conditional_free_character (object)
 implicit none
-    character (:), pointer, intent (inout)  :: ptr
+    character (:), allocatable, intent (inout)  :: object
 
-    intrinsic   :: associated
+    intrinsic   :: allocated
 
-    if (associated (ptr)) then
-        deallocate (ptr)
+    if (allocated (object)) then
+        deallocate (object)
     end if
 end subroutine conditional_free_character
 

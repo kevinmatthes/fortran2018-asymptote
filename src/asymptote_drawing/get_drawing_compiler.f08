@@ -34,11 +34,11 @@
 !>
 !> \brief   Create a deep copy of this drawing's preferred compiler.
 !> \param   this        The Asymptote drawing whose compiler shall be copied.
-!> \param   compiler    The pointer pointing to the output memory region.
+!> \param   compiler    The object to assign the deep copy to.
 !>
 !> This subroutine will assign a deep copy of this drawing's preferred compiler
 !> to the output parameter.  If this drawing does not already have a preferred
-!> compiler, the output parameter will remain disassociated.
+!> compiler, the output parameter will receive an empty string.
 !>
 !> \note This operation will allocate memory for its output parameter.  This
 !> allocation needs to be freed by the caller as the memory allocation is not
@@ -48,25 +48,14 @@
 
 pure subroutine get_drawing_compiler (this, compiler)
 implicit none
-    character (:), pointer, intent (out)    :: compiler
-    class (drawing), intent (in)            :: this
+    character (:), allocatable, intent (out)    :: compiler
+    class (drawing), intent (in)                :: this
+    intrinsic                                   :: allocated
 
-    integer :: i
-    integer :: string_length
+    allocate (character (0) :: compiler)
 
-    intrinsic   :: associated
-    intrinsic   :: len
-    intrinsic   :: null
-
-    compiler => null ()
-
-    if (associated (this % compiler)) then
-        string_length = len (this % compiler)
-        allocate (character (string_length) :: compiler)
-
-        do i = 1, string_length
-            compiler (i : i) = this % compiler (i : i)
-        end do
+    if (allocated (this % compiler)) then
+        compiler = this % compiler
     end if
 end subroutine get_drawing_compiler
 

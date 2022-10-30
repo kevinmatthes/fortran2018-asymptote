@@ -54,9 +54,9 @@ program test_export_combinations
     use, non_intrinsic :: libf18asy, only: drawing
     use, non_intrinsic :: libf18asy, only: finalise
 implicit none
-    character (:), pointer  :: compiler         => null ()
-    character (:), pointer  :: output_format    => null ()
-    type (drawing)          :: asymptote
+    character (:), allocatable  :: compiler
+    character (:), allocatable  :: output_format
+    type (drawing)              :: asymptote
 
 
 

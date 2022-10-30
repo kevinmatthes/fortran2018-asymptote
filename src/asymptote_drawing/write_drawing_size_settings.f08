@@ -51,12 +51,12 @@ implicit none
     character (:), allocatable  :: length_unit
     integer                     :: writing_unit
 
-    intrinsic   :: associated
+    intrinsic   :: allocated
     intrinsic   :: present
 
     allocate (character (0) :: length_unit)
 
-    if (associated (this % length_unit)) then
+    if (allocated (this % length_unit)) then
         length_unit = ' ' // this % length_unit
     end if
 

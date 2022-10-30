@@ -34,11 +34,11 @@
 !>
 !> \brief   Create a deep copy of this drawing's output format.
 !> \param   this            The Asymptote drawing whose format shall be copied.
-!> \param   output_format   The pointer pointing to the output memory region.
+!> \param   output_format   The object to assign the deep copy to.
 !>
 !> This subroutine will assign a deep copy of this drawing's intended output
 !> format to the output parameter.  If this drawing does not already have an
-!> intended output format, the output parameter will remain disassociated.
+!> intended output format, the output parameter will receive an empty string.
 !>
 !> \note This operation will allocate memory for its output parameter.  This
 !> allocation needs to be freed by the caller as the memory allocation is not
@@ -48,25 +48,14 @@
 
 pure subroutine get_drawing_format (this, output_format)
 implicit none
-    character (:), pointer, intent (out)    :: output_format
-    class (drawing), intent (in)            :: this
+    character (:), allocatable, intent (out)    :: output_format
+    class (drawing), intent (in)                :: this
+    intrinsic                                   :: allocated
 
-    integer :: i
-    integer :: string_length
+    allocate (character (0) :: output_format)
 
-    intrinsic   :: associated
-    intrinsic   :: len
-    intrinsic   :: null
-
-    output_format => null ()
-
-    if (associated (this % output_format)) then
-        string_length = len (this % output_format)
-        allocate (character (string_length) :: output_format)
-
-        do i = 1, string_length
-            output_format (i : i) = this % output_format (i : i)
-        end do
+    if (allocated (this % output_format)) then
+        output_format = this % output_format
     end if
 end subroutine get_drawing_format
 

@@ -34,11 +34,11 @@
 !>
 !> \brief   Create a deep copy of this drawing's length unit.
 !> \param   this        The drawing whose unit shall be copied.
-!> \param   length_unit The pointer pointing to the output memory region.
+!> \param   length_unit The object to assign the deep copy to.
 !>
 !> This subroutine will assign a deep copy of this drawing's unit to the output
 !> parameter.  If this drawing does not already have a unit, the output
-!> parameter will remain disassociated.
+!> parameter will receive an empty string.
 !>
 !> \note This operation will allocate memory for its output parameter.  This
 !> allocation needs to be freed by the caller as the memory allocation is not
@@ -48,25 +48,14 @@
 
 pure subroutine get_drawing_length_unit (this, length_unit)
 implicit none
-    character (:), pointer, intent (out)    :: length_unit
-    class (drawing), intent (in)            :: this
+    character (:), allocatable, intent (out)    :: length_unit
+    class (drawing), intent (in)                :: this
+    intrinsic                                   :: allocated
 
-    integer :: i
-    integer :: string_length
+    allocate (character (0) :: length_unit)
 
-    intrinsic   :: associated
-    intrinsic   :: len
-    intrinsic   :: null
-
-    length_unit => null ()
-
-    if (associated (this % length_unit)) then
-        string_length = len (this % length_unit)
-        allocate (character (string_length) :: length_unit)
-
-        do i = 1, string_length
-            length_unit (i : i) = this % length_unit (i : i)
-        end do
+    if (allocated (this % length_unit)) then
+        length_unit = this % length_unit
     end if
 end subroutine get_drawing_length_unit
 

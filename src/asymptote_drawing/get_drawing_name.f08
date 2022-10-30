@@ -34,11 +34,11 @@
 !>
 !> \brief   Create a deep copy of this drawing's name.
 !> \param   this    The Asymptote drawing whose name shall be copied.
-!> \param   name    The pointer pointing to the output memory region.
+!> \param   name    The object to assign the deep copy to.
 !>
 !> This subroutine will assign a deep copy of this drawing's name to the output
 !> parameter.  If this drawing does not already have a name, the output
-!> parameter will remain disassociated.
+!> parameter will receive an empty string.
 !>
 !> \note This operation will allocate memory for its output parameter.  This
 !> allocation needs to be freed by the caller as the memory allocation is not
@@ -48,25 +48,14 @@
 
 pure subroutine get_drawing_name (this, name)
 implicit none
-    character (:), pointer, intent (out)    :: name
-    class (drawing), intent (in)            :: this
+    character (:), allocatable, intent (out)    :: name
+    class (drawing), intent (in)                :: this
+    intrinsic                                   :: allocated
 
-    integer :: i
-    integer :: string_length
+    allocate (character (0) :: name)
 
-    intrinsic   :: associated
-    intrinsic   :: len
-    intrinsic   :: null
-
-    name => null ()
-
-    if (associated (this % name)) then
-        string_length = len (this % name)
-        allocate (character (string_length) :: name)
-
-        do i = 1, string_length
-            name (i : i) = this % name (i : i)
-        end do
+    if (allocated (this % name)) then
+        name = this % name
     end if
 end subroutine get_drawing_name
 
