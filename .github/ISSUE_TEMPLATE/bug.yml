@@ -50,13 +50,26 @@ body:
         - Nightly
     validations:
       required: true
+  - type: dropdown
+    attributes:
+      label: Category
+      description: |
+        Please choose the category which describes best the bug to be reported.
+      options:
+        - Major — The library does not fulfill the task it is designed for.
+        - Minor — The library basically does what it should do but there might
+          be improvements.
+        - Typo — There is a spelling mistake or something similar.
+    validations:
+      required: true
   - type: textarea
     attributes:
-      label: Description
+      label: Detailed Description
       description: |
-        Please describe the bug.  This is only required if the issue title is
-        not alredy descriptive enough.
-      placeholder: Description of the bug
+        Please describe the bug in detail.  This is only required if the issue
+        title is not alredy descriptive enough.  In any case, further details
+        might be given by additional comments on this issue after its creation.
+      placeholder: Detailed description of the bug
     validations:
       required: false
 
