@@ -46,11 +46,9 @@
 subroutine write_library_version_header (unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
+    integer                         :: writing_unit
     integer, intent (in), optional  :: unit
-
-    integer :: writing_unit
-
-    intrinsic   :: present
+    intrinsic                       :: present
 
     if (present (unit)) then
         writing_unit = unit

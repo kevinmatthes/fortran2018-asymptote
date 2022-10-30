@@ -148,7 +148,6 @@ private
 
     private :: conditional_free
     private :: write_library_version_header
-
     public  :: finalise
 
     interface conditional_free

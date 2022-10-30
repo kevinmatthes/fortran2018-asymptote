@@ -50,11 +50,9 @@ pure subroutine set_drawing_name (this, name)
 implicit none
     character (*), intent (in)      :: name
     class (drawing), intent (inout) :: this
-
-    integer :: i
-    integer :: string_length
-
-    intrinsic   :: len_trim
+    integer                         :: i
+    integer                         :: string_length
+    intrinsic                       :: len_trim
 
     call conditional_free (this % name)
     string_length = len_trim (name)
