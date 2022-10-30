@@ -51,16 +51,14 @@
 pure function initialise_drawing (name, width, height, aspect)
 implicit none
     character (*), intent (in)      :: name
+    integer                         :: i
+    integer                         :: string_length
+    intrinsic                       :: len_trim
+    intrinsic                       :: present
     logical, intent (in), optional  :: aspect
     real, intent (in)               :: width
     real, intent (in), optional     :: height
     type (drawing)                  :: initialise_drawing
-
-    integer :: i
-    integer :: string_length
-
-    intrinsic   :: len_trim
-    intrinsic   :: present
 
     initialise_drawing % width = width
 
