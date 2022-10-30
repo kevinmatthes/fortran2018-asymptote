@@ -53,12 +53,15 @@ body:
   - type: dropdown
     attributes:
       label: Category
-      description: Please choose the category which describes the bug best.
+      description: |
+        Please choose the category which describes best the bug to be reported.
       options:
         - Major — The library does not fulfill the task it is designed for.
         - Minor — The library basically does what it should do but there might
           be improvements.
         - Typo — There is a spelling mistake.
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Description
