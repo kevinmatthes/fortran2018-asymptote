@@ -59,15 +59,9 @@ private
     !> This library's version.
     character (*), parameter, public    :: library_version = 'v0.0.0'
 
-    !> The abstract base class for all commands.
-    type, abstract, private :: abstract_command
-        class (command), allocatable, private   :: next
-    contains
-    end type abstract_command
-
     !> A command to be executed.
     type, private   :: command
-        class (abstract_command), allocatable, private  :: instruction
+        class (generic_command), allocatable, private   :: instruction
     contains
     end type command
 
@@ -163,6 +157,12 @@ private
         procedure, pass (this), private :: write_size_settings                 &
                                         => write_drawing_size_settings
     end type drawing
+
+    !> The general base class for all commands.
+    type, private :: generic_command
+        class (generic_command), allocatable, private   :: next
+    contains
+    end type generic_command
 
     !> A path to draw.
     type, public    :: path
