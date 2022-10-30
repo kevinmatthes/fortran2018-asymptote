@@ -59,6 +59,13 @@ private
     !> This library's version.
     character (*), parameter, public    :: library_version = 'v0.0.0'
 
+    !> A command to be executed.
+    type, private   :: command
+        type (command), allocatable, private    :: next
+        type (path), allocatable, private       :: draw
+    contains
+    end type command
+
     !> The Asymptote drawing to produce.
     type, public    :: drawing
         character (:), allocatable, private :: compiler
