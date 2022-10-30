@@ -149,6 +149,9 @@ private
         procedure, pass (this), public  :: set_xelatex                         &
                                         => set_drawing_compiler_xelatex
 
+        procedure, pass (this), private :: write_output_settings               &
+                                        => write_drawing_output_settings
+
         procedure, pass (this), private :: write_size_settings                 &
                                         => write_drawing_size_settings
     end type drawing
@@ -374,6 +377,14 @@ private
             class (drawing), intent (inout) :: this
             real, intent (in)               :: width
         end subroutine set_drawing_width
+    end interface
+
+    interface
+        module subroutine write_drawing_output_settings (this, unit)
+        implicit none
+            class (drawing), intent (in)    :: this
+            integer, intent (in), optional  :: unit
+        end subroutine write_drawing_output_settings
     end interface
 
     interface
