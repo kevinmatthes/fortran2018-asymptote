@@ -42,8 +42,7 @@
 pure subroutine conditional_free_character (object)
 implicit none
     character (:), allocatable, intent (inout)  :: object
-
-    intrinsic   :: allocated
+    intrinsic                                   :: allocated
 
     if (allocated (object)) then
         deallocate (object)
