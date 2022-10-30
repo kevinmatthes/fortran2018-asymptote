@@ -59,18 +59,6 @@ private
     !> This library's version.
     character (*), parameter, public    :: library_version = 'v0.0.0'
 
-    !> A command to be executed.
-    type, private   :: command
-        class (generic_command), allocatable, private   :: instruction
-    contains
-    end type command
-
-    !> The instruction to draw something.
-    type, extends (generic_command), private    :: command_draw
-        type (path), allocatable, private   :: curve
-    contains
-    end type command_draw
-
     !> The Asymptote drawing to produce.
     type, public    :: drawing
         character (:), allocatable, private :: compiler
@@ -157,12 +145,6 @@ private
         procedure, pass (this), private :: write_size_settings                 &
                                         => write_drawing_size_settings
     end type drawing
-
-    !> The general base class for all commands.
-    type, private :: generic_command
-        class (generic_command), allocatable, private   :: next
-    contains
-    end type generic_command
 
     !> A path to draw.
     type, public    :: path
