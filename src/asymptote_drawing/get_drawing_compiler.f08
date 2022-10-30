@@ -50,11 +50,7 @@ pure subroutine get_drawing_compiler (this, compiler)
 implicit none
     character (:), allocatable, intent (out)    :: compiler
     class (drawing), intent (in)                :: this
-
-    integer :: i
-    integer :: string_length
-
-    intrinsic   :: allocated
+    intrinsic                                   :: allocated
 
     allocate (character (0) :: compiler)
 
