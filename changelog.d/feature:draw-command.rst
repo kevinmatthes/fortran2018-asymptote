@@ -7,4 +7,6 @@ Added
 
 - declare type for commands
 
+- define submodule for 2D point type
+
 - define write method for output settings
