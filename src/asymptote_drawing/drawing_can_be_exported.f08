@@ -47,9 +47,8 @@
 pure function drawing_can_be_exported (this)
 implicit none
     class (drawing), intent (in)    :: this
+    intrinsic                       :: allocated
     logical                         :: drawing_can_be_exported
-
-    intrinsic   :: allocated
 
     drawing_can_be_exported =       allocated (this % compiler)                &
                             .and.   allocated (this % name)                    &
