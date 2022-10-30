@@ -45,7 +45,7 @@
 subroutine write_drawing_output_settings (this, unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-    character (*), parameter        :: fmt = '(a, a, ''";'')'
+    character (*), parameter        :: fmt = '(a, '' = "'', a, ''";'')'
     class (drawing), intent (in)    :: this
     integer                         :: writing_unit
     integer, intent (in), optional  :: unit
@@ -58,9 +58,9 @@ implicit none
         writing_unit = output_unit
     end if
 
-    write (writing_unit, fmt) 'defaultfilename = "', this % name
-    write (writing_unit, fmt) 'settings.outformt = "', this % output_format
-    write (writing_unit, fmt) 'settings.tex = "', this % compiler
+    write (writing_unit, fmt) 'defaultfilename', this % name
+    write (writing_unit, fmt) 'settings.outformt', this % output_format
+    write (writing_unit, fmt) 'settings.tex', this % compiler
 end subroutine write_drawing_output_settings
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
