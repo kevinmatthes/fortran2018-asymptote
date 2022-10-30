@@ -61,7 +61,7 @@ private
 
     !> The abstract base class for all commands.
     type, abstract, private :: abstract_command
-        type (abstract_command), allocatable, private   :: next
+        class (command), allocatable, private   :: next
     contains
     end type abstract_command
 
