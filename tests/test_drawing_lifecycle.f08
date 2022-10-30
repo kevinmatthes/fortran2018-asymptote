@@ -55,8 +55,8 @@ program test_drawing_lifecycle
     use, non_intrinsic :: libf18asy, only: drawing
     use, non_intrinsic :: libf18asy, only: finalise
 implicit none
-    character (:), pointer  :: name => null ()
-    type (drawing)          :: asymptote
+    character (:), allocatable  :: name
+    type (drawing)              :: asymptote
 
     asymptote = drawing ('name', 3.0, 3.0)
     call asymptote % set_centimetre
