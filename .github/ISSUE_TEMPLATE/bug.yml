@@ -59,7 +59,7 @@ body:
         - Major — The library does not fulfill the task it is designed for.
         - Minor — The library basically does what it should do but there might
           be improvements.
-        - Typo — There is a spelling mistake.
+        - Typo — There is a spelling mistake or something similar.
     validations:
       required: true
   - type: textarea
