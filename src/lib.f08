@@ -59,8 +59,30 @@ private
     !> This library's version.
     character (*), parameter, public    :: library_version = 'v0.0.0'
 
+    !> The abstract base class for all commands.
+    type, abstract, private :: abstract_command
+    implicit none
+        type (abstract_command), allocatable, private   :: next
+    contains
+    end type abstract_command
+
+    !> A command to be executed.
+    type, private   :: command
+    implicit none
+        class (abstract_command), allocatable, private  :: instruction
+    contains
+    end type command
+
+    !> The instruction to draw something.
+    type, extends (abstract_command), private   :: command_draw
+    implicit none
+        type (path), allocatable, private   :: curve
+    contains
+    end type command_draw
+
     !> The Asymptote drawing to produce.
     type, public    :: drawing
+    implicit none
         character (:), allocatable, private :: compiler
         character (:), allocatable, private :: length_unit
         character (:), allocatable, private :: name
@@ -146,12 +168,21 @@ private
                                         => write_drawing_size_settings
     end type drawing
 
+    !> A path to draw.
+    type, public    :: path
+    implicit none
+        type (pair), allocatable, private   :: point
+        type (pair), allocatable, private   :: next_line_point
+    contains
+    end type path
+
     !> A simple, 2D point.
-    type, public    :: point_2
+    type, public    :: pair
+    implicit none
         real, public    :: fst  = 0.0
         real, public    :: snd  = 0.0
     contains
-    end type point_2
+    end type pair
 
     private :: conditional_free
     private :: write_library_version_header
