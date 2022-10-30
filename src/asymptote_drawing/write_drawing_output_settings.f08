@@ -33,7 +33,7 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   Output the output settings of this drawing.
-!> \param   this    The output settings to export.
+!> \param   this    The drawing whose output settings shall be exported.
 !> \param   unit    The unit to write to.
 !>
 !> This subroutine will write the output settings of this drawing to the given
