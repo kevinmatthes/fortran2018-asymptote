@@ -285,7 +285,7 @@ private
         implicit none
             real, intent (in)   :: fst
             real, intent (in)   :: snd
-            type (pair)         :: initialise pair
+            type (pair)         :: initialise_pair
         end function initialise_pair
     end interface pair
 
