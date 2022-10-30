@@ -45,7 +45,7 @@ body:
     attributes:
       label: Version
       description: |
-        Please specify the version of the software in which the bug occurred.
+        Please specify the version of the library in which the bug occurred.
       options:
         - Nightly
     validations:
