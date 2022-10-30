@@ -61,26 +61,13 @@ private
 
     !> The Asymptote drawing to produce.
     type, public    :: drawing
-        character (:), allocatable, private :: compiler                        &
-                                            => null ()
-
-        character (:), allocatable, private :: length_unit                     &
-                                        => null ()
-
-        character (:), allocatable, private :: name                            &
-                                        => null ()
-
-        character (:), allocatable, private :: output_format                   &
-                                        => null ()
-
-        logical, private    :: aspect                                          &
-                            =  .true.
-
-        real, private   :: height                                              &
-                        =  0.0
-
-        real, private   :: width                                               &
-                        =  0.0
+        character (:), allocatable, private :: compiler
+        character (:), allocatable, private :: length_unit
+        character (:), allocatable, private :: name
+        character (:), allocatable, private :: output_format
+        logical, private                    :: aspect           = .true.
+        real, private                       :: height           = 0.0
+        real, private                       :: width            = 0.0
     contains
         final   :: finalise_drawing
 
