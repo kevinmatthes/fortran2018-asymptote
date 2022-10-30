@@ -174,14 +174,14 @@ private
     private :: write_library_version_header
     public  :: finalise
 
-    interface operator (line)
+    interface operator (.line.)
         pure module function line_pair_pair (beginning, ending)
         implicit none
             type (pair), intent (in)    :: beginning
             type (pair), intent (in)    :: ending
             type (path)                 :: line_pair_pair
         end function line_pair_pair
-    end interface operator (line)
+    end interface operator (.line.)
 
     interface conditional_free
         pure module subroutine conditional_free_character (object)
