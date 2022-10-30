@@ -50,6 +50,15 @@ body:
         - Nightly
     validations:
       required: true
+  - type: dropdown
+    attributes:
+      label: Category
+      description: Please choose the category which describes the bug best.
+      options:
+        - Major — The library does not fulfill the task it is designed for.
+        - Minor — The library basically does what it should do but there might
+          be improvements.
+        - Typo — There is a spelling mistake.
   - type: textarea
     attributes:
       label: Description
