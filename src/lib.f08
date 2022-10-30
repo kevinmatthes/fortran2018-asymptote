@@ -66,7 +66,7 @@ private
     end type command
 
     !> The instruction to draw something.
-    type, extends (abstract_command), private   :: command_draw
+    type, extends (generic_command), private    :: command_draw
         type (path), allocatable, private   :: curve
     contains
     end type command_draw
