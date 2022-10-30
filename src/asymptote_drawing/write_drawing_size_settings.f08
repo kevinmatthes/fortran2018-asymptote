@@ -33,7 +33,7 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   Output the size settings of this drawing.
-!> \param   this    The size settings to export.
+!> \param   this    The drawing whose size settings shall be exported.
 !> \param   unit    The unit to write to.
 !>
 !> This subroutine will write the size settings of this drawing to the given IO
