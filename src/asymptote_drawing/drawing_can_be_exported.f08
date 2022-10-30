@@ -49,11 +49,11 @@ implicit none
     class (drawing), intent (in)    :: this
     logical                         :: drawing_can_be_exported
 
-    intrinsic   :: associated
+    intrinsic   :: allocated
 
-    drawing_can_be_exported =       associated (this % compiler)               &
-                            .and.   associated (this % name)                   &
-                            .and.   associated (this % output_format)
+    drawing_can_be_exported =       allocated (this % compiler)                &
+                            .and.   allocated (this % name)                    &
+                            .and.   allocated (this % output_format)
 end function drawing_can_be_exported
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
