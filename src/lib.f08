@@ -64,6 +64,7 @@ private
         type (command), pointer, private    :: next
         type (path), allocatable, private   :: draw
     contains
+        final   :: finalise_command
     end type command
 
     !> The Asymptote drawing to produce.
@@ -167,8 +168,9 @@ private
     !> A path to draw.
     type, public    :: path
         type (pair), allocatable, private   :: point
-        type (path), allocatable, private   :: next_line_point
+        type (path), pointer, private       :: next_line_point
     contains
+        final   :: finalise_path
     end type path
 
     private :: conditional_free
@@ -189,16 +191,6 @@ private
         implicit none
             character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
-
-        pure module subroutine conditional_free_command (object)
-        implicit none
-            type (command), allocatable, intent (inout) :: object
-        end subroutine conditional_free_command
-
-        pure module subroutine conditional_free_path (object)
-        implicit none
-            type (path), allocatable, intent (inout)    :: object
-        end subroutine conditional_free_path
     end interface conditional_free
 
     interface
@@ -241,6 +233,16 @@ private
         implicit none
             type (drawing), intent (inout)  :: this
         end subroutine finalise_drawing
+
+        pure module subroutine finalise_command (this)
+        implicit none
+            type (command), intent (inout)  :: this
+        end subroutine finalise_command
+
+        pure module subroutine finalise_path (this)
+        implicit none
+            type (path), intent (inout) :: this
+        end subroutine finalise_path
     end interface finalise
 
     interface
