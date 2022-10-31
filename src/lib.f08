@@ -175,6 +175,7 @@ private
 
     private :: conditional_free
     private :: write_library_version_header
+    private :: write_string_assignment
     public  :: finalise
 
     interface operator (.line.)
@@ -449,6 +450,15 @@ private
         implicit none
             integer, intent (in), optional  :: unit
         end subroutine write_library_version_header
+    end interface
+
+    interface
+        module subroutine write_string_assignment (variable, string, unit)
+        implicit none
+            character (*), intent (in)      :: string
+            character (*), intent (in)      :: variable
+            integer, intent (in), optional  :: unit
+        end subroutine write_string_assignment
     end interface
 end module libf18asy
 
