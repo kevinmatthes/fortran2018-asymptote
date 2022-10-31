@@ -45,7 +45,7 @@ pure function initialise_pair (fst, snd)
 implicit none
     real, intent (in)   :: fst
     real, intent (in)   :: snd
-    type (pair)         :: intitialise_pair
+    type (pair)         :: initialise_pair
 
     initialise_pair % fst = fst
     initialise_pair % snd = snd
