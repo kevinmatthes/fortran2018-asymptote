@@ -45,6 +45,9 @@
 subroutine write_drawing_output_settings (this, unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
+    character (*), parameter        :: fname = 'defaultfilename'
+    character (*), parameter        :: soutf = 'settings.outformat'
+    character (*), parameter        :: scomp = 'settings.tex'
     class (drawing), intent (in)    :: this
     integer                         :: writing_unit
     integer, intent (in), optional  :: unit
@@ -56,9 +59,9 @@ implicit none
         writing_unit = output_unit
     end if
 
-    call write_string_assignment ('defaultfilename', this % name)
-    call write_string_assignment ('settings.outformt', this % output_format)
-    call write_string_assignment ('settings.tex', this % compiler)
+    call write_string_assignment (fname, this % name, unit)
+    call write_string_assignment (soutf, this % output_format, unit)
+    call write_string_assignment (fname, this % compiler, unit)
 end subroutine write_drawing_output_settings
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
