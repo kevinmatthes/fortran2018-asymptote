@@ -61,7 +61,7 @@ implicit none
 
     call write_string_assignment (fname, this % name, unit)
     call write_string_assignment (soutf, this % output_format, unit)
-    call write_string_assignment (fname, this % compiler, unit)
+    call write_string_assignment (scomp, this % compiler, unit)
 end subroutine write_drawing_output_settings
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
