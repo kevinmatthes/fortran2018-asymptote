@@ -189,6 +189,16 @@ private
         implicit none
             character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
+
+        pure module subroutine conditional_free_command (object)
+        implicit none
+            type (command), allocatable, intent (inout) :: object
+        end subroutine conditional_free_command
+
+        pure module subroutine conditional_free_path (object)
+        implicit none
+            type (path), allocatable, intent (inout)    :: object
+        end subroutine conditional_free_path
     end interface conditional_free
 
     interface
