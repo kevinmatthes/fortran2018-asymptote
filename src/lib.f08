@@ -191,6 +191,14 @@ private
         end subroutine conditional_free_character
     end interface conditional_free
 
+    interface
+        pure module subroutine draw (this, drawing_path)
+        implicit none
+            class (drawing), intent (inout) :: this
+            type (path), intent (in)        :: drawing_path
+        end subroutine draw
+    end interface
+
     interface drawing
         pure module function initialise_drawing (name, width, height, aspect)
         implicit none
