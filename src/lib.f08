@@ -382,8 +382,10 @@ private
     end interface
 
     interface
-        module subroutine write_string_assignment (unit)
+        module subroutine write_string_assignment (variable, string, unit)
         implicit none
+            character (*), intent (in)      :: string
+            character (*), intent (in)      :: variable
             integer, intent (in), optional  :: unit
         end subroutine write_string_assignment
     end interface
