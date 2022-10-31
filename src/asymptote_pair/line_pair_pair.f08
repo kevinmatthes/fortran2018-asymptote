@@ -47,7 +47,6 @@ implicit none
     type (pair), intent (in)    :: ending
     type (path)                 :: line_pair_pair
 
-    allocate (line_pair_pair)
     allocate (line_pair_pair % next_line_point)
     line_pair_pair % point                      = beginning
     line_pair_pair % next_line_point % point    = ending
