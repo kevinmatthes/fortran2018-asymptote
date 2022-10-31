@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file library_utilities.f08
+!> \file write_string_assignment.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,20 +32,32 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining some utility procedures for this library.
+!> \brief   Output a string assignment to the given unit.
+!> \param   variable    The variable receiving the string.
+!> \param   string      The string to assign.
+!> \param   unit        The unit to write to.
 !>
-!> This submodule contains a set of utility procedures for this library.
+!> This subroutine will write the a string assignment to the given unit.  If no
+!> unit is given, the default output unit will be used.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) library_utilities
+subroutine write_string_assignment (variable, string, unit)
+    use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-contains
-    include 'library_utilities/conditional_free_character.f08'
-    include 'library_utilities/conditional_free_command.f08'
-    include 'library_utilities/conditional_free_path.f08'
-    include 'library_utilities/write_library_version_header.f08'
-    include 'library_utilities/write_string_assignment.f08'
-end submodule library_utilities
+    character (*), intent (in)      :: string
+    character (*), intent (in)      :: variable
+    integer                         :: writing_unit
+    integer, intent (in), optional  :: unit
+    intrinsic                       :: present
+
+    if (present (unit)) then
+        writing_unit = unit
+    else
+        writing_unit = output_unit
+    end if
+
+    write (writing_unit, fmt = '(a, '' = "'', a, ''";'')') variable, string
+end subroutine write_string_assignment
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
