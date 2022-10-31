@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file library_utilities.f08
+!> \file write_drawing_output_settings.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,18 +32,36 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining some utility procedures for this library.
+!> \brief   Output the output settings of this drawing.
+!> \param   this    The drawing whose output settings shall be exported.
+!> \param   unit    The unit to write to.
 !>
-!> This submodule contains a set of utility procedures for this library.
+!> This subroutine will write the output settings of this drawing to the given
+!> IO unit.  If there is no unit number given, the default output unit will be
+!> used for output.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) library_utilities
+subroutine write_drawing_output_settings (this, unit)
+    use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-contains
-    include 'library_utilities/conditional_free_character.f08'
-    include 'library_utilities/write_library_version_header.f08'
-    include 'library_utilities/write_string_assignment.f08'
-end submodule library_utilities
+    character (*), parameter        :: fname = 'defaultfilename'
+    character (*), parameter        :: soutf = 'settings.outformat'
+    character (*), parameter        :: scomp = 'settings.tex'
+    class (drawing), intent (in)    :: this
+    integer                         :: writing_unit
+    integer, intent (in), optional  :: unit
+    intrinsic                       :: present
+
+    if (present (unit)) then
+        writing_unit = unit
+    else
+        writing_unit = output_unit
+    end if
+
+    call write_string_assignment (fname, this % name, unit)
+    call write_string_assignment (soutf, this % output_format, unit)
+    call write_string_assignment (scomp, this % compiler, unit)
+end subroutine write_drawing_output_settings
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

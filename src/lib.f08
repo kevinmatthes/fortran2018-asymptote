@@ -69,8 +69,7 @@ private
         real, private                       :: height           = 0.0
         real, private                       :: width            = 0.0
     contains
-        final   :: finalise_drawing
-
+        final                           :: finalise_drawing
         procedure, pass (this), public  :: drawing_can_be_exported
 
         procedure, pass (this), public  :: export                              &
@@ -142,12 +141,16 @@ private
         procedure, pass (this), public  :: set_xelatex                         &
                                         => set_drawing_compiler_xelatex
 
+        procedure, pass (this), private :: write_output_settings               &
+                                        => write_drawing_output_settings
+
         procedure, pass (this), private :: write_size_settings                 &
                                         => write_drawing_size_settings
     end type drawing
 
     private :: conditional_free
     private :: write_library_version_header
+    private :: write_string_assignment
     public  :: finalise
 
     interface conditional_free
@@ -356,6 +359,14 @@ private
     end interface
 
     interface
+        module subroutine write_drawing_output_settings (this, unit)
+        implicit none
+            class (drawing), intent (in)    :: this
+            integer, intent (in), optional  :: unit
+        end subroutine write_drawing_output_settings
+    end interface
+
+    interface
         module subroutine write_drawing_size_settings (this, unit)
         implicit none
             class (drawing), intent (in)    :: this
@@ -368,6 +379,15 @@ private
         implicit none
             integer, intent (in), optional  :: unit
         end subroutine write_library_version_header
+    end interface
+
+    interface
+        module subroutine write_string_assignment (variable, string, unit)
+        implicit none
+            character (*), intent (in)      :: string
+            character (*), intent (in)      :: variable
+            integer, intent (in), optional  :: unit
+        end subroutine write_string_assignment
     end interface
 end module libf18asy
 
