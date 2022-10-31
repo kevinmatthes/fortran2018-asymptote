@@ -229,15 +229,15 @@ private
     end interface
 
     interface finalise
-        pure module subroutine finalise_drawing (this)
-        implicit none
-            type (drawing), intent (inout)  :: this
-        end subroutine finalise_drawing
-
         pure module subroutine finalise_command (this)
         implicit none
             type (command), intent (inout)  :: this
         end subroutine finalise_command
+
+        pure module subroutine finalise_drawing (this)
+        implicit none
+            type (drawing), intent (inout)  :: this
+        end subroutine finalise_drawing
 
         pure module subroutine finalise_path (this)
         implicit none
