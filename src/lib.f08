@@ -61,21 +61,21 @@ private
 
     !> A command to be executed.
     type, private   :: command
-        type (command), allocatable, private    :: next
-        type (path), allocatable, private       :: draw
+        type (command), pointer, private    :: next
+        type (path), allocatable, private   :: draw
     contains
     end type command
 
     !> The Asymptote drawing to produce.
     type, public    :: drawing
-        character (:), allocatable, private     :: compiler
-        character (:), allocatable, private     :: length_unit
-        character (:), allocatable, private     :: name
-        character (:), allocatable, private     :: output_format
-        logical, private                        :: aspect           = .true.
-        real, private                           :: height           = 0.0
-        real, private                           :: width            = 0.0
-        type (command), allocatable, private    :: instructions
+        character (:), allocatable, private :: compiler
+        character (:), allocatable, private :: length_unit
+        character (:), allocatable, private :: name
+        character (:), allocatable, private :: output_format
+        logical, private                    :: aspect           = .true.
+        real, private                       :: height           = 0.0
+        real, private                       :: width            = 0.0
+        type (command), pointer, private    :: instructions
     contains
         final                           :: finalise_drawing
         procedure, pass (this), public  :: draw
