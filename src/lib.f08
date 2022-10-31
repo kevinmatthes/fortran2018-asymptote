@@ -194,7 +194,7 @@ private
     interface
         pure module subroutine draw (this, drawing_path)
         implicit none
-            class (drawing), intent (inout) :: this
+            type (drawing), intent (inout)  :: this
             type (path), intent (in)        :: drawing_path
         end subroutine draw
     end interface
