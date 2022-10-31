@@ -75,12 +75,16 @@ lnk-f18 := '-I. ' + lflags
 @all: check doxygen
 
 # Compile the Asymptote drawing type.
-@asymptote_drawing: asymptote_pair interfaces library_utilities
+@asymptote_drawing: asymptote_pair asymptote_path interfaces library_utilities
     just compile src/asymptote_drawing.f08
 
 # Compile the pair type.
 @asymptote_pair: interfaces library_utilities
     just compile src/asymptote_pair.f08
+
+# Compile the path type.
+@asymptote_path: interfaces library_utilities
+    just compile src/asymptote_path.f08
 
 # Increment the version numbers.
 @bump part:
@@ -115,7 +119,11 @@ lnk-f18 := '-I. ' + lflags
     just compile src/lib.f08
 
 # Create the project library.
-@library: asymptote_drawing asymptote_pair interfaces library_utilities
+@library:   asymptote_drawing   \
+            asymptote_pair      \
+            asymptote_path      \
+            interfaces          \
+            library_utilities
 
 # Compile the library utility procedures.
 @library_utilities: interfaces
