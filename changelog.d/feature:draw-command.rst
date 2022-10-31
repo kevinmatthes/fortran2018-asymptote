@@ -28,5 +28,3 @@ Added
 - define submodule for 2D path to draw
 
 - define submodule for 2D point type
-
-- define write method for output settings
