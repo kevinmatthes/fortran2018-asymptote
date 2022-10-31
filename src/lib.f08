@@ -156,19 +156,19 @@ private
                                         => write_drawing_size_settings
     end type drawing
 
-    !> A path to draw.
-    type, public    :: path
-        type (pair), allocatable, private   :: point
-        type (pair), allocatable, private   :: next_line_point
-    contains
-    end type path
-
     !> A simple, 2D point.
     type, public    :: pair
         real, private   :: fst  = 0.0
         real, private   :: snd  = 0.0
     contains
     end type pair
+
+    !> A path to draw.
+    type, public    :: path
+        type (pair), allocatable, private   :: point
+        type (path), allocatable, private   :: next_line_point
+    contains
+    end type path
 
     private :: conditional_free
     private :: write_library_version_header
