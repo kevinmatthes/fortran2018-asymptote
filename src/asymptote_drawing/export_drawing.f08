@@ -71,14 +71,11 @@ implicit none
                 )
 
         if (status /= 0) then
-            write (unit = error_unit, fmt = fmt)                               &
+            write (error_unit, fmt)                                            &
                 'Asymptote drawing ''', this % name, ''' cannot be created.'
         else
             call write_library_version_header (unit)
-            write (unit, fmt = fmt) 'defaultfilename = "', this % name, '";'
-            write (unit, fmt = fmt)                                            &
-                'settings.outformat = "', this % output_format, '";'
-            write (unit, fmt = fmt) 'settings.tex = "', this % compiler, '";'
+            call this % write_output_settings (unit)
             call this % write_size_settings (unit)
             close (unit)
 
