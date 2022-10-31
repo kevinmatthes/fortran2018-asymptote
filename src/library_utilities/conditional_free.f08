@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file conditional_free_character.f08
+!> \file conditional_free.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -41,8 +41,8 @@
 
 pure subroutine conditional_free_character (object)
 implicit none
-    character (:), allocatable, intent (inout)  :: object
-    intrinsic                                   :: allocated
+    class (*), allocatable, intent (inout)  :: object
+    intrinsic                               :: allocated
 
     if (allocated (object)) then
         deallocate (object)
