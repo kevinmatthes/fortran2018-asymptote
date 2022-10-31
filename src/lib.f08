@@ -184,22 +184,12 @@ private
         end function line_pair_pair
     end interface operator (.line.)
 
-    interface conditional_free
-        pure module subroutine conditional_free_character (object)
+    interface
+        pure module subroutine conditional_free (object)
         implicit none
-            character (:), allocatable, intent (inout)  :: object
-        end subroutine conditional_free_character
-
-        pure module subroutine conditional_free_command (object)
-        implicit none
-            type (command), allocatable, intent (inout) :: object
-        end subroutine conditional_free_command
-
-        pure module subroutine conditional_free_path (object)
-        implicit none
-            type (path), allocatable, intent (inout)    :: object
-        end subroutine conditional_free_path
-    end interface conditional_free
+            class (*), allocatable, intent (inout)  :: object
+        end subroutine conditional_free
+    end interface
 
     interface
         pure module subroutine draw (this, drawing_path)
