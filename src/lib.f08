@@ -148,6 +148,14 @@ private
                                         => write_drawing_size_settings
     end type drawing
 
+    !> A 2D point on the canvas.
+    type, public    :: pair
+        real, private   :: fst = 0.0
+        real, private   :: snd = 0.0
+    contains
+        procedure, pass (this), private :: write => write_pair
+    end type pair
+
     private :: conditional_free
     private :: write_library_version_header
     private :: write_string_assignment
@@ -379,6 +387,14 @@ private
         implicit none
             integer, intent (in), optional  :: unit
         end subroutine write_library_version_header
+    end interface
+
+    interface
+        module subroutine write_pair (this, unit)
+        implicit none
+            class (pair), intent (in)       :: this
+            integer, intent (in), optional  :: unit
+        end subroutine
     end interface
 
     interface
