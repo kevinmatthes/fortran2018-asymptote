@@ -187,14 +187,14 @@ private
     interface
         pure module subroutine conditional_free (object)
         implicit none
-            class (*), allocatable, intent (inout)  :: object
+            type (*), allocatable, intent (inout)   :: object
         end subroutine conditional_free
     end interface
 
     interface
         pure module subroutine draw (this, drawing_path)
         implicit none
-            type (drawing), intent (inout)  :: this
+            class (drawing), intent (inout) :: this
             type (path), intent (in)        :: drawing_path
         end subroutine draw
     end interface
