@@ -68,6 +68,7 @@ contains
     include 'asymptote_drawing/set_drawing_length_unit_millimetre.f08'
     include 'asymptote_drawing/set_drawing_length_unit_point.f08'
     include 'asymptote_drawing/set_drawing_width.f08'
+    include 'asymptote_drawing/write_drawing_output_settings.f08'
     include 'asymptote_drawing/write_drawing_size_settings.f08'
 end submodule asymptote_drawing
 
