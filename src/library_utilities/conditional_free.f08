@@ -41,7 +41,7 @@
 
 pure subroutine conditional_free_character (object)
 implicit none
-    class (*), allocatable, intent (inout)  :: object
+    type (*), allocatable, intent (inout)   :: object
     intrinsic                               :: allocated
 
     if (allocated (object)) then
