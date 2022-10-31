@@ -43,6 +43,7 @@ implicit none
 contains
     include 'library_utilities/conditional_free_character.f08'
     include 'library_utilities/write_library_version_header.f08'
+    include 'library_utilities/write_string_assignment.f08'
 end submodule library_utilities
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
