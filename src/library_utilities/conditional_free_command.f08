@@ -39,7 +39,7 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine conditional_free_character (object)
+pure subroutine conditional_free_command (object)
 implicit none
     intrinsic                                   :: allocated
     type (command), allocatable, intent (inout) :: object
@@ -47,6 +47,6 @@ implicit none
     if (allocated (object)) then
         deallocate (object)
     end if
-end subroutine conditional_free_character
+end subroutine conditional_free_command
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
