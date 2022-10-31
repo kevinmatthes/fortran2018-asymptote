@@ -41,7 +41,7 @@
 submodule (libf18asy) asymptote_path
 implicit none
 contains
-    include 'asymptote_pair/line_pair_pair.f08'
+    include 'asymptote_path/line_pair_pair.f08'
 end submodule asymptote_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
