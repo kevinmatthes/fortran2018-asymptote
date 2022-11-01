@@ -160,6 +160,8 @@ private
     type, public    :: path
         type (pair), allocatable, private   :: point
         type (path), pointer, private       :: line     => null ()
+    contains
+        final   :: finalise_path
     end type path
 
     private :: conditional_free
