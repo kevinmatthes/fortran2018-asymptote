@@ -56,13 +56,26 @@ implicit none
     test = pair ()
     call test % write
 
-    call pair (fst = 1.0) % write
-    call pair (snd = 2.0) % write
-    call pair (3.0, 3.0) % write
-    call pair (4.0, 4.0) % write (length_unit = 'cm')
-    call pair (5.0, 5.0) % write (length_unit = 'inch')
-    call pair (6.0, 6.0) % write (length_unit = 'mm')
-    call pair (7.0, 7.0) % write (length_unit = 'pt')
+    test = pair (fst = 1.0)
+    call test % write
+
+    test = pair (snd = 2.0)
+    call test % write
+
+    test = pair (3.0, 3.0)
+    call test % write
+
+    test = pair (4.0, 4.0)
+    call test % write (length_unit = 'cm')
+
+    test = pair (5.0, 5.0)
+    call test % write (length_unit = 'inch')
+
+    test = pair (6.0, 6.0)
+    call test % write (length_unit = 'mm')
+
+    test = pair (7.0, 7.0)
+    call test % write (length_unit = 'pt')
 end program test_pair_write
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
