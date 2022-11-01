@@ -44,6 +44,6 @@ updates:
     labels:
       - 'dependencies'
       - 'submodule'
-    milestone: 'v0.1.0'
+    milestone: 1
 
 ################################################################################
