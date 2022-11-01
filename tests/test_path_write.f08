@@ -62,11 +62,13 @@ implicit none
     b = pair (2.0, 2.0)
 
     line = a .line. b
+
     call line % write
     call line % write (length_unit = 'cm')
     call line % write (length_unit = 'inch')
     call line % write (length_unit = 'mm')
     call line % write (length_unit = 'pt')
+
     call finalise (line)
 end program test_pair_write
 
