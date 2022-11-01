@@ -50,18 +50,29 @@ implicit none
     character (*), intent (in), optional    :: length_unit
     character (*), parameter                :: fmt = '(a, f17.8, a, f17.8, a)'
     class (pair), intent (in)               :: this
+    integer                                 :: string_length = 0
     integer                                 :: writing_unit
     integer, intent (in), optional          :: unit
+    intrinsic                               :: len
     intrinsic                               :: present
 
-    allocate (character (2) :: comma)
-    allocate (character (1) :: parenthesis)
+    if (present (length_unit)) then
+        if (len (length_unit) > 0) then
+            string_length = len (length_unit) + 1
+        end if
+    end if
+
+    allocate (character (2 + string_length) :: comma)
+    allocate (character (1 + string_length) :: parenthesis)
     comma       = ', '
     parenthesis = ')'
 
-    if (present (length_unit)) then
-        comma       = ' ' // length_unit // comma
-        parenthesis = ' ' // length_unit // parenthesis
+    if (string_length > 0) then
+        comma       = ' ' // length_unit // ', '
+        parenthesis = ' ' // length_unit // ')'
+    else
+        comma       = ', '
+        parenthesis = ')'
     end if
 
     if (present (unit)) then
