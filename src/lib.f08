@@ -261,9 +261,9 @@ private
     interface pair
         pure module function initialise_pair (fst, snd)
         implicit none
-            real, intent (in)   :: fst
-            real, intent (in)   :: snd
-            type (pair)         :: initialise_pair
+            real, intent (in), optional :: fst
+            real, intent (in), optional :: snd
+            type (pair)                 :: initialise_pair
         end function initialise_pair
     end interface pair
 
