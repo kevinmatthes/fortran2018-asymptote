@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file finalise_drawing.f08
+!> \file conditional_free_pair.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,22 +32,21 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate all memory regions requested for this drawing.
-!> \param   this    The Asymptote drawing to finalise.
+!> \brief   Deallocate the given allocatable object if it is allocated.
+!> \param   object  The object to deallocate.
 !>
-!> This subroutine will finalise this Asymptote drawing in order to prevent
-!> memory leaks.
+!> If the given allocatable object is allocated, it will be deallocated.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine finalise_drawing (this)
+pure subroutine conditional_free_pair (object)
 implicit none
-    type (drawing), intent (inout)  :: this
+    type (pair), allocatable, intent (inout)    :: object
+    intrinsic                                   :: allocated
 
-    call conditional_free (this % compiler)
-    call conditional_free (this % length_unit)
-    call conditional_free (this % name)
-    call conditional_free (this % output_format)
-end subroutine finalise_drawing
+    if (allocated (object)) then
+        deallocate (object)
+    end if
+end subroutine conditional_free_pair
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

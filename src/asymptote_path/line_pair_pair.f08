@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file finalise_drawing.f08
+!> \file line_pair_pair.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,22 +32,24 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate all memory regions requested for this drawing.
-!> \param   this    The Asymptote drawing to finalise.
+!> \brief   Create a new path from two 2D points to form a line.
+!> \param   beginning   The first 2D point of the path to draw.
+!> \param   ending      The second 2D point of the path to draw.
+!> \return  The new path.
 !>
-!> This subroutine will finalise this Asymptote drawing in order to prevent
-!> memory leaks.
+!> This function will construct a new path entity based on the given data.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine finalise_drawing (this)
+pure function line_pair_pair (beginning, ending)
 implicit none
-    type (drawing), intent (inout)  :: this
+    type (pair), intent (in)    :: beginning
+    type (pair), intent (in)    :: ending
+    type (path)                 :: line_pair_pair
 
-    call conditional_free (this % compiler)
-    call conditional_free (this % length_unit)
-    call conditional_free (this % name)
-    call conditional_free (this % output_format)
-end subroutine finalise_drawing
+    allocate (line_pair_pair % line)
+    line_pair_pair % point          = beginning
+    line_pair_pair % line % point   = ending
+end function line_pair_pair
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

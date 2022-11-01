@@ -82,6 +82,10 @@ lnk-f18 := '-I. ' + lflags
 @asymptote_pair: interfaces
     just compile src/asymptote_pair.f08
 
+# Compile the `path` type.
+@asymptote_path: asymptote_pair
+    just compile src/asymptote_path.f08
+
 # Increment the version numbers.
 @bump part:
     bump2version {{part}}
@@ -115,7 +119,7 @@ lnk-f18 := '-I. ' + lflags
     just compile src/lib.f08
 
 # Create the project library.
-@library: asymptote_drawing asymptote_pair
+@library: asymptote_drawing asymptote_path
 
 # Compile the library utility procedures.
 @library_utilities: interfaces
@@ -133,5 +137,6 @@ lnk-f18 := '-I. ' + lflags
     just test drawing_lifecycle
     just test library_version
     just test pair_write
+    just test path_write
 
 ################################################################################

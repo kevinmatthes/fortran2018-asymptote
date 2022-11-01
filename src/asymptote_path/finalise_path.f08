@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file finalise_drawing.f08
+!> \file finalise_path.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -33,21 +33,19 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   Deallocate all memory regions requested for this drawing.
-!> \param   this    The Asymptote drawing to finalise.
+!> \param   this    The 2D drawing path to finalise.
 !>
-!> This subroutine will finalise this Asymptote drawing in order to prevent
-!> memory leaks.
+!> This subroutine will finalise this path in order to prevent memory leaks.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine finalise_drawing (this)
+pure recursive subroutine finalise_path (this)
 implicit none
-    type (drawing), intent (inout)  :: this
+    intrinsic                   :: associated
+    type (path), intent (inout) :: this
 
-    call conditional_free (this % compiler)
-    call conditional_free (this % length_unit)
-    call conditional_free (this % name)
-    call conditional_free (this % output_format)
-end subroutine finalise_drawing
+    call conditional_free (this % point)
+    call conditional_free (this % line)
+end subroutine finalise_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

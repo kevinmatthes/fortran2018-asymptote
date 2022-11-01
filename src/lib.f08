@@ -150,22 +150,51 @@ private
 
     !> A 2D point on the canvas.
     type, public    :: pair
-        real, private   :: fst = 0.0
-        real, private   :: snd = 0.0
+        real, private   :: fst  = 0.0
+        real, private   :: snd  = 0.0
     contains
-        procedure, pass (this), public  :: write => write_pair
+        procedure, pass (this), public  :: write    => write_pair
     end type pair
+
+    !> A path of 2D points to draw.
+    type, public    :: path
+        type (pair), allocatable, private   :: point
+        type (path), pointer, private       :: line     => null ()
+    contains
+        final                           :: finalise_path
+        procedure, pass (this), public  :: write    => write_path
+    end type path
 
     private :: conditional_free
     private :: write_library_version_header
     private :: write_string_assignment
+    public  :: operator (.line.)
     public  :: finalise
+
+    interface operator (.line.)
+        pure module function line_pair_pair (beginning, ending)
+        implicit none
+            type (pair), intent (in)    :: beginning
+            type (pair), intent (in)    :: ending
+            type (path)                 :: line_pair_pair
+        end function line_pair_pair
+    end interface operator (.line.)
 
     interface conditional_free
         pure module subroutine conditional_free_character (object)
         implicit none
             character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
+
+        pure module subroutine conditional_free_pair (object)
+        implicit none
+            type (pair), allocatable, intent (inout)    :: object
+        end subroutine conditional_free_pair
+
+        pure recursive module subroutine conditional_free_path (object)
+        implicit none
+            type (path), pointer, intent (inout)    :: object
+        end subroutine conditional_free_path
     end interface conditional_free
 
     interface drawing
@@ -200,6 +229,11 @@ private
         implicit none
             type (drawing), intent (inout)  :: this
         end subroutine finalise_drawing
+
+        pure recursive module subroutine finalise_path (this)
+        implicit none
+            type (path), intent (inout) :: this
+        end subroutine finalise_path
     end interface finalise
 
     interface
@@ -404,7 +438,16 @@ private
             character (*), intent (in), optional    :: length_unit
             class (pair), intent (in)               :: this
             integer, intent (in), optional          :: unit
-        end subroutine
+        end subroutine write_pair
+    end interface
+
+    interface
+        impure recursive module subroutine write_path (this, unit, length_unit)
+        implicit none
+            character (*), intent (in), optional    :: length_unit
+            class (path), intent (in)               :: this
+            integer, intent (in), optional          :: unit
+        end subroutine write_path
     end interface
 
     interface

@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file finalise_drawing.f08
+!> \file asymptote_path.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,22 +32,19 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate all memory regions requested for this drawing.
-!> \param   this    The Asymptote drawing to finalise.
+!> \brief   The submodule defining operations on a 2D path to draw.
 !>
-!> This subroutine will finalise this Asymptote drawing in order to prevent
-!> memory leaks.
+!> This submodule contains the procedures associated with the `path` type.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine finalise_drawing (this)
+submodule (libf18asy) asymptote_path
 implicit none
-    type (drawing), intent (inout)  :: this
-
-    call conditional_free (this % compiler)
-    call conditional_free (this % length_unit)
-    call conditional_free (this % name)
-    call conditional_free (this % output_format)
-end subroutine finalise_drawing
+contains
+    include 'asymptote_path/conditional_free_path.f08'
+    include 'asymptote_path/finalise_path.f08'
+    include 'asymptote_path/line_pair_pair.f08'
+    include 'asymptote_path/write_path.f08'
+end submodule asymptote_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

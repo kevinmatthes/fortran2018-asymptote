@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file finalise_drawing.f08
+!> \file conditional_free_path.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,22 +32,22 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate all memory regions requested for this drawing.
-!> \param   this    The Asymptote drawing to finalise.
+!> \brief   Deallocate the given pointer object if it is associated.
+!> \param   object  The object to deallocate.
 !>
-!> This subroutine will finalise this Asymptote drawing in order to prevent
-!> memory leaks.
+!> If the given pointer object is associated, it will be deallocated.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine finalise_drawing (this)
+pure recursive subroutine conditional_free_path (object)
 implicit none
-    type (drawing), intent (inout)  :: this
+    type (path), pointer, intent (inout)    :: object
+    intrinsic                               :: associated
 
-    call conditional_free (this % compiler)
-    call conditional_free (this % length_unit)
-    call conditional_free (this % name)
-    call conditional_free (this % output_format)
-end subroutine finalise_drawing
+    if (associated (object)) then
+        call finalise (object)
+        deallocate (object)
+    end if
+end subroutine conditional_free_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

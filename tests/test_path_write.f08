@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file finalise_drawing.f08
+!> \file test_path_write.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,22 +32,45 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate all memory regions requested for this drawing.
-!> \param   this    The Asymptote drawing to finalise.
+!> \brief   A simple writing test for the `pair` type.
+!> \return  Whether this test succeeds.
 !>
-!> This subroutine will finalise this Asymptote drawing in order to prevent
-!> memory leaks.
+!> This unit test will check whether
+!>
+!> * a new path can be constructed from two 2D points.
+!> * the constructed path can be written to `stdout`.
+!> * the constructed path can be written to `stdout` with one of the following
+!>   length units.
+!>   * centimetre (`cm`)
+!>   * inch (`inch`)
+!>   * millimetre (`mm`)
+!>   * point (`pt`)
+!> * the memory management is working.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine finalise_drawing (this)
+program test_pair_write
+    use, non_intrinsic :: libf18asy, only: operator (.line.)
+    use, non_intrinsic :: libf18asy, only: finalise
+    use, non_intrinsic :: libf18asy, only: pair
+    use, non_intrinsic :: libf18asy, only: path
 implicit none
-    type (drawing), intent (inout)  :: this
+    type (pair) :: a
+    type (pair) :: b
+    type (path) :: line
 
-    call conditional_free (this % compiler)
-    call conditional_free (this % length_unit)
-    call conditional_free (this % name)
-    call conditional_free (this % output_format)
-end subroutine finalise_drawing
+    a = pair (1.0, 1.0)
+    b = pair (2.0, 2.0)
+
+    line = a .line. b
+
+    call line % write
+    call line % write (length_unit = 'cm')
+    call line % write (length_unit = 'inch')
+    call line % write (length_unit = 'mm')
+    call line % write (length_unit = 'pt')
+
+    call finalise (line)
+end program test_pair_write
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
