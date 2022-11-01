@@ -32,7 +32,7 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   A submodule defining operations on a path.
+!> \brief   The submodule defining operations on a 2D path to draw.
 !>
 !> This submodule contains the procedures associated with the `path` type.
 !!
@@ -41,7 +41,10 @@
 submodule (libf18asy) asymptote_path
 implicit none
 contains
+    include 'asymptote_path/conditional_free_path.f08'
+    include 'asymptote_path/finalise_path.f08'
     include 'asymptote_path/line_pair_pair.f08'
+    include 'asymptote_path/write_path.f08'
 end submodule asymptote_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
