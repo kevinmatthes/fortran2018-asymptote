@@ -46,18 +46,18 @@ updates:
       - github-action
     milestone: 1
 
-  - package-ecosystem: 'gitsubmodule'
-    directory: '/'
+  - package-ecosystem: gitsubmodule
+    directory: /
     schedule:
-      interval: 'daily'
+      interval: daily
     assignees:
-      - 'kevinmatthes'
+      - kevinmatthes
     commit-message:
-      prefix: 'Dependabot'
-      include: 'scope'
+      prefix: Dependabot
+      include: scope
     labels:
-      - 'dependencies'
-      - 'submodule'
+      - dependencies
+      - submodule
     milestone: 1
 
 ################################################################################
