@@ -45,6 +45,7 @@
 !>   * inch (`inch`)
 !>   * millimetre (`mm`)
 !>   * point (`pt`)
+!> * the memory management is working.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
