@@ -33,8 +33,9 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   Output this pair.
-!> \param   this    The pair which shall be exported.
-!> \param   unit    The unit to write to.
+!> \param   this        The pair which shall be exported.
+!> \param   unit        The unit to write to.
+!> \param   length_unit The length unit to write in addition.
 !>
 !> This subroutine will write this pair to the given unit.  If there is no unit
 !> number given, the default output unit will be used for output.
