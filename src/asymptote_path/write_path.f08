@@ -47,6 +47,7 @@ impure recursive subroutine write_path (this, unit, length_unit)
 implicit none
     character (*), intent (in), optional    :: length_unit
     class (path), intent (in)               :: this
+    integer, intent (in), optional          :: unit
     integer                                 :: writing_unit
     intrinsic                               :: associated
     intrinsic                               :: present
