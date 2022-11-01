@@ -38,12 +38,12 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_pair
+submodule (libf18asy) asymptote_path
 implicit none
 contains
     include 'asymptote_path/finalise_path.f08'
     include 'asymptote_path/line_pair_pair.f08'
     include 'asymptote_path/write_path.f08'
-end submodule asymptote_pair
+end submodule asymptote_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
