@@ -32,7 +32,7 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   A submodule defining operations on a pair.
+!> \brief   The submodule defining operations on a 2D point.
 !>
 !> This submodule contains the procedures associated with the `pair` type.
 !!
@@ -42,6 +42,7 @@ submodule (libf18asy) asymptote_pair
 implicit none
 contains
     include 'asymptote_pair/initialise_pair.f08'
+    include 'asymptote_pair/write_pair.f08'
 end submodule asymptote_pair
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
