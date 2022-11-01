@@ -137,5 +137,6 @@ lnk-f18 := '-I. ' + lflags
     just test drawing_lifecycle
     just test library_version
     just test pair_write
+    just test path_write
 
 ################################################################################
