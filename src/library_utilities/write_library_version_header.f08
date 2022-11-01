@@ -43,7 +43,7 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine write_library_version_header (unit)
+impure subroutine write_library_version_header (unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
     integer                         :: writing_unit
