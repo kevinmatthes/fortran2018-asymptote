@@ -41,9 +41,6 @@ updates:
     commit-message:
       prefix: Dependabot
       include: scope
-    labels:
-      - dependencies
-      - github-action
     milestone: 1
 
   - package-ecosystem: gitsubmodule
@@ -55,9 +52,6 @@ updates:
     commit-message:
       prefix: Dependabot
       include: scope
-    labels:
-      - dependencies
-      - submodule
     milestone: 1
 
 ################################################################################
