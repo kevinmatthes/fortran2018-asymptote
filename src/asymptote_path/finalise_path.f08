@@ -45,11 +45,7 @@ implicit none
     type (path), intent (inout) :: this
 
     call conditional_free (this % point)
-
-    if (associated (this % line)) then
-        call finalise (this % line)
-        call conditional_free (this % line)
-    end if
+    call conditional_free (this % line)
 end subroutine finalise_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
