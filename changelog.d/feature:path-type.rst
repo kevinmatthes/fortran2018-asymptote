@@ -16,3 +16,5 @@ Added
 - define submodule for 2D drawing path
 
 - define write method for 2D drawing path
+
+- unit test:  construction and writing of a 2D line with two points
