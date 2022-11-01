@@ -42,7 +42,7 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine write_string_assignment (variable, string, unit)
+impure subroutine write_string_assignment (variable, string, unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
     character (*), intent (in)      :: string
