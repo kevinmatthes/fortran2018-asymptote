@@ -185,6 +185,11 @@ private
             character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
 
+        pure module subroutine conditional_free_pair (object)
+        implicit none
+            type (pair), allocatable, intent (inout)    :: object
+        end subroutine conditional_free_pair
+
         pure recursive module subroutine conditional_free_path (object)
         implicit none
             type (path), pointer, intent (inout)    :: object
