@@ -408,7 +408,10 @@ private
     end interface
 
     interface
-        impure module subroutine write_string_assignment (variable, string, unit)
+        impure module subroutine write_string_assignment    ( variable         &
+                                                            , string           &
+                                                            , unit             &
+                                                            )
         implicit none
             character (*), intent (in)      :: string
             character (*), intent (in)      :: variable
