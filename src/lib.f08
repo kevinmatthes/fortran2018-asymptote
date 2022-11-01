@@ -436,7 +436,7 @@ private
             character (*), intent (in), optional    :: length_unit
             class (path), intent (in)               :: this
             integer, intent (in), optional          :: unit
-        end subroutine write_pair
+        end subroutine write_path
     end interface
 
     interface
