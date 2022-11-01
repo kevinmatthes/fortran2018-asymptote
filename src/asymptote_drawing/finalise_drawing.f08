@@ -35,8 +35,8 @@
 !> \brief   Deallocate all memory regions requested for this drawing.
 !> \param   this    The Asymptote drawing to finalise.
 !>
-!> This subroutine will finalise this Asymptote drawing in order to avoid memory
-!> leaks.
+!> This subroutine will finalise this Asymptote drawing in order to prevent
+!> memory leaks.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
