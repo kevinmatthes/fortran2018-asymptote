@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_pair.f08
+!> \file finalise_path.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,18 +32,20 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining operations on a 2D point.
+!> \brief   Deallocate all memory regions requested for this drawing.
+!> \param   this    The 2D drawing path to finalise.
 !>
-!> This submodule contains the procedures associated with the `pair` type.
+!> This subroutine will finalise this path in order to prevent memory leaks.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_pair
+pure recursive subroutine finalise_path (this)
 implicit none
-contains
-    include 'asymptote_pair/conditional_free_pair.f08'
-    include 'asymptote_pair/initialise_pair.f08'
-    include 'asymptote_pair/write_pair.f08'
-end submodule asymptote_pair
+    intrinsic                   :: associated
+    type (path), intent (inout) :: this
+
+    call conditional_free (this % point)
+    call conditional_free (this % line)
+end subroutine finalise_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

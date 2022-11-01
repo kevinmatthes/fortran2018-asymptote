@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_pair.f08
+!> \file write_path.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,18 +32,50 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining operations on a 2D point.
+!> \brief   Output this path.
+!> \param   this        The path which shall be exported.
+!> \param   unit        The unit to write to.
+!> \param   length_unit The length unit to write in addition.
 !>
-!> This submodule contains the procedures associated with the `pair` type.
+!> This subroutine will write this path to the given unit.  If there is no unit
+!> number given, the default output unit will be used for output.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_pair
+impure recursive subroutine write_path (this, unit, length_unit)
+    use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-contains
-    include 'asymptote_pair/conditional_free_pair.f08'
-    include 'asymptote_pair/initialise_pair.f08'
-    include 'asymptote_pair/write_pair.f08'
-end submodule asymptote_pair
+    character (*), intent (in), optional    :: length_unit
+    class (path), intent (in)               :: this
+    integer, intent (in), optional          :: unit
+    integer                                 :: writing_unit
+    intrinsic                               :: associated
+    intrinsic                               :: present
+    logical                                 :: lu_present
+
+    lu_present = present (length_unit)
+
+    if (present (unit)) then
+        writing_unit = unit
+    else
+        writing_unit = output_unit
+    end if
+
+    if (lu_present) then
+        call this % point % write (writing_unit, length_unit)
+    else
+        call this % point % write (writing_unit)
+    end if
+
+    if (associated (this % line)) then
+        write (writing_unit, '(a)') ' -- '
+
+        if (lu_present) then
+            call this % line % write (writing_unit, length_unit)
+        else
+            call this % line % write (writing_unit)
+        end if
+    end if
+end subroutine write_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

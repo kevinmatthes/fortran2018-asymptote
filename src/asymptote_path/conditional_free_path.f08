@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_pair.f08
+!> \file conditional_free_path.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,18 +32,22 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining operations on a 2D point.
+!> \brief   Deallocate the given pointer object if it is associated.
+!> \param   object  The object to deallocate.
 !>
-!> This submodule contains the procedures associated with the `pair` type.
+!> If the given pointer object is associated, it will be deallocated.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_pair
+pure recursive subroutine conditional_free_path (object)
 implicit none
-contains
-    include 'asymptote_pair/conditional_free_pair.f08'
-    include 'asymptote_pair/initialise_pair.f08'
-    include 'asymptote_pair/write_pair.f08'
-end submodule asymptote_pair
+    type (path), pointer, intent (inout)    :: object
+    intrinsic                               :: associated
+
+    if (associated (object)) then
+        call finalise (object)
+        deallocate (object)
+    end if
+end subroutine conditional_free_path
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

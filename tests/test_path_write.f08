@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file asymptote_pair.f08
+!> \file test_path_write.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,18 +32,45 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   The submodule defining operations on a 2D point.
+!> \brief   A simple writing test for the `pair` type.
+!> \return  Whether this test succeeds.
 !>
-!> This submodule contains the procedures associated with the `pair` type.
+!> This unit test will check whether
+!>
+!> * a new path can be constructed from two 2D points.
+!> * the constructed path can be written to `stdout`.
+!> * the constructed path can be written to `stdout` with one of the following
+!>   length units.
+!>   * centimetre (`cm`)
+!>   * inch (`inch`)
+!>   * millimetre (`mm`)
+!>   * point (`pt`)
+!> * the memory management is working.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-submodule (libf18asy) asymptote_pair
+program test_pair_write
+    use, non_intrinsic :: libf18asy, only: operator (.line.)
+    use, non_intrinsic :: libf18asy, only: finalise
+    use, non_intrinsic :: libf18asy, only: pair
+    use, non_intrinsic :: libf18asy, only: path
 implicit none
-contains
-    include 'asymptote_pair/conditional_free_pair.f08'
-    include 'asymptote_pair/initialise_pair.f08'
-    include 'asymptote_pair/write_pair.f08'
-end submodule asymptote_pair
+    type (pair) :: a
+    type (pair) :: b
+    type (path) :: line
+
+    a = pair (1.0, 1.0)
+    b = pair (2.0, 2.0)
+
+    line = a .line. b
+
+    call line % write
+    call line % write (length_unit = 'cm')
+    call line % write (length_unit = 'inch')
+    call line % write (length_unit = 'mm')
+    call line % write (length_unit = 'pt')
+
+    call finalise (line)
+end program test_pair_write
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

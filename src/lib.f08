@@ -160,10 +160,10 @@ private
 
     !> A 2D point on the canvas.
     type, public    :: pair
-        real, private   :: fst = 0.0
-        real, private   :: snd = 0.0
+        real, private   :: fst  = 0.0
+        real, private   :: snd  = 0.0
     contains
-        procedure, pass (this), public  :: write => write_pair
+        procedure, pass (this), public  :: write    => write_pair
     end type pair
 
     !> A path of 2D points to draw.
@@ -178,6 +178,7 @@ private
     private :: conditional_free
     private :: write_library_version_header
     private :: write_string_assignment
+    public  :: operator (.line.)
     public  :: finalise
 
     interface operator (.line.)
@@ -465,7 +466,16 @@ private
             character (*), intent (in), optional    :: length_unit
             class (pair), intent (in)               :: this
             integer, intent (in), optional          :: unit
-        end subroutine
+        end subroutine write_pair
+    end interface
+
+    interface
+        impure recursive module subroutine write_path (this, unit, length_unit)
+        implicit none
+            character (*), intent (in), optional    :: length_unit
+            class (path), intent (in)               :: this
+            integer, intent (in), optional          :: unit
+        end subroutine write_path
     end interface
 
     interface
