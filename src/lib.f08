@@ -161,7 +161,8 @@ private
         type (pair), allocatable, private   :: point
         type (path), pointer, private       :: line     => null ()
     contains
-        final   :: finalise_path
+        final                           :: finalise_path
+        procedure, pass (this), public  :: write    => write_path
     end type path
 
     private :: conditional_free
@@ -426,7 +427,16 @@ private
             character (*), intent (in), optional    :: length_unit
             class (pair), intent (in)               :: this
             integer, intent (in), optional          :: unit
-        end subroutine
+        end subroutine write_pair
+    end interface
+
+    interface
+        impure module subroutine write_path (this, unit, length_unit)
+        implicit none
+            character (*), intent (in), optional    :: length_unit
+            class (path), intent (in)               :: this
+            integer, intent (in), optional          :: unit
+        end subroutine write_pair
     end interface
 
     interface
