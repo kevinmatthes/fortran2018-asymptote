@@ -150,22 +150,42 @@ private
 
     !> A 2D point on the canvas.
     type, public    :: pair
-        real, private   :: fst = 0.0
-        real, private   :: snd = 0.0
+        real, private   :: fst  = 0.0
+        real, private   :: snd  = 0.0
     contains
         procedure, pass (this), public  :: write => write_pair
     end type pair
+
+    !> A path of 2D points to draw.
+    type, public    :: path
+        type (pair), allocatable, private   :: point
+        type (path), pointer, private       :: line     => null ()
+    end type path
 
     private :: conditional_free
     private :: write_library_version_header
     private :: write_string_assignment
     public  :: finalise
 
+    interface operator (.line.)
+        pure module function line_pair_pair (beginning, ending)
+        implicit none
+            type (pair), intent (in)    :: beginning
+            type (pair), intent (in)    :: ending
+            type (path)                 :: line_pair_pair
+        end function line_pair_pair
+    end interface operator (.line.)
+
     interface conditional_free
         pure module subroutine conditional_free_character (object)
         implicit none
             character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
+
+        pure recursive module subroutine finalise_path (this)
+        implicit none
+            type (path), intent (inout) :: this
+        end subroutine finalise_path
     end interface conditional_free
 
     interface drawing
