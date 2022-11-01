@@ -399,7 +399,7 @@ private
     end interface
 
     interface
-        module subroutine write_pair (this, unit)
+        impure module subroutine write_pair (this, unit)
         implicit none
             class (pair), intent (in)       :: this
             integer, intent (in), optional  :: unit
