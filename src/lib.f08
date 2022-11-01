@@ -184,6 +184,11 @@ private
         implicit none
             character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
+
+        pure recursive module subroutine conditional_free_path (object)
+        implicit none
+            type (path), pointer, intent (inout)    :: object
+        end subroutine conditional_free_path
     end interface conditional_free
 
     interface drawing
