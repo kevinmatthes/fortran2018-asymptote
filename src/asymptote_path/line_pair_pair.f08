@@ -32,9 +32,9 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Create a new path from two pairs to form a line.
-!> \param   beginning   The first point of the path to draw.
-!> \param   ending      The second point of the path to draw.
+!> \brief   Create a new path from two 2D points to form a line.
+!> \param   beginning   The first 2D point of the path to draw.
+!> \param   ending      The second 2D point of the path to draw.
 !> \return  The new path.
 !>
 !> This function will construct a new path entity based on the given data.
@@ -47,9 +47,9 @@ implicit none
     type (pair), intent (in)    :: ending
     type (path)                 :: line_pair_pair
 
-    allocate (line_pair_pair % next_line_point)
-    line_pair_pair % point                      = beginning
-    line_pair_pair % next_line_point % point    = ending
+    allocate (line_pair_pair % line)
+    line_pair_pair % point          = beginning
+    line_pair_pair % line % point   = ending
 end function line_pair_pair
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
