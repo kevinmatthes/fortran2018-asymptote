@@ -183,11 +183,6 @@ private
         implicit none
             character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
-
-        pure recursive module subroutine finalise_path (this)
-        implicit none
-            type (path), intent (inout) :: this
-        end subroutine finalise_path
     end interface conditional_free
 
     interface drawing
@@ -222,6 +217,11 @@ private
         implicit none
             type (drawing), intent (inout)  :: this
         end subroutine finalise_drawing
+
+        pure recursive module subroutine finalise_path (this)
+        implicit none
+            type (path), intent (inout) :: this
+        end subroutine finalise_path
     end interface finalise
 
     interface
