@@ -71,6 +71,6 @@ implicit none
     end if
 
     write (writing_unit, fmt) '(', this % fst, comma, this % snd, parenthesis
-end subroutine write_drawing_size_settings
+end subroutine write_pair
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
