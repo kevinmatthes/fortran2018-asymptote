@@ -41,7 +41,7 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine write_pair (this, unit, length_unit)
+impure subroutine write_pair (this, unit, length_unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
     character (:), allocatable              :: comma
