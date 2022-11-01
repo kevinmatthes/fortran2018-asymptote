@@ -32,23 +32,34 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Create a new pair.
-!> \param   fst The first number to hold.
-!> \param   snd The second number to hold.
-!> \return  The new pair.
+!> \brief   Create a new 2D point.
+!> \param   fst The `x` coordinate.
+!> \param   snd The `y` coordinate.
+!> \return  The new 2D point.
 !>
-!> This function will construct a new pair entity based on the given data.
+!> This function will construct a new 2D point based on the given data.  If for
+!> any coordinate no value is specified, zero is assumed.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 pure function initialise_pair (fst, snd)
 implicit none
-    real, intent (in)   :: fst
-    real, intent (in)   :: snd
-    type (pair)         :: initialise_pair
+    intrinsic                   :: present
+    real, intent (in), optional :: fst
+    real, intent (in), optional :: snd
+    type (pair)                 :: initialise_pair
 
-    initialise_pair % fst = fst
-    initialise_pair % snd = snd
+    if (present (fst)) then
+        initialise_pair % fst = fst
+    else
+        initialise_pair % fst = 0.0
+    end if
+
+    if (present (snd)) then
+        initialise_pair % snd = snd
+    else
+        initialise_pair % snd = 0.0
+    end if
 end function initialise_pair
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
