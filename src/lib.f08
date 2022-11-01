@@ -153,7 +153,7 @@ private
         real, private   :: fst  = 0.0
         real, private   :: snd  = 0.0
     contains
-        procedure, pass (this), public  :: write => write_pair
+        procedure, pass (this), public  :: write    => write_pair
     end type pair
 
     !> A path of 2D points to draw.
