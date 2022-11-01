@@ -32,6 +32,20 @@
 
 version: 2
 updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+    assignees:
+      - kevinmatthes
+    commit-message:
+      prefix: Dependabot
+      include: scope
+    labels:
+      - dependencies
+      - github-action
+    milestone: 1
+
   - package-ecosystem: 'gitsubmodule'
     directory: '/'
     schedule:
