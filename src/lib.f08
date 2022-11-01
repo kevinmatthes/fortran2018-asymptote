@@ -166,12 +166,13 @@ private
         procedure, pass (this), public  :: write => write_pair
     end type pair
 
-    !> A path to draw.
+    !> A path of 2D points to draw.
     type, public    :: path
         type (pair), allocatable, private   :: point
-        type (path), pointer, private       :: next_line_point
+        type (path), pointer, private       :: line     => null ()
     contains
-        final   :: finalise_path
+        final                           :: finalise_path
+        procedure, pass (this), public  :: write    => write_path
     end type path
 
     private :: conditional_free
@@ -199,9 +200,14 @@ private
             type (command), allocatable, intent (inout) :: object
         end subroutine conditional_free_command
 
-        pure module subroutine conditional_free_path (object)
+        pure module subroutine conditional_free_pair (object)
         implicit none
-            type (path), allocatable, intent (inout)    :: object
+            type (pair), allocatable, intent (inout)    :: object
+        end subroutine conditional_free_pair
+
+        pure recursive module subroutine conditional_free_path (object)
+        implicit none
+            type (path), pointer, intent (inout)    :: object
         end subroutine conditional_free_path
     end interface conditional_free
 
@@ -251,7 +257,7 @@ private
             type (drawing), intent (inout)  :: this
         end subroutine finalise_drawing
 
-        pure module subroutine finalise_path (this)
+        pure recursive module subroutine finalise_path (this)
         implicit none
             type (path), intent (inout) :: this
         end subroutine finalise_path
