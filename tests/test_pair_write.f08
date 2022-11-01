@@ -51,7 +51,11 @@
 program test_pair_write
     use, non_intrinsic :: libf18asy, only: pair
 implicit none
-    call pair () % write
+    type (pair) :: test
+
+    test = pair ()
+    call test % write
+
     call pair (fst = 1.0) % write
     call pair (snd = 2.0) % write
     call pair (3.0, 3.0) % write
