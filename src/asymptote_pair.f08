@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file write_library_version_header.f08
+!> \file asymptote_pair.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,32 +32,17 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Output this library's version number in an informative header.
-!> \param   unit    The unit to write to.
+!> \brief   The submodule defining operations on a 2D point.
 !>
-!> This subroutine will write the version number of this library to the given
-!> IO unit.  If there is no unit number given, the default output unit will be
-!> used for output.  The information about this library's version number will be
-!> given together with this library's name in a small header.  This is
-!> especially useful when exporting an Asymptote drawing with this library.
+!> This submodule contains the procedures associated with the `pair` type.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-impure subroutine write_library_version_header (unit)
-    use, intrinsic  :: iso_fortran_env, only: output_unit
+submodule (libf18asy) asymptote_pair
 implicit none
-    integer                         :: writing_unit
-    integer, intent (in), optional  :: unit
-    intrinsic                       :: present
-
-    if (present (unit)) then
-        writing_unit = unit
-    else
-        writing_unit = output_unit
-    end if
-
-    write (writing_unit, fmt = '(a, a, a)')                                    &
-        '// Created by LIBF18ASY, ', library_version, '.'
-end subroutine write_library_version_header
+contains
+    include 'asymptote_pair/initialise_pair.f08'
+    include 'asymptote_pair/write_pair.f08'
+end submodule asymptote_pair
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

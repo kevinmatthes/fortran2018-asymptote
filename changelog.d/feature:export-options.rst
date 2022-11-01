@@ -7,4 +7,4 @@ Added
 
 - define setter for a drawing's preferred compiler (``xelatex``)
 
-- unit test:  export combinations (output format and compiler)
+- unit test:  drawing export combinations (output format and compiler)

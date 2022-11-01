@@ -42,7 +42,7 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine write_drawing_output_settings (this, unit)
+impure subroutine write_drawing_output_settings (this, unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
     character (*), parameter        :: fname = 'defaultfilename'

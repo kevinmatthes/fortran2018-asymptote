@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file write_library_version_header.f08
+!> \file initialise_pair.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,32 +32,34 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Output this library's version number in an informative header.
-!> \param   unit    The unit to write to.
+!> \brief   Create a new 2D point.
+!> \param   fst The `x` coordinate.
+!> \param   snd The `y` coordinate.
+!> \return  The new 2D point.
 !>
-!> This subroutine will write the version number of this library to the given
-!> IO unit.  If there is no unit number given, the default output unit will be
-!> used for output.  The information about this library's version number will be
-!> given together with this library's name in a small header.  This is
-!> especially useful when exporting an Asymptote drawing with this library.
+!> This function will construct a new 2D point based on the given data.  If for
+!> any coordinate no value is specified, zero is assumed.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-impure subroutine write_library_version_header (unit)
-    use, intrinsic  :: iso_fortran_env, only: output_unit
+pure function initialise_pair (fst, snd)
 implicit none
-    integer                         :: writing_unit
-    integer, intent (in), optional  :: unit
-    intrinsic                       :: present
+    intrinsic                   :: present
+    real, intent (in), optional :: fst
+    real, intent (in), optional :: snd
+    type (pair)                 :: initialise_pair
 
-    if (present (unit)) then
-        writing_unit = unit
+    if (present (fst)) then
+        initialise_pair % fst = fst
     else
-        writing_unit = output_unit
+        initialise_pair % fst = 0.0
     end if
 
-    write (writing_unit, fmt = '(a, a, a)')                                    &
-        '// Created by LIBF18ASY, ', library_version, '.'
-end subroutine write_library_version_header
+    if (present (snd)) then
+        initialise_pair % snd = snd
+    else
+        initialise_pair % snd = 0.0
+    end if
+end function initialise_pair
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
