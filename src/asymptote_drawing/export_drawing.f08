@@ -52,7 +52,7 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-function export_drawing (this)
+impure function export_drawing (this)
     use, intrinsic :: iso_fortran_env, only: error_unit
 implicit none
     character (*), parameter        :: fmt = '(a, a, a)'

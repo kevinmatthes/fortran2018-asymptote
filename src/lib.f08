@@ -160,8 +160,8 @@ private
 
     !> A 2D point on the canvas.
     type, public    :: pair
-        real, private   :: fst  = 0.0
-        real, private   :: snd  = 0.0
+        real, private   :: fst = 0.0
+        real, private   :: snd = 0.0
     contains
         procedure, pass (this), public  :: write => write_pair
     end type pair
@@ -233,7 +233,7 @@ private
     end interface
 
     interface
-        module function export_drawing (this)
+        impure module function export_drawing (this)
         implicit none
             class (drawing), intent (in)    :: this
             logical                         :: export_drawing
@@ -431,7 +431,7 @@ private
     end interface
 
     interface
-        module subroutine write_drawing_output_settings (this, unit)
+        impure module subroutine write_drawing_output_settings (this, unit)
         implicit none
             class (drawing), intent (in)    :: this
             integer, intent (in), optional  :: unit
@@ -439,7 +439,7 @@ private
     end interface
 
     interface
-        module subroutine write_drawing_size_settings (this, unit)
+        impure module subroutine write_drawing_size_settings (this, unit)
         implicit none
             class (drawing), intent (in)    :: this
             integer, intent (in), optional  :: unit
@@ -447,14 +447,26 @@ private
     end interface
 
     interface
-        module subroutine write_library_version_header (unit)
+        impure module subroutine write_library_version_header (unit)
         implicit none
             integer, intent (in), optional  :: unit
         end subroutine write_library_version_header
     end interface
 
     interface
-        module subroutine write_string_assignment (variable, string, unit)
+        impure module subroutine write_pair (this, unit, length_unit)
+        implicit none
+            character (*), intent (in), optional    :: length_unit
+            class (pair), intent (in)               :: this
+            integer, intent (in), optional          :: unit
+        end subroutine
+    end interface
+
+    interface
+        impure module subroutine write_string_assignment    ( variable         &
+                                                            , string           &
+                                                            , unit             &
+                                                            )
         implicit none
             character (*), intent (in)      :: string
             character (*), intent (in)      :: variable

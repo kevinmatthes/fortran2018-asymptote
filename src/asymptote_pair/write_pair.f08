@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file write_library_version_header.f08
+!> \file write_pair.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,23 +32,48 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Output this library's version number in an informative header.
-!> \param   unit    The unit to write to.
+!> \brief   Output this pair.
+!> \param   this        The pair which shall be exported.
+!> \param   unit        The unit to write to.
+!> \param   length_unit The length unit to write in addition.
 !>
-!> This subroutine will write the version number of this library to the given
-!> IO unit.  If there is no unit number given, the default output unit will be
-!> used for output.  The information about this library's version number will be
-!> given together with this library's name in a small header.  This is
-!> especially useful when exporting an Asymptote drawing with this library.
+!> This subroutine will write this pair to the given unit.  If there is no unit
+!> number given, the default output unit will be used for output.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-impure subroutine write_library_version_header (unit)
+impure subroutine write_pair (this, unit, length_unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-    integer                         :: writing_unit
-    integer, intent (in), optional  :: unit
-    intrinsic                       :: present
+    character (:), allocatable              :: comma
+    character (:), allocatable              :: parenthesis
+    character (*), intent (in), optional    :: length_unit
+    character (*), parameter                :: fmt = '(a, f17.8, a, f17.8, a)'
+    class (pair), intent (in)               :: this
+    integer                                 :: string_length = 0
+    integer                                 :: writing_unit
+    integer, intent (in), optional          :: unit
+    intrinsic                               :: len
+    intrinsic                               :: present
+
+    if (present (length_unit)) then
+        if (len (length_unit) > 0) then
+            string_length = len (length_unit) + 1
+        end if
+    end if
+
+    allocate (character (2 + string_length) :: comma)
+    allocate (character (1 + string_length) :: parenthesis)
+    comma       = ', '
+    parenthesis = ')'
+
+    if (string_length > 0) then
+        comma       = ' ' // length_unit // ', '
+        parenthesis = ' ' // length_unit // ')'
+    else
+        comma       = ', '
+        parenthesis = ')'
+    end if
 
     if (present (unit)) then
         writing_unit = unit
@@ -56,8 +81,7 @@ implicit none
         writing_unit = output_unit
     end if
 
-    write (writing_unit, fmt = '(a, a, a)')                                    &
-        '// Created by LIBF18ASY, ', library_version, '.'
-end subroutine write_library_version_header
+    write (writing_unit, fmt) '(', this % fst, comma, this % snd, parenthesis
+end subroutine write_pair
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

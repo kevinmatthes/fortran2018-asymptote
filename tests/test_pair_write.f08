@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file write_library_version_header.f08
+!> \file test_pair_write.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,32 +32,50 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Output this library's version number in an informative header.
-!> \param   unit    The unit to write to.
+!> \brief   A simple writing test for the `pair` type.
+!> \return  Whether this test succeeds.
 !>
-!> This subroutine will write the version number of this library to the given
-!> IO unit.  If there is no unit number given, the default output unit will be
-!> used for output.  The information about this library's version number will be
-!> given together with this library's name in a small header.  This is
-!> especially useful when exporting an Asymptote drawing with this library.
+!> This unit test will check whether
+!>
+!> * a new pair can be constructed.
+!> * the constructed pair can be written to `stdout`.
+!> * the constructed pair can be written to `stdout` with one of the following
+!>   length units.
+!>   * centimetre (`cm`)
+!>   * inch (`inch`)
+!>   * millimetre (`mm`)
+!>   * point (`pt`)
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-impure subroutine write_library_version_header (unit)
-    use, intrinsic  :: iso_fortran_env, only: output_unit
+program test_pair_write
+    use, non_intrinsic :: libf18asy, only: pair
 implicit none
-    integer                         :: writing_unit
-    integer, intent (in), optional  :: unit
-    intrinsic                       :: present
+    type (pair) :: test
 
-    if (present (unit)) then
-        writing_unit = unit
-    else
-        writing_unit = output_unit
-    end if
+    test = pair ()
+    call test % write
 
-    write (writing_unit, fmt = '(a, a, a)')                                    &
-        '// Created by LIBF18ASY, ', library_version, '.'
-end subroutine write_library_version_header
+    test = pair (fst = 1.0)
+    call test % write
+
+    test = pair (snd = 2.0)
+    call test % write
+
+    test = pair (3.0, 3.0)
+    call test % write
+
+    test = pair (4.0, 4.0)
+    call test % write (length_unit = 'cm')
+
+    test = pair (5.0, 5.0)
+    call test % write (length_unit = 'inch')
+
+    test = pair (6.0, 6.0)
+    call test % write (length_unit = 'mm')
+
+    test = pair (7.0, 7.0)
+    call test % write (length_unit = 'pt')
+end program test_pair_write
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

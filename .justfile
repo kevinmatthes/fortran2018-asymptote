@@ -82,9 +82,9 @@ lnk-f18 := '-I. ' + lflags
 @asymptote_pair: library_utilities
     just compile src/asymptote_pair.f08
 
-# Compile the path type.
-@asymptote_path: library_utilities
-    just compile src/asymptote_path.f08
+# Compile the `pair` type.
+@asymptote_pair: interfaces
+    just compile src/asymptote_pair.f08
 
 # Increment the version numbers.
 @bump part:
@@ -119,7 +119,7 @@ lnk-f18 := '-I. ' + lflags
     just compile src/lib.f08
 
 # Create the project library.
-@library: asymptote_drawing
+@library: asymptote_drawing asymptote_pair
 
 # Compile the library utility procedures.
 @library_utilities: interfaces
@@ -133,8 +133,9 @@ lnk-f18 := '-I. ' + lflags
 
 # Analyse the memory management of the unit tests.
 @valgrind:
+    just test drawing_export_combinations
     just test drawing_lifecycle
-    just test export_combinations
     just test library_version
+    just test pair_write
 
 ################################################################################
