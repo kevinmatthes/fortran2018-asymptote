@@ -158,11 +158,12 @@ private
                                         => write_drawing_size_settings
     end type drawing
 
-    !> A simple, 2D point.
+    !> A 2D point on the canvas.
     type, public    :: pair
         real, private   :: fst  = 0.0
         real, private   :: snd  = 0.0
     contains
+        procedure, pass (this), public  :: write => write_pair
     end type pair
 
     !> A path to draw.
@@ -315,9 +316,9 @@ private
     interface pair
         pure module function initialise_pair (fst, snd)
         implicit none
-            real, intent (in)   :: fst
-            real, intent (in)   :: snd
-            type (pair)         :: initialise_pair
+            real, intent (in), optional :: fst
+            real, intent (in), optional :: snd
+            type (pair)                 :: initialise_pair
         end function initialise_pair
     end interface pair
 
