@@ -188,7 +188,7 @@ private
     end interface
 
     interface
-        module function export_drawing (this)
+        impure module function export_drawing (this)
         implicit none
             class (drawing), intent (in)    :: this
             logical                         :: export_drawing
@@ -376,7 +376,7 @@ private
     end interface
 
     interface
-        module subroutine write_drawing_output_settings (this, unit)
+        impure module subroutine write_drawing_output_settings (this, unit)
         implicit none
             class (drawing), intent (in)    :: this
             integer, intent (in), optional  :: unit
@@ -384,7 +384,7 @@ private
     end interface
 
     interface
-        module subroutine write_drawing_size_settings (this, unit)
+        impure module subroutine write_drawing_size_settings (this, unit)
         implicit none
             class (drawing), intent (in)    :: this
             integer, intent (in), optional  :: unit
@@ -392,7 +392,7 @@ private
     end interface
 
     interface
-        module subroutine write_library_version_header (unit)
+        impure module subroutine write_library_version_header (unit)
         implicit none
             integer, intent (in), optional  :: unit
         end subroutine write_library_version_header
@@ -408,7 +408,7 @@ private
     end interface
 
     interface
-        module subroutine write_string_assignment (variable, string, unit)
+        impure module subroutine write_string_assignment (variable, string, unit)
         implicit none
             character (*), intent (in)      :: string
             character (*), intent (in)      :: variable
