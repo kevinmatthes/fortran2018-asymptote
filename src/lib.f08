@@ -74,10 +74,10 @@ private
         character (:), allocatable, private :: length_unit
         character (:), allocatable, private :: name
         character (:), allocatable, private :: output_format
-        logical, private                    :: aspect           = .true.
-        real, private                       :: height           = 0.0
-        real, private                       :: width            = 0.0
-        type (command), pointer, private    :: instructions
+        logical, private                    :: aspect           =   .true.
+        real, private                       :: height           =   0.0
+        real, private                       :: width            =   0.0
+        type (command), pointer, private    :: instructions     =>  null ()
     contains
         final                           :: finalise_drawing
         procedure, pass (this), public  :: draw
