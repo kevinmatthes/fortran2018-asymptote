@@ -123,7 +123,7 @@ lnk-f18 := '-I. ' + lflags
     just compile src/lib.f08
 
 # Create the project library.
-@library: asymptote_drawing asymptote_path
+@library: asymptote_command asymptote_drawing
 
 # Compile the library utility procedures.
 @library_utilities: interfaces
@@ -137,6 +137,7 @@ lnk-f18 := '-I. ' + lflags
 
 # Analyse the memory management of the unit tests.
 @valgrind:
+    just test command_write
     just test drawing_export_combinations
     just test drawing_lifecycle
     just test library_version

@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file test_path_write.f08
+!> \file test_command_write.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,15 +32,15 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   A simple writing test for the `path` type.
+!> \brief   A simple writing test for the `command` type.
 !> \return  Whether this test succeeds.
 !>
 !> This unit test will check whether
 !>
-!> * a new path can be constructed from two 2D points.
-!> * the constructed path can be written to `stdout`.
-!> * the constructed path can be written to `stdout` with one of the following
-!>   length units.
+!> * a new command can be constructed from a 2D drawing path.
+!> * the constructed command can be written to `stdout`.
+!> * the constructed command can be written to `stdout` with one of the
+!>   following length units.
 !>   * centimetre (`cm`)
 !>   * inch (`inch`)
 !>   * millimetre (`mm`)
@@ -49,28 +49,32 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-program test_path_write
+program test_command_write
     use, non_intrinsic :: libf18asy, only: operator (.line.)
+    use, non_intrinsic :: libf18asy, only: command
+    use, non_intrinsic :: libf18asy, only: draw
     use, non_intrinsic :: libf18asy, only: finalise
     use, non_intrinsic :: libf18asy, only: pair
     use, non_intrinsic :: libf18asy, only: path
 implicit none
-    type (pair) :: a
-    type (pair) :: b
-    type (path) :: line
+    type (command)      :: instruction
+    type (pair)         :: a
+    type (pair)         :: b
+    type (path), target :: line
 
     a = pair (1.0, 1.0)
     b = pair (2.0, 2.0)
-
     line = a .line. b
 
-    call line % write
-    call line % write (length_unit = 'cm')
-    call line % write (length_unit = 'inch')
-    call line % write (length_unit = 'mm')
-    call line % write (length_unit = 'pt')
+    instruction = draw (line)
+
+    call instruction % write
+    call instruction % write (length_unit = 'cm')
+    call instruction % write (length_unit = 'inch')
+    call instruction % write (length_unit = 'mm')
+    call instruction % write (length_unit = 'pt')
 
     call finalise (line)
-end program test_path_write
+end program test_command_write
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

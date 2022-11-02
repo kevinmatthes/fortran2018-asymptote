@@ -173,13 +173,14 @@ private
         type (path), pointer, private       :: line     => null ()
     contains
         final                           :: finalise_path
-        procedure, pass (this), public  :: write    => write_path
+        procedure, pass (this), public  :: write            => write_path
     end type path
 
     private :: conditional_free
     private :: write_library_version_header
     private :: write_string_assignment
     public  :: operator (.line.)
+    public  :: draw
     public  :: finalise
 
     interface operator (.line.)
@@ -436,6 +437,18 @@ private
             class (drawing), intent (inout) :: this
             real, intent (in)               :: width
         end subroutine set_drawing_width
+    end interface
+
+    interface
+        impure recursive module subroutine write_command    ( this         &
+                                                            , unit         &
+                                                            , length_unit  &
+                                                            )
+        implicit none
+            character (*), intent (in), optional    :: length_unit
+            class (command), intent (in)            :: this
+            integer, intent (in), optional          :: unit
+        end subroutine write_command
     end interface
 
     interface
