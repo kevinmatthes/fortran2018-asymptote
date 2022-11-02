@@ -212,7 +212,7 @@ private
     end interface conditional_free
 
     interface draw
-        pure module function draw_command (curve)
+        impure module function draw_command (curve)
         implicit none
             type (command)                      :: draw_command
             type (path), pointer, intent (in)   :: curve
