@@ -33,7 +33,7 @@
 !>              See `README.md' for project details.
 !>
 !> \brief   Create a new command from a 2D drawing path.
-!> \param   path    The path to draw.
+!> \param   curve   The path to draw.
 !> \return  The new drawing instruction.
 !>
 !> This function will construct a new drawing instruction based on the given
