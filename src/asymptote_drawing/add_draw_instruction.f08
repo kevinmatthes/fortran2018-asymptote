@@ -50,11 +50,11 @@ implicit none
     if (associated (this % instructions)) then
         current => this % instructions % next
 
-        do while (associated (current))
+        do while (associated (current % next))
             current => current % next
         end do
 
-        current % draw = draw (drawing_path)
+        current % next = draw (drawing_path)
     else
         this % instructions = draw (drawing_path)
     end if
