@@ -248,7 +248,7 @@ private
     end interface
 
     interface finalise
-        pure module subroutine finalise_command (this)
+        pure recursive module subroutine finalise_command (this)
         implicit none
             type (command), intent (inout)  :: this
         end subroutine finalise_command
