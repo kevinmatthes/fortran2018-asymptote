@@ -437,7 +437,7 @@ private
     end interface
 
     interface
-        impure module subroutine write_command (this, unit, length_unit)
+        impure recursive module subroutine write_command (this, unit, length_unit)
         implicit none
             character (*), intent (in), optional    :: length_unit
             class (command), intent (in)            :: this
