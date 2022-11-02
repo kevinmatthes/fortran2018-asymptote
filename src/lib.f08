@@ -191,14 +191,14 @@ private
     end interface operator (.line.)
 
     interface conditional_free
-        pure recursive module subroutine conditional_free_character (object)
+        pure module subroutine conditional_free_character (object)
         implicit none
-            character (:), pointer, intent (inout)  :: object
+            character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
 
-        pure module subroutine conditional_free_command (object)
+        pure recursive module subroutine conditional_free_command (object)
         implicit none
-            type (command), allocatable, intent (inout) :: object
+            type (command), pointer, intent (inout) :: object
         end subroutine conditional_free_command
 
         pure module subroutine conditional_free_pair (object)
