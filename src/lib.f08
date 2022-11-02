@@ -195,6 +195,11 @@ private
             character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
 
+        pure module subroutine conditional_free_command (object)
+        implicit none
+            type (command), allocatable, intent (inout) :: object
+        end subroutine conditional_free_command
+
         pure module subroutine conditional_free_pair (object)
         implicit none
             type (pair), allocatable, intent (inout)    :: object
@@ -205,6 +210,14 @@ private
             type (path), pointer, intent (inout)    :: object
         end subroutine conditional_free_path
     end interface conditional_free
+
+    interface draw
+        pure module function draw_command (curve)
+        implicit none
+            type (command)              :: draw_command
+            type (path), intent (in)    :: curve
+        end function draw_command
+    end interface draw
 
     interface drawing
         pure module function initialise_drawing (name, width, height, aspect)
