@@ -32,7 +32,7 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate all memory regions requested for this drawing.
+!> \brief   Deallocate all memory regions requested for this 2D drawing path.
 !> \param   this    The 2D drawing path to finalise.
 !>
 !> This subroutine will finalise this path in order to prevent memory leaks.

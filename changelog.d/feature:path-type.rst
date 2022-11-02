@@ -11,7 +11,7 @@ Added
   it is allocated (type ``pair``)
 
 - define library utility subroutine to deallocate a pointer object only if it is
-  allocated (type ``path``)
+  associated (type ``path``)
 
 - define submodule for 2D drawing path
 

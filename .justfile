@@ -74,7 +74,11 @@ lnk-f18 := '-I. ' + lflags
 # Execute all configured recipes.
 @all: check doxygen
 
-# Compile the Asymptote drawing type.
+# Compile the `command` type.
+@asymptote_command: asymptote_path
+    just compile src/asymptote_command.f08
+
+# Compile the `drawing` type.
 @asymptote_drawing: library_utilities
     just compile src/asymptote_drawing.f08
 
@@ -119,7 +123,7 @@ lnk-f18 := '-I. ' + lflags
     just compile src/lib.f08
 
 # Create the project library.
-@library: asymptote_drawing asymptote_path
+@library: asymptote_command asymptote_drawing
 
 # Compile the library utility procedures.
 @library_utilities: interfaces
@@ -133,6 +137,7 @@ lnk-f18 := '-I. ' + lflags
 
 # Analyse the memory management of the unit tests.
 @valgrind:
+    just test command_write
     just test drawing_export_combinations
     just test drawing_lifecycle
     just test library_version

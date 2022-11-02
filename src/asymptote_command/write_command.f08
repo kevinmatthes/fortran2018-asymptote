@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file test_path_write.f08
+!> \file write_command.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,45 +32,54 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   A simple writing test for the `path` type.
-!> \return  Whether this test succeeds.
+!> \brief   Output this command.
+!> \param   this        The command which shall be exported.
+!> \param   unit        The unit to write to.
+!> \param   length_unit The length unit to write in addition.
 !>
-!> This unit test will check whether
-!>
-!> * a new path can be constructed from two 2D points.
-!> * the constructed path can be written to `stdout`.
-!> * the constructed path can be written to `stdout` with one of the following
-!>   length units.
-!>   * centimetre (`cm`)
-!>   * inch (`inch`)
-!>   * millimetre (`mm`)
-!>   * point (`pt`)
-!> * the memory management is working.
+!> This subroutine will write this command to the given unit.  If there is no
+!> unit number given, the default output unit will be used for output.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-program test_path_write
-    use, non_intrinsic :: libf18asy, only: operator (.line.)
-    use, non_intrinsic :: libf18asy, only: finalise
-    use, non_intrinsic :: libf18asy, only: pair
-    use, non_intrinsic :: libf18asy, only: path
+impure recursive subroutine write_command (this, unit, length_unit)
+    use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
-    type (pair) :: a
-    type (pair) :: b
-    type (path) :: line
+    character (*), intent (in), optional    :: length_unit
+    class (command), intent (in)            :: this
+    integer                                 :: writing_unit
+    integer, intent (in), optional          :: unit
+    intrinsic                               :: associated
+    intrinsic                               :: present
+    logical                                 :: lu_present
 
-    a = pair (1.0, 1.0)
-    b = pair (2.0, 2.0)
+    lu_present = present (length_unit)
 
-    line = a .line. b
+    if (present (unit)) then
+        writing_unit = unit
+    else
+        writing_unit = output_unit
+    end if
 
-    call line % write
-    call line % write (length_unit = 'cm')
-    call line % write (length_unit = 'inch')
-    call line % write (length_unit = 'mm')
-    call line % write (length_unit = 'pt')
+    if (associated (this % draw)) then
+        write (writing_unit, '(a)') 'draw ('
 
-    call finalise (line)
-end program test_path_write
+        if (lu_present) then
+            call this % draw % write (writing_unit, length_unit)
+        else
+            call this % draw % write (writing_unit)
+        end if
+
+        write (writing_unit, '(a)') ');'
+    end if
+
+    if (associated (this % next)) then
+        if (lu_present) then
+            call this % next % write (writing_unit, length_unit)
+        else
+            call this % next % write (writing_unit)
+        end if
+    end if
+end subroutine write_command
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

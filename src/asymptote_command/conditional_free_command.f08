@@ -20,7 +20,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
-!> \file test_path_write.f08
+!> \file conditional_free_command.f08
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -32,45 +32,22 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   A simple writing test for the `path` type.
-!> \return  Whether this test succeeds.
+!> \brief   Deallocate the given pointer object if it is associated.
+!> \param   object  The object to deallocate.
 !>
-!> This unit test will check whether
-!>
-!> * a new path can be constructed from two 2D points.
-!> * the constructed path can be written to `stdout`.
-!> * the constructed path can be written to `stdout` with one of the following
-!>   length units.
-!>   * centimetre (`cm`)
-!>   * inch (`inch`)
-!>   * millimetre (`mm`)
-!>   * point (`pt`)
-!> * the memory management is working.
+!> If the given pointer object is associated, it will be deallocated.
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-program test_path_write
-    use, non_intrinsic :: libf18asy, only: operator (.line.)
-    use, non_intrinsic :: libf18asy, only: finalise
-    use, non_intrinsic :: libf18asy, only: pair
-    use, non_intrinsic :: libf18asy, only: path
+pure recursive subroutine conditional_free_command (object)
 implicit none
-    type (pair) :: a
-    type (pair) :: b
-    type (path) :: line
+    type (command), pointer, intent (inout) :: object
+    intrinsic                               :: associated
 
-    a = pair (1.0, 1.0)
-    b = pair (2.0, 2.0)
-
-    line = a .line. b
-
-    call line % write
-    call line % write (length_unit = 'cm')
-    call line % write (length_unit = 'inch')
-    call line % write (length_unit = 'mm')
-    call line % write (length_unit = 'pt')
-
-    call finalise (line)
-end program test_path_write
+    if (associated (object)) then
+        call finalise (object)
+        deallocate (object)
+    end if
+end subroutine conditional_free_command
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

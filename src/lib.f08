@@ -59,6 +59,15 @@ private
     !> This library's version.
     character (*), parameter, public    :: library_version = 'v0.0.0'
 
+    !> An Asymptote command to execute.
+    type, public    :: command
+        type (path), pointer, private       :: draw => null ()
+        type (command), pointer, private    :: next => null ()
+    contains
+        final                           :: finalise_command
+        procedure, pass (this), public  :: write            => write_command
+    end type command
+
     !> The Asymptote drawing to produce.
     type, public    :: drawing
         character (:), allocatable, private :: compiler
@@ -162,13 +171,14 @@ private
         type (path), pointer, private       :: line     => null ()
     contains
         final                           :: finalise_path
-        procedure, pass (this), public  :: write    => write_path
+        procedure, pass (this), public  :: write            => write_path
     end type path
 
     private :: conditional_free
     private :: write_library_version_header
     private :: write_string_assignment
     public  :: operator (.line.)
+    public  :: draw
     public  :: finalise
 
     interface operator (.line.)
@@ -186,6 +196,11 @@ private
             character (:), allocatable, intent (inout)  :: object
         end subroutine conditional_free_character
 
+        pure recursive module subroutine conditional_free_command (object)
+        implicit none
+            type (command), pointer, intent (inout) :: object
+        end subroutine conditional_free_command
+
         pure module subroutine conditional_free_pair (object)
         implicit none
             type (pair), allocatable, intent (inout)    :: object
@@ -196,6 +211,14 @@ private
             type (path), pointer, intent (inout)    :: object
         end subroutine conditional_free_path
     end interface conditional_free
+
+    interface draw
+        impure module function draw_command (curve)
+        implicit none
+            type (command)                      :: draw_command
+            type (path), pointer, intent (in)   :: curve
+        end function draw_command
+    end interface draw
 
     interface drawing
         pure module function initialise_drawing (name, width, height, aspect)
@@ -225,6 +248,11 @@ private
     end interface
 
     interface finalise
+        pure recursive module subroutine finalise_command (this)
+        implicit none
+            type (command), intent (inout)  :: this
+        end subroutine finalise_command
+
         pure module subroutine finalise_drawing (this)
         implicit none
             type (drawing), intent (inout)  :: this
@@ -407,6 +435,18 @@ private
             class (drawing), intent (inout) :: this
             real, intent (in)               :: width
         end subroutine set_drawing_width
+    end interface
+
+    interface
+        impure recursive module subroutine write_command    ( this         &
+                                                            , unit         &
+                                                            , length_unit  &
+                                                            )
+        implicit none
+            character (*), intent (in), optional    :: length_unit
+            class (command), intent (in)            :: this
+            integer, intent (in), optional          :: unit
+        end subroutine write_command
     end interface
 
     interface
