@@ -196,7 +196,7 @@ private
     end interface operator (.line.)
 
     interface
-        pure module subroutine add_draw_instruction (this, drawing_path)
+        impure module subroutine add_draw_instruction (this, drawing_path)
         implicit none
             class (drawing), intent (in)        :: this
             type (path), pointer, intent (in)   :: drawing_path
