@@ -59,6 +59,14 @@ private
     !> This library's version.
     character (*), parameter, public    :: library_version = 'v0.0.0'
 
+    !> An Asymptote command to execute.
+    type, public    :: command
+        type (path), pointer, private   :: draw => null ()
+    contains
+        final                           :: finalise_command
+        procedure, pass (this), public  :: write            => write_command
+    end type command
+
     !> The Asymptote drawing to produce.
     type, public    :: drawing
         character (:), allocatable, private :: compiler
@@ -162,7 +170,7 @@ private
         type (path), pointer, private       :: line     => null ()
     contains
         final                           :: finalise_path
-        procedure, pass (this), public  :: write    => write_path
+        procedure, pass (this), public  :: write            => write_path
     end type path
 
     private :: conditional_free
@@ -225,6 +233,11 @@ private
     end interface
 
     interface finalise
+        pure module subroutine finalise_command (this)
+        implicit none
+            type (command), intent (inout)  :: this
+        end subroutine finalise_command
+
         pure module subroutine finalise_drawing (this)
         implicit none
             type (drawing), intent (inout)  :: this
@@ -407,6 +420,15 @@ private
             class (drawing), intent (inout) :: this
             real, intent (in)               :: width
         end subroutine set_drawing_width
+    end interface
+
+    interface
+        impure module subroutine write_command (this, unit, length_unit)
+        implicit none
+            character (*), intent (in), optional    :: length_unit
+            class (command), intent (in)            :: this
+            integer, intent (in), optional          :: unit
+        end subroutine write_command
     end interface
 
     interface
