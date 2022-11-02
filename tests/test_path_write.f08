@@ -32,7 +32,7 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   A simple writing test for the `pair` type.
+!> \brief   A simple writing test for the `path` type.
 !> \return  Whether this test succeeds.
 !>
 !> This unit test will check whether
