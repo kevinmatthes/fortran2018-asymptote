@@ -74,14 +74,6 @@ lnk-f18 := '-I. ' + lflags
 # Execute all configured recipes.
 @all: check doxygen
 
-# Compile the Asymptote drawing type.
-@asymptote_drawing: asymptote_pair asymptote_path
-    just compile src/asymptote_drawing.f08
-
-# Compile the pair type.
-@asymptote_pair: library_utilities
-    just compile src/asymptote_pair.f08
-
 # Compile the `pair` type.
 @asymptote_pair: interfaces
     just compile src/asymptote_pair.f08
