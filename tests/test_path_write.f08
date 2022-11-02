@@ -49,7 +49,7 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-program test_pair_write
+program test_path_write
     use, non_intrinsic :: libf18asy, only: operator (.line.)
     use, non_intrinsic :: libf18asy, only: finalise
     use, non_intrinsic :: libf18asy, only: pair
@@ -71,6 +71,6 @@ implicit none
     call line % write (length_unit = 'pt')
 
     call finalise (line)
-end program test_pair_write
+end program test_path_write
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
