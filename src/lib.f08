@@ -59,12 +59,13 @@ private
     !> This library's version.
     character (*), parameter, public    :: library_version = 'v0.0.0'
 
-    !> A command to be executed.
-    type, private   :: command
-        type (command), pointer, private    :: next
-        type (path), allocatable, private   :: draw
+    !> An Asymptote command to execute.
+    type, public    :: command
+        type (path), pointer, private       :: draw => null ()
+        type (command), pointer, private    :: next => null ()
     contains
-        final   :: finalise_command
+        final                           :: finalise_command
+        procedure, pass (this), public  :: write            => write_command
     end type command
 
     !> The Asymptote drawing to produce.
