@@ -214,8 +214,8 @@ private
     interface draw
         pure module function draw_command (curve)
         implicit none
-            type (command)              :: draw_command
-            type (path), intent (in)    :: curve
+            type (command)                      :: draw_command
+            type (path), pointer, intent (in)   :: curve
         end function draw_command
     end interface draw
 
