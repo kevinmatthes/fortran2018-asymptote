@@ -41,12 +41,12 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure function draw_command (curve)
+impure function draw_command (curve)
 implicit none
-    type (command)              :: draw_command
-    type (path), intent (in)    :: curve
+    type (command)                      :: draw_command
+    type (path), pointer, intent (in)   :: curve
 
-    draw_command % draw = curve
+    draw_command % draw => curve
 end function draw_command
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
