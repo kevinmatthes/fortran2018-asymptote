@@ -61,7 +61,7 @@ private
 
     !> An Asymptote command to execute.
     type, public    :: command
-        type (path), pointer, allocatable   :: draw
+        type (path), allocatable, private   :: draw
         type (command), pointer, private    :: next => null ()
     contains
         final                           :: finalise_command
