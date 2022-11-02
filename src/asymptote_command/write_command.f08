@@ -46,10 +46,9 @@ impure recursive subroutine write_command (this, unit, length_unit)
     use, intrinsic  :: iso_fortran_env, only: output_unit
 implicit none
     character (*), intent (in), optional    :: length_unit
-    class (path), intent (in)               :: this
+    class (command), intent (in)            :: this
     integer                                 :: writing_unit
     integer, intent (in), optional          :: unit
-    intrinsic                               :: allocated
     intrinsic                               :: associated
     intrinsic                               :: present
     logical                                 :: lu_present
@@ -62,7 +61,7 @@ implicit none
         writing_unit = output_unit
     end if
 
-    if (allocated (this % draw)) then
+    if (associated (this % draw)) then
         write (writing_unit, '(a)') 'draw ('
 
         if (lu_present) then
