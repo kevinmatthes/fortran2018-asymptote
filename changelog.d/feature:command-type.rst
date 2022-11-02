@@ -7,6 +7,11 @@ Added
 
 - define destructor for Asymptote command type
 
+- define library utility subroutine to deallocate a pointer object only if it is
+  allocated (type ``command``)
+
 - define submodule for Asymptote command type
 
 - define write method for Asymptote command type
+
+- unit test:  construction and writing of a command
