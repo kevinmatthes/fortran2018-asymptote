@@ -178,6 +178,7 @@ private
     private :: write_library_version_header
     private :: write_string_assignment
     public  :: operator (.line.)
+    public  :: draw
     public  :: finalise
 
     interface operator (.line.)
