@@ -3,7 +3,7 @@ Added
 
 - declare type for Asymptote commands
 
-- define constructor for Asymptote command type
+- define constructor for Asymptote command type (drawing instruction)
 
 - define destructor for Asymptote command type
 
