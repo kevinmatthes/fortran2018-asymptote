@@ -198,7 +198,7 @@ private
     interface
         impure module subroutine add_draw_instruction (this, drawing_path)
         implicit none
-            class (drawing), intent (in)        :: this
+            class (drawing), intent (inout)     :: this
             type (path), pointer, intent (in)   :: drawing_path
         end subroutine add_draw_instruction
     end interface
