@@ -212,13 +212,13 @@ private
         end subroutine conditional_free_path
     end interface conditional_free
 
-    interface
-        pure module subroutine draw (this, drawing_path)
+    interface draw
+        impure module function draw_command (curve)
         implicit none
-            class (drawing), intent (inout) :: this
-            type (path), intent (in)        :: drawing_path
-        end subroutine draw
-    end interface
+            type (command)                      :: draw_command
+            type (path), pointer, intent (in)   :: curve
+        end function draw_command
+    end interface draw
 
     interface drawing
         pure module function initialise_drawing (name, width, height, aspect)
