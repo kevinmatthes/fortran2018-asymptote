@@ -32,7 +32,7 @@
 !> \note        See `LICENSE' for full license.
 !>              See `README.md' for project details.
 !>
-!> \brief   Deallocate all memory regions requested for this command.
+!> \brief   Deallocate all memory regions requested for these instructions.
 !> \param   this    The instructions to finalise.
 !>
 !> This subroutine will finalise these instructions in order to prevent memory
