@@ -137,6 +137,7 @@ lnk-f18 := '-I. ' + lflags
 
 # Analyse the memory management of the unit tests.
 @valgrind:
+    just test command write
     just test drawing_export_combinations
     just test drawing_lifecycle
     just test library_version
