@@ -80,7 +80,10 @@ private
         type (command), pointer, private    :: instructions     =>  null ()
     contains
         final                           :: finalise_drawing
-        procedure, pass (this), public  :: draw
+
+        procedure, pass (this), public  :: draw                                &
+                                        => add_draw_instruction
+
         procedure, pass (this), public  :: drawing_can_be_exported
 
         procedure, pass (this), public  :: export                              &
