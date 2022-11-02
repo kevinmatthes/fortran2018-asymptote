@@ -195,6 +195,14 @@ private
         end function line_pair_pair
     end interface operator (.line.)
 
+    interface
+        pure module subroutine add_draw_instruction (this, drawing_path)
+        implicit none
+            class (drawing), intent (in)        :: this
+            type (path), pointer, intent (in)   :: drawing_path
+        end subroutine add_draw_instruction
+    end interface
+
     interface conditional_free
         pure module subroutine conditional_free_character (object)
         implicit none
