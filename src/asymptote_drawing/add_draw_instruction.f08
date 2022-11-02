@@ -40,7 +40,7 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine add_draw_instruction (this, drawing_path)
+impure subroutine add_draw_instruction (this, drawing_path)
 implicit none
     class (drawing), intent (in)        :: this
     intrinsic                           :: associated
