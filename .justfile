@@ -75,7 +75,7 @@ lnk-f18 := '-I. ' + lflags
 @all: check doxygen
 
 # Compile the `command` type.
-@compile_command: asymptote_path
+@asymptote_command: asymptote_path
     just compile src/asymptote_command.f08
 
 # Compile the `drawing` type.
