@@ -40,12 +40,12 @@
 !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-pure subroutine draw (this, drawing_path)
+pure subroutine add_draw_instruction (this, drawing_path)
 implicit none
-    class (drawing), intent (inout) :: this
-    intrinsic                       :: associated
-    type (command), pointer         :: current
-    type (path), intent (in)        :: drawing_path
+    class (drawing), intent (in)        :: this
+    intrinsic                           :: associated
+    type (command), pointer             :: current
+    type (path), pointer, intent (in)   :: drawing_path
 
     if (associated (this % instructions)) then
         current => this % instructions % next
@@ -54,11 +54,10 @@ implicit none
             current => current % next
         end do
 
-        current % draw = drawing_path
+        current % draw = draw (drawing_path)
     else
-        allocate (this % instructions)
-        this % instructions = drawing_path
+        this % instructions = draw (drawing_path)
     end if
-end subroutine draw
+end subroutine add_draw_instruction
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
