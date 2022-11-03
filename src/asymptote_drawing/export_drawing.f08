@@ -59,6 +59,8 @@ implicit none
     class (drawing), intent (in)    :: this
     integer                         :: status
     integer                         :: unit
+    intrinsic                       :: allocated
+    intrinsic                       :: associated
     logical                         :: export_drawing
 
     export_drawing = .false.
@@ -77,6 +79,15 @@ implicit none
             call write_library_version_header (unit)
             call this % write_output_settings (unit)
             call this % write_size_settings (unit)
+
+            if (associated (this % instructions)) then
+                if (allocated (this % length_unit)) then
+                    call this % instructions % write (unit, this % length_unit)
+                else
+                    call this % instructions % write (unit)
+                end if
+            end if
+
             close (unit)
 
             export_drawing = .true.
