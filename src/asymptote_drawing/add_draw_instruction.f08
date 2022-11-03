@@ -42,7 +42,7 @@
 
 impure subroutine add_draw_instruction (this, drawing_path)
 implicit none
-    class (drawing), intent (in)        :: this
+    class (drawing), intent (inout)     :: this
     intrinsic                           :: associated
     type (command), pointer             :: current
     type (path), pointer, intent (in)   :: drawing_path
