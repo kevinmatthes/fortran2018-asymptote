@@ -36,6 +36,7 @@ updates:
     directory: /
     schedule:
       interval: daily
+      time: '00:00'
     assignees:
       - kevinmatthes
     commit-message:
@@ -47,6 +48,7 @@ updates:
     directory: /
     schedule:
       interval: daily
+      time: '00:00'
     assignees:
       - kevinmatthes
     commit-message:
