@@ -45,7 +45,7 @@ authors:
   - alias: kevinmatthes
     family-names: Matthes
     given-names: Kevin
-license: GPL-2.0
+license: GPL-3.0
 repository-code: https://github.com/kevinmatthes/fortran2018-asymptote
 title: fortran2018-asymptote
 url: https://github.com/kevinmatthes/fortran2018-asymptote
