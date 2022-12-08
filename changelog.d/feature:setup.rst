@@ -7,8 +7,6 @@ Added
 
 - create this repository
 
-- license:  GPL-2.0
-
 - Scriv settings
 
 - submodule:  literature
